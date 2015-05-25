@@ -1005,11 +1005,11 @@ pre {
   .body {
     float: left;
     width: 100%;
-    margin-right: -450px;
+    margin-right: -250px;
   }
   .body .unit-body {
     border-top: 0 none;
-    margin-right: 450px;
+    margin-right: 250px;
     padding: 26px 52px;
   }
   .the-footer {
@@ -1020,7 +1020,7 @@ pre {
     display: block;
     float: left;
     padding: 0 0 0 26px;
-    width: 420px;
+    width: 220px;
   }
 }
 /*
@@ -1029,7 +1029,7 @@ pre {
 @media only screen and (min-width: 1410px) {
   .the-header {
     float: left;
-    width: 19%;
+    width: 15%;
   }
   .the-header .unit-head {
     padding: 26px;
@@ -1067,15 +1067,15 @@ pre {
     -moz-box-shadow: #ffffff 0px 0px 2px;
     -o-box-shadow: #ffffff 0px 0px 2px;
     float: left;
-    width: 81%;
-    margin-right: -450px;
+    width: 85%;
+    margin-right: -250px;
   }
   .body .unit-body {
     border-right: 1px solid rgba(0, 0, 0, 0.2);
     -webkit-box-shadow: #ffffff 0px 0px 2px;
     -moz-box-shadow: #ffffff 0px 0px 2px;
     -o-box-shadow: #ffffff 0px 0px 2px;
-    margin-right: 450px;
+    margin-right: 250px;
     padding: 26px 52px;
     min-height: 1050px;
   }
@@ -1085,7 +1085,7 @@ pre {
     display: block;
     float: left;
     padding: 26px 0 0 26px;
-    width: 420px;
+    width: 220px;
   }
   .the-footer h4 {
     font-size: 30px;

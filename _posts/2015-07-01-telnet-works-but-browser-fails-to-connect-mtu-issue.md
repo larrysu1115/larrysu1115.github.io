@@ -8,6 +8,7 @@ tags: [network]
 {% include JB/setup %}
 
 一般网站无法浏览时，可以使用下面指令确定连线是否正常：
+
 ```bash
 # ping 指令, 在有开通 ICMP 时候才可使用
 D:\>ping www.baidu.comPinging www.a.shifen.com [103.235.46.39] with 32 bytes of data:Reply from 103.235.46.39: bytes=32 time=130ms TTL=128Reply from 103.235.46.39: bytes=32 time=129ms TTL=128

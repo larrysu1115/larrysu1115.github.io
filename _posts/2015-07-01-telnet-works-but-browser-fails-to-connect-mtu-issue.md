@@ -29,15 +29,17 @@ D:\> telnet www.baidu.com 80
 
 找到问题后，解决方式有二:
 
-1. 调整防火墙处理 fragment 的设定, 加大 fcb : 
+方法一: 调整防火墙处理 fragment 的设定, 加大 fcb : 
+
 ```
 SSG520-> set envar fcb_pool_multiple=5
 SSG520-> save
 SSG520-> reset
 ```
+
 但是公司网络管理部门要调整这种设定，审批作业较为麻烦；而我只需要解决一台特定电脑能够访问即可，于是采用下面第二种方法。
 
-2. 修改客户端电脑的 TCP MTU 设定，参考 [这篇文章](http://www.richard-slater.co.uk/archives/2009/10/23/change-your-mtu-under-vista-windows-7-or-windows-8/)
+方法二: 修改客户端电脑的 TCP MTU 设定，参考 [这篇文章](http://www.richard-slater.co.uk/archives/2009/10/23/change-your-mtu-under-vista-windows-7-or-windows-8/)
 
 ```
 # STEP 1: 查看网络界面，windows上的默认封包大小是 1500

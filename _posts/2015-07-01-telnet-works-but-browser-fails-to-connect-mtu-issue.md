@@ -8,7 +8,7 @@ tags: [network]
 {% include JB/setup %}
 
 一般网站无法浏览时，可以使用下面指令确定连线是否正常：
-```
+```bash
 # ping 指令, 在有开通 ICMP 时候才可使用
 D:\>ping www.baidu.comPinging www.a.shifen.com [103.235.46.39] with 32 bytes of data:Reply from 103.235.46.39: bytes=32 time=130ms TTL=128Reply from 103.235.46.39: bytes=32 time=129ms TTL=128
 
@@ -31,7 +31,7 @@ D:\> telnet www.baidu.com 80
 
 方法一: 调整防火墙处理 fragment 的设定, 加大 fcb : 
 
-```
+```bash
 SSG520-> set envar fcb_pool_multiple=5
 SSG520-> save
 SSG520-> reset
@@ -41,7 +41,7 @@ SSG520-> reset
 
 方法二: 修改客户端电脑的 TCP MTU 设定，参考 [这篇文章](http://www.richard-slater.co.uk/archives/2009/10/23/change-your-mtu-under-vista-windows-7-or-windows-8/)
 
-```
+```bash
 # STEP 1: 查看网络界面，windows上的默认封包大小是 1500
 D:\> netsh interface ipv4 show subinterfaces   MTU      MediaSenseState   Bytes In  Bytes Out  Interface------      ---------------  ---------  ---------  -------------4294967295                1          0       5232  Loopback Pseudo-Interface 1      1500                1     669164     132823  Ethernet
 

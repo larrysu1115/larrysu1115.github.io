@@ -37,6 +37,20 @@ $ docker start -i my_ubuntu
 # 重新连上容器的 TTY
 $ docker attach my_ubuntu
 
-# 删除容器 (若有使用 data volumn 则需记得加上 -v)
+# 删除容器 (若有使用 data volume 则需记得加上 -v)
 $ docker rm -v my_ubuntu
 ```
+
+###容器 - Data Volume
+
+```bash
+# 新建一个 data volume container
+# 基于 jenkins镜像, 加载后会是在 对象容器的 /var/jenkins_home 路径
+$ docker create -v /var/jenkins_home --name jenkins-dv jenkins
+
+```
+
+
+
+
+

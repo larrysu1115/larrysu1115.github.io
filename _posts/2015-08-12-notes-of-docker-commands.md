@@ -59,6 +59,11 @@ $ docker run -d -p 9090:8080 -p 30000:50000 --volumes-from jenkins-dv --name jen
 # 新建一个 data volume container
 # 基于 jenkins镜像, 加载后会是在 对象容器的 /var/jenkins_home 路径
 $ docker create -v /var/jenkins_home --name jenkins-dv jenkins
+
+# 备份 Data Volume:jenkins-dv 的内容到 本地 mybackup-ymd.tar.gz
+# 下面命令新建一个 container (基于ubuntu镜像), 加载 Data Volume:jenkins-dv 以及 本地当前路径pwd于容器中的/backup/, 
+# 然后在容器中运行 tar czvf 备份 /var/jenkins_home 的内容到 tar.gz 文件。
+$ docker run --volumes-from jenkins-dv -v $(pwd):/backup ubuntu tar czvf /backup/mybackup-ymd.tar.gz /var/jenkins_home
 ```
 
 ### 网络 - boot2docker (Mac & Windows)

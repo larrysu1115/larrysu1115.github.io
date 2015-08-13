@@ -2,7 +2,7 @@
 layout: post
 title: "telnet works but browser fails to connect: MTU issue"
 description: ""
-category: Network
+category: network
 tags: [network]
 ---
 {% include JB/setup %}

@@ -2,8 +2,8 @@
 layout: post
 title: "Boot2Docker network setting"
 description: ""
-category: 
-tags: []
+category: devops
+tags: [docker]
 ---
 {% include JB/setup %}
 

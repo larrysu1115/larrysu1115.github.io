@@ -2,7 +2,7 @@
 layout: post
 title: "MSSQL Identity Insert"
 description: ""
-category: MSSQL
+category: database
 tags: [mssql]
 ---
 {% include JB/setup %}

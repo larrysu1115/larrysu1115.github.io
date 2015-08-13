@@ -2,7 +2,7 @@
 layout: post
 title: "Docker Introduction"
 description: ""
-category: DevOps
+category: devops
 tags: [docker]
 ---
 {% include JB/setup %}

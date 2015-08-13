@@ -2,8 +2,8 @@
 layout: post
 title: "MongoDB CRUD Operations"
 description: ""
-category: NoSQL
-tags: [MongoDB, NoSQL]
+category: nosql
+tags: [mongodb]
 ---
 {% include JB/setup %}
 

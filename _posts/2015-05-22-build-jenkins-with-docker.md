@@ -2,7 +2,7 @@
 layout: post
 title: "Build Jenkins with Docker"
 description: ""
-category: DevOps
+category: devops
 tags: [jenkins, docker]
 ---
 {% include JB/setup %}

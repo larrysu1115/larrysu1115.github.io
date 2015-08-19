@@ -11,6 +11,7 @@ tags: [bigquery, notes]
 
 
 删除多个 BigQuery tables 的 Shell Script:
+
 ```bash
 #!/bin/bash
 

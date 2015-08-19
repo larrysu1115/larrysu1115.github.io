@@ -2,7 +2,7 @@
 layout: post
 title: "Notes of Docker commands"
 description: ""
-category: docker
+category: devops
 tags: [docker, notes]
 ---
 {% include JB/setup %}
@@ -92,6 +92,9 @@ $ VBoxManage list -l vms
 ...
 NIC 1 Rule(0):   name = tcp-port9090, protocol = tcp, host ip = , host port = 9090, guest ip = , guest port = 9090
 ...
+
+# 如果要移除掉新增的 port forwarding rule:
+$ VBoxManage modifyvm "boot2docker-vm" --natpf1 delete "tcp-port9090"
 
 ```
 

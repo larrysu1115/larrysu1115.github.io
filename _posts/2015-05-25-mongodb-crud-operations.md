@@ -39,7 +39,7 @@ switched to db test01
     name: "Jacks",
 	birthday: ISODate("1980-03-23"),
 	status: "A",
-	habbits: [ "tennis", "literature"]
+	habits: [ "tennis", "literature"]
   }
 )
 

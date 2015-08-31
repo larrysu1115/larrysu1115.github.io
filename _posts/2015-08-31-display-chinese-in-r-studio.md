@@ -48,7 +48,9 @@ Sys.setlocale(category='LC_ALL', locale='English_United States.1252')
 
 以上为 Windows 环境的设定及测试，
 
-如果使用Linux & Mac, 拿只需要设定 `Sys.setlocale("LC_ALL", 'en_US.UTF-8')` 就可以了。
+### For Linux & Mac
+
+如果使用Linux & Mac, 只需要设定 `Sys.setlocale("LC_ALL", 'en_US.UTF-8')` 就可以了。
 
 [img-text-file]: /assets/img/2015-08/20150831-r-read-txt-1.png "Text File"
 

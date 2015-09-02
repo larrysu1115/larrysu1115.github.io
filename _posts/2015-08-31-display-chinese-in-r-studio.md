@@ -2,7 +2,7 @@
 layout: post
 title: "Display Chinese in R Studio"
 description: ""
-category: r
+category: programming
 tags: [r]
 ---
 {% include JB/setup %}

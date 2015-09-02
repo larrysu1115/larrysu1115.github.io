@@ -2,7 +2,7 @@
 layout: post
 title: "Python virtualenv"
 description: ""
-category: python
+category: programming
 tags: [python]
 ---
 {% include JB/setup %}

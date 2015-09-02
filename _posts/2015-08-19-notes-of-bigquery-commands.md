@@ -2,7 +2,7 @@
 layout: post
 title: "Notes of BigQuery commands"
 description: ""
-category: bigquery
+category: bigdata
 tags: [bigquery, notes]
 ---
 {% include JB/setup %}

@@ -66,7 +66,7 @@ $ docker create -v /var/jenkins_home --name jenkins-dv jenkins
 $ docker run --volumes-from jenkins-dv -v $(pwd):/backup ubuntu tar czvf /backup/mybackup-ymd.tar.gz /var/jenkins_home
 ```
 
-### 网络 - boot2docker (Mac & Windows)
+### 网络 - boot2docker (Mac & Windows) DEPRECIATED!!! 已经被 docker toolbox 取代
 
 使用 Mac 或 Windows 的 boot2docker 时，想要访问容器提供的服务端口还需要进行 boot2docker 的网络设定，进行本机端口与boot2docker VirtualBox虚拟机的端口绑定。做法有两种：临时的SSH Tunnel, 以及 VBoxManage网络永久 NAT port forwarding 设定。参考 [VirtualBox 设定文档] (https://www.virtualbox.org/manual/ch08.html#vboxmanage-modifyvm)
 

@@ -617,6 +617,12 @@ pre {
   margin-top: 0;
   margin-bottom: 0;
 }
+
+span.archive-date {
+  width: 7.0em;
+  display: inline-block;
+}
+
 .unit-article .entry-content h2,
 .unit-article .entry-content h3,
 .unit-article .entry-content h4,

@@ -2,8 +2,8 @@
 layout: post
 title: "mongoDB Cluster"
 description: ""
-category: 
-tags: []
+category: mongodb
+tags: [mongodb]
 ---
 {% include JB/setup %}
 

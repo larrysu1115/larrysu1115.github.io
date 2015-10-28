@@ -480,22 +480,35 @@ mg> sh.enableSharding("db01")
 mg> sh.shardCollection("db01.cars", { "dateProduce": "hashed" } )
 mg> use db01;
 mg> 
-var bulk = db.cars.initializeUnorderedBulkOp();
-for (i=1; i<=50000; i++) {
-   var name = 'name_' + i;
-   var rNum = Math.floor((Math.random() * 2000));
-   var brand = ["Lexus", "Volvo", "Benz", "Toyota", "Luxgen", "Mazda", "Honda"];
-   var date = new Date("2015");
-   date = date.setDate(date.getDate() - rNum);  
+db.system.js.save(
+  {
+    _id : "insertSome" ,
+    value : function(loops) {
+      db = db.getSiblingDB('db01')
+      for (x=1; x<=loops; x++) {
+      var bulk = db.cars.initializeUnorderedBulkOp()
+      for (i=1; i<=10000; i++) {
+        var name = 'name_' + i
+        var rNum = Math.floor((Math.random() * 2000))
+        var brand = ["Lexus", "Volvo", "Benz", "Toyota", "Luxgen", "Mazda", "Honda"]
+        var date = new Date("2015")
+        date = date.setDate(date.getDate() - rNum)
+        bulk.insert({
+          name: name,
+          brand: brand[rNum % 5],
+          dateProduce: date,
+          speed: rNum
+        })
+      }
+      bulk.execute()
+      }
+    }
+  });
 
-   bulk.insert({
-     name: name,
-     brand: brand[rNum % 5],
-     dateProduce: date,
-     speed: rNum
-   })
-};
-bulk.execute();
+mg> db.loadServerScripts();
+
+# insert 50,000 documents
+insertSome(5);
 
 mg> db.cars.stats()
 {

@@ -5,7 +5,7 @@ description: ""
 category: network
 tags: [network]
 ---
-{% include JB/setup %}
+
 
 一般网站无法浏览时，可以使用下面指令确定连线是否正常：
 

@@ -5,7 +5,7 @@ description: ""
 category: database
 tags: [mssql]
 ---
-{% include JB/setup %}
+
 
 ```sql
 SET IDENTITY_INSERT my_table ONGOINSERT INTO my_table(pk_id, col1, col2) 

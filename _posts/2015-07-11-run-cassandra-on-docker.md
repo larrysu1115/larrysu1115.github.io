@@ -5,7 +5,7 @@ description: ""
 category: nosql
 tags: [cassandra, docker]
 ---
-{% include JB/setup %}
+
 
 使用 docker 运行 cassandra, 简易单机运行。
 可以从 [Official Cassandra Dockerfile](https://github.com/docker-library/cassandra/blob/master/2.2/Dockerfile) 了解如何设定。

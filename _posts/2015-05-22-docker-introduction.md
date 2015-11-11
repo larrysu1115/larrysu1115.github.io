@@ -5,7 +5,7 @@ description: ""
 category: devops
 tags: [docker]
 ---
-{% include JB/setup %}
+
 
 ![alt text][icon-docker]
 

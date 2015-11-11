@@ -5,7 +5,7 @@ description: ""
 category: devops
 tags: [jenkins, docker]
 ---
-{% include JB/setup %}
+
 
 使用 Jenkins 官方提供的 Docker image, 建制 Jenkins 环境。
 

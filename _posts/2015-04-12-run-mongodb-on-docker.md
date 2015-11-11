@@ -5,7 +5,7 @@ description: ""
 category: nosql
 tags: [mongodb, docker]
 ---
-{% include JB/setup %}
+
 
 使用 docker 运行 mongodb, 简易单机运行。
 可以从 [Official MongoDB Dockerfile](https://github.com/docker-library/mongo/blob/master/3.0/Dockerfile) 了解如何设定。

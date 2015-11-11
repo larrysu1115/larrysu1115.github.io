@@ -5,7 +5,7 @@ description: ""
 category: devops
 tags: [docker, notes]
 ---
-{% include JB/setup %}
+
 
 记录一些常用的 Docker 指令。
 

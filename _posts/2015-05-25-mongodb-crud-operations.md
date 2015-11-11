@@ -5,7 +5,7 @@ description: ""
 category: nosql
 tags: [mongodb]
 ---
-{% include JB/setup %}
+
 
 记录常用的 MongoDB 操作指令。 官方文件 [看这里](http://docs.mongodb.org/manual/tutorial/)
 

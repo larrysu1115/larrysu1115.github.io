@@ -5,7 +5,7 @@ description: ""
 category: programming
 tags: [r]
 ---
-{% include JB/setup %}
+
 
 工作上偶有同事使用R语言遇到乱码问题，
 记录一下如何处理。

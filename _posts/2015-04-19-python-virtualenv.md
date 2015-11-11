@@ -5,7 +5,7 @@ description: ""
 category: programming
 tags: [python]
 ---
-{% include JB/setup %}
+
 
 在使用 Python 时，不同 pip library 相互之间的版本依赖关系，需要小心处理。如果同时间处理数个项目，使用不同版本的 python (2.x / 3.x), 各个项目又依赖不同版本的 pip library, 就会陷入无解的 [dependency hell](https://en.wikipedia.org/wiki/Dependency_hell) 了。
 

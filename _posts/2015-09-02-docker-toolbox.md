@@ -5,7 +5,7 @@ description: ""
 category: devops
 tags: [docker]
 ---
-{% include JB/setup %}
+
 
 在 Mac OSX, Windows 上运行 docker, 需要安装 Docker Toolbox (之前的 boot2docker 就忘了吧), Toolbox 也包含了一个简易的UI设定界面 Kitematic, 比起上一版的 Kitematic 提供更丰富的图形设定界面，有一定的实用性了。
 

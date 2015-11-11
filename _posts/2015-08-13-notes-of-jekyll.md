@@ -5,7 +5,7 @@ description: ""
 category: Blog
 tags: [jekyll, notes]
 ---
-{% include JB/setup %}
+
 
 记录一些常用的 Jekyll 指令。
 

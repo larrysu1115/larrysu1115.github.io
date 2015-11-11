@@ -5,7 +5,7 @@ description: ""
 category: mongodb
 tags: [mongodb, kubernetes]
 ---
-{% include JB/setup %}
+
 
 这里使用 Google Container Engine (GKE) 来建立 mongoDB cluster, GKE 使用 kubernetes 作为管理 Docker 环境的工具。
 

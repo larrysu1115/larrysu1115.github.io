@@ -5,7 +5,7 @@ description: ""
 category: devops
 tags: [docker]
 ---
-{% include JB/setup %}
+
 
 在 Mac OSX 上使用 docker，是透過 boot2docker 中的 VirtualBox。如果想自订一些 docker 的网络设定，需要熟悉指令: `VBoxManage` 。
 

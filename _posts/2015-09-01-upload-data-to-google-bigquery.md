@@ -5,7 +5,7 @@ description: ""
 category: bigdata
 tags: [bigquery]
 ---
-{% include JB/setup %}
+
 
 当需要导入大量资料 (10GB+) 到 Google BigQuery Table 中时，
 为了节省资料传输的时间，采用传输压缩文件的方式
@@ -63,7 +63,6 @@ total 636904
 -rw-r--r--  1 larrysu  staff    44M Sep  2 10:17 out_part_1.csv
 -rw-r--r--  1 larrysu  staff    47M Sep  2 10:17 out_part_2.csv
 -rw-r--r--  1 larrysu  staff    13M Sep  2 10:18 out_part_3.csv
-
 ```
 
 ---

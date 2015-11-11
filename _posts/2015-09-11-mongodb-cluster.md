@@ -5,7 +5,7 @@ description: ""
 category: mongodb
 tags: [mongodb]
 ---
-{% include JB/setup %}
+
 
 这一系列的文章，介绍如何建立生产环境的 mongoDB cluster。分为三个部分，最后将完成下图的的配置：
 

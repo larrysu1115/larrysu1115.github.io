@@ -5,7 +5,7 @@ description: ""
 category: bigdata
 tags: [bigquery, notes]
 ---
-{% include JB/setup %}
+
 
 记录一些 BigQuery 的操作
 

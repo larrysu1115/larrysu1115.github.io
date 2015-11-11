@@ -5,7 +5,7 @@ description: ""
 category: mongodb
 tags: [mongodb]
 ---
-{% include JB/setup %}
+
 
 这是准备建制 mongoDB 环境前的准备工作，先在本地的 docker 中建立
 

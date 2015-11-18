@@ -4,4 +4,4 @@ title: About
 permalink: /about/
 ---
 
-Notes of a programmer's career.
+Notes of a programmer.

@@ -1,16 +1,32 @@
 ---
 layout: post
-title: "Notes on Effective Go"
+title: "Google Dataflow with BigQuery"
 description: ""
 category: programming
-tags: [golang]
+tags: [bigquery]
 ---
 
-<img style="float: right; width:100px" src="/assets/img/icon/icon-golang.png">
 
-阅读 [Effective Go](https://golang.org/doc/effective_go.html) 的一些摘要笔记
+
+參考 [Getting Started with Maven](https://cloud.google.com/dataflow/getting-started-maven) 製作的 Dataflow 例子 
+
+__建立 java project__
+
+```bash
+mvn archetype:generate \
+    -DarchetypeArtifactId=google-cloud-dataflow-java-archetypes-starter \
+    -DarchetypeGroupId=com.google.cloud.dataflow
+
+Define value for property 'groupId': org.sws9f.gemini.weed
+Define value for property 'artifactId': weed
+
+```
+
+
+
 
 ### Introduction
+
 
 Go语言的概念与其它语言如 Java, C# 等不同；直接将其它语言的程式逻辑翻译为 golang 不太可能获得满意结果。因此需要先理解 golang 的概念，以 golang 的思路去撰写 go 程式。
 

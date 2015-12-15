@@ -37,3 +37,29 @@ for i in `bq ls -n 3000 ${src_project_id}:${dataset_id} | sed -n 3,3000p | awk '
   bq cp ${src_project_id}:${dataset_id}.$i ${dst_project_id}:${dataset_id}.$i
 done;
 ```
+
+取消运行中的 BigQiery Job
+
+```bash
+# 查看运行中的 jobs
+$ bq ls -j
+               jobId                Job Type    State      Start Time      Duration  
+ --------------------------------- ---------- --------- ----------------- ---------- 
+  job_cNcVUzoink9FiKx94xxxxxxxxxx   query      RUNNING   02 Dec 12:46:59             
+  job_hpsMGvAH7fYOcTauuuuuuuuuFsY   query      SUCCESS   02 Dec 12:45:37   0:01:17   
+  job_b09x5aGu6cdhTxpgD3iZEv3sJ_U   query      SUCCESS   02 Dec 12:44:42   0:00:49   
+
+# 取消
+$ bq cancel job_cNcVUzoink9FiKx94xxxxxxxxxx
+Waiting on job_cNcVUzoink9FiKx94wyHVkvKJCE ... (12s) Current status: DONE    
+Job lab-larry:job_cNcVUzoink9FiKx94wyHVkvKJCE
+
+  Job Type    State      Start Time      Duration   Bytes Processed   Bytes Billed   Billing Tier  
+ ---------- --------- ----------------- ---------- ----------------- -------------- -------------- 
+  query      FAILURE   02 Dec 12:46:59   1:08:22    2114092406        2114977792     1             
+
+Errors encountered during job execution. Job cancel was requested.
+
+Job has been cancelled successfully.
+
+```

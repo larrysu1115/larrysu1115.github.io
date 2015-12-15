@@ -63,4 +63,38 @@ $
 
 ```
 
+ docker-machine 的虚拟磁碟操作
+
+```
+# 查看虚拟磁碟
+$ VBoxManage showmediuminfo disk.vmdk
+UUID:           475f67df-bd8d-409b-a078-17e05dbab94e
+Parent UUID:    base
+State:          created
+Type:           normal (base)
+Location:       /Users/larrysu/.docker/machine/machines/default/disk.vmdk
+Storage format: VMDK
+Format variant: dynamic default
+Capacity:       20000 MBytes
+Size on disk:   11450 MBytes
+Encryption:     disabled
+In use by VMs:  default (UUID: bc7e3446-30e4-4083-912e-df6c791e0ec3)
+
+# 无法修改虚拟磁碟大小
+$ VBoxManage modifymedium disk.vmdk --resize 40000
+0%...
+Progress state: VBOX_E_NOT_SUPPORTED
+VBoxManage: error: Resize medium operation for this format is not implemented yet!
+
+```
+
+建立 docker-machine: 因为一开始 docker-machine 建立的 docker VM 磁碟为20GB，容器开多了不够用，而又无法修改虚拟磁碟大小；因此新建一个VM来使用。
+
+```
+# 建立一个 vm, 名称 dev, 磁碟大小 40GB, RAM: 4GB
+docker-machine create -d virtualbox --virtualbox-disk-size 40000 --virtualbox-memory 4096 dev
+
+```
+
+
 [img-toolbox-logo]: /assets/img/icon/icon-docker-toolbox.jpg "Docker Toolbox"

@@ -9,6 +9,16 @@ tags: [bigquery, notes]
 
 记录一些 BigQuery 的操作
 
+查询 DataSet 占用的空间大小
+```
+bq query \
+'SELECT dataset_id, sum(size_bytes)/1024/1024/1024 AS GBytes from gmn_cal_ablejeans.__TABLES__ GROUP BY dataset_id'
+```
+
+删除 DataSet
+```
+bq rm -r -f [PROJECT_ID]:[DATASET]
+```
 
 删除多个 BigQuery tables 的 Shell Script:
 

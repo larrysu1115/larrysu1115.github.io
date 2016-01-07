@@ -10,13 +10,31 @@ tags: [bigquery, notes]
 记录一些 BigQuery 的操作
 
 查询 DataSet 占用的空间大小
-```
+
+```bash
 bq query \
-'SELECT dataset_id, sum(size_bytes)/1024/1024/1024 AS GBytes from gmn_cal_ablejeans.__TABLES__ GROUP BY dataset_id'
+'SELECT dataset_id, sum(size_bytes)/1024/1024/1024 AS GBytes from datasetname.__TABLES__ GROUP BY dataset_id'
 ```
 
-删除 DataSet
+查询某个 project 下所有的 dataset 大小
+
+```bash
+#!/bin/bash
+
+for i in `bq --project_id [PROJECT_ID] ls -a -d -n 1000 | sed -n 3,1000p | awk '{ print $1 }'` ;do
+  echo "------ tables in dataset: $i"
+  #bq query \
+  CMD="SELECT dataset_id, ROUND(sum(size_bytes)/1024/1024/1024, 2) AS GBytes from $i.__TABLES__ GROUP BY dataset_id"
+  #echo $CMD
+  echo $CMD | bq query --project_id [PROJECT_ID]
+done;
+
 ```
+
+
+删除 DataSet
+
+```bash
 bq rm -r -f [PROJECT_ID]:[DATASET]
 ```
 

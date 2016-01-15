@@ -12,3 +12,11 @@ tags: [bash, notes]
 ```
 cat /dev/null > ~/.bash_history && history -c && exit
 ```
+
+```
+# add user to group
+sudo usermod -a -G GROUP1,GROUP2 USERNAME
+
+# show user's groups
+groups USERNAME
+```

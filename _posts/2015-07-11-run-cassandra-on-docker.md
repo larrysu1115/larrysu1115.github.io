@@ -1,9 +1,10 @@
 ---
 layout: post
 title: "Run Cassandra on docker"
-description: ""
+description: "使用 docker 运行 cassandra, 简易单机运行。试试看 CQL 查询"
 category: nosql
-tags: [cassandra, docker]
+tags: [cassandra, docker, homepage]
+image-url: /assets/img/icon/icon-cassandra.png
 ---
 
 

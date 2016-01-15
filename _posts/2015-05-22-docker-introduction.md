@@ -1,9 +1,10 @@
 ---
 layout: post
 title: "Docker Introduction"
-description: ""
+description: "Docker 是基于 Linux 的 operating system level 虚拟化技术。在 Host 主机上隔离出 CPU, memory, I/O 与网络资源，分配给每个虚拟容器(Container)使用。"
 category: devops
-tags: [docker]
+tags: [docker, homepage]
+image-url: /assets/img/icon/icon-docker.png
 ---
 
 
@@ -103,7 +104,7 @@ $ docker rm ubuntu-sys2
 	
 	Docker 是基于 Linux 的虚拟化软件。不过在 Mac OSX, windows 上也可以安装，是透过 VirtualBox 作为中介的 Docker Host，带来效能上的损失；因此在正式生产环境上，需要使用 Linux。
 	
-	Docker 无法运行 microsoft windows 的虚拟容器。
+	目前 Docker 无法运行 microsoft windows 的虚拟容器，但微软未来有计划要提供支援。
 
 [icon-docker]: /assets/img/icon/icon-docker.png "Docker"
 [img-docker-repo]: /assets/img/2015-05/2015-05-22_docker_images.png

@@ -8,6 +8,8 @@ tags: [bigquery]
 
 Reference [How To Configure a Production-Ready Mesosphere Cluster on Ubuntu 14.04](https://www.digitalocean.com/community/tutorials/how-to-configure-a-production-ready-mesosphere-cluster-on-ubuntu-14-04)
 
+gcloud compute project-info describe
+gcloud compute regions describe asia-east1
 
 
 gcloud compute --project "lab-larry" instances create "mesos-master-1" \
@@ -146,6 +148,22 @@ sudo cp /opt/shared/apache-cassandra-3.0.2-bin.tar.gz /opt/
 sudo tar zxvf apache-cassandra-3.0.2-bin.tar.gz
 sudo ln -s apache-cassandra-3.0.2 cassandra
 
+sudo cp /opt/shared/cassandra.yaml /opt/cassandra/conf/
+
+# start
+sudo /opt/cassandra/bin/cassandra
+
+# stop
+sudo ps auwx | grep cassandra
+sudo kill pid
+
+#status
+sudo /opt/cassandra/bin/nodetool status
+
+
+
+curl -i -H 'Content-Type: application/json' -d@marathon-cax-seeds.json mesos-master-1:8080/v2/apps
+
 ```
 
 ### gcsfuse (mount goolge-storage)
@@ -181,5 +199,16 @@ sudo /opt/mesos-dns/mesos-dns -config=/opt/mesos-dns/mesos-dns-config.json
 curl -i -H 'Content-Type: application/json' -d@marathon-mesos-dns.json mesos-master-1:8080/v2/apps
 
 sudo sed -i '1s/^/nameserver 10.240.\n /' /etc/resolv.conf
+
+
+sudo vim /etc/resolvconf/resolv.conf.d/head
+sudo resolvconf -u
+#content
+nameserver 10.240.0.6
+nameserver 8.8.8.8
+
+ping hello2-3.marathon.mesos
+
+
 
 ```

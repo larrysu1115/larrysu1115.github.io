@@ -91,3 +91,11 @@ Errors encountered during job execution. Job cancel was requested.
 Job has been cancelled successfully.
 
 ```
+
+extract the contents of gzip file
+
+```bash
+gunzip -d src* 
+# -f : force, don't ask before overwriting
+# -S : suffix setting
+```

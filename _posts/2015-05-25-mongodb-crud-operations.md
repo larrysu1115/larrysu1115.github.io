@@ -1,9 +1,10 @@
 ---
 layout: post
 title: "MongoDB CRUD Operations"
-description: ""
+description: "记录常用的 MongoDB 操作指令"
 category: nosql
-tags: [mongodb]
+tags: [mongodb, homepage]
+image-url: /assets/img/icon/icon-mongodb.png
 ---
 
 

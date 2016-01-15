@@ -1,9 +1,10 @@
 ---
 layout: post
 title: "Hadoop on docker"
-description: ""
+description: "Simulate a hadoop cluster running on one single docker host."
 category: bigdata
-tags: [hadoop]
+tags: [hadoop, homepage]
+image-url: /assets/img/icon/icon-hadoop.jpg
 ---
 
 Running [Hadoop](http://hadoop.apache.org/) on Docker

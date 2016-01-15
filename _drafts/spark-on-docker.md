@@ -1,9 +1,10 @@
 ---
 layout: post
 title: "Spark on docker"
-description: ""
+description: "Demonstrate running spark on docker, including a working image on docker hub."
 category: bigdata
 tags: [hadoop]
+image-url: /assets/img/2014-11/jenkins_process_be.png
 ---
 
 在 Docker 中运行 [Spark](https://spark.apache.org/) 

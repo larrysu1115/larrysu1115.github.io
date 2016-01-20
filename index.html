@@ -11,7 +11,7 @@ layout: default
       <li>
 
         {% if post.image-url contains 'assets' %}
-        <img src="{{ site.baseurl }}{{ post.image-url }}" style="width:160px;float:right" alt="post visual" title="{{ post.title }}" />
+        <img src="{{ site.baseurl }}{{ post.image-url }}" style="max-width:160px;max-height:70px;padding:5px;float:right" alt="post visual" title="{{ post.title }}" />
         {% else %}
         {% endif %}
 

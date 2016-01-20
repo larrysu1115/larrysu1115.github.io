@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Build MESOS cluster on GCE"
+title: "Setup MESOS cluster on GCE"
 description: "A step by step tutorial to build Mesos cluster on GCE(Google Compute Engine), Including Mesos master *3, slave *N, marathon and mesosDNS"
 category: programming
 tags: [bigquery, homepage]

@@ -362,7 +362,7 @@ sudo kill pid
 #status
 sudo /opt/cassandra/bin/nodetool status
 
-
+curl -i -H 'Content-Type: application/json' -d@./def-tasks/marathon-cassandra.json mesos-master-1:8080/v2/apps
 
 curl -i -H 'Content-Type: application/json' -d@marathon-cax-seeds.json mesos-master-1:8080/v2/apps
 
@@ -398,10 +398,21 @@ sudo cp /opt/shared/mesos-dns-config.json /opt/mesos-dns/
 sudo /opt/mesos-dns/mesos-dns -config=/opt/mesos-dns/mesos-dns-config.json
 
 
-curl -i -H 'Content-Type: application/json' -d@marathon-mesos-dns.json mesos-master-1:8080/v2/apps
+curl -i -H 'Content-Type: application/json' -d@./def-tasks/marathon-mesos-dns.json mesos-master-1:8080/v2/apps
+
+curl -i -H 'Content-Type: application/json' -d@./def-tasks/task-loop-hello.json mesos-master-1:8080/v2/apps
 
 sudo sed -i '1s/^/nameserver 10.240.\n /' /etc/resolv.conf
 
+# get ip address from hostname
+getent hosts mesos-master-1 | awk '{ print $1 }'
+
+# on each slave
+sed -i '/nameserver/d' /etc/resolvconf/resolv.conf.d/head
+getent hosts mesos-slave-1 | awk '{ print "nameserver "$1 }' >> /etc/resolvconf/resolv.conf.d/head
+resolvconf -u
+
+MY_DNS_IP=`getent hosts mesos-master-1 | awk '{ print "nameserver "$1 }'`; 
 
 sudo vim /etc/resolvconf/resolv.conf.d/head
 sudo resolvconf -u
@@ -409,7 +420,8 @@ sudo resolvconf -u
 nameserver 10.240.0.6
 nameserver 8.8.8.8
 
-ping hello2-3.marathon.mesos
+ping hello-100-times.marathon.mesos
+ping helloworld.marathon.mesos
 
 
 

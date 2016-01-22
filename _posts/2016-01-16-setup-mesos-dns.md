@@ -80,6 +80,12 @@ Here we will running mesos-dns service on `mesos-slave-1`, and set all slaves to
 	getent hosts mesos-slave-1 | awk '{ print "nameserver "$1 }' >> /etc/resolvconf/resolv.conf.d/head
 	resolvconf -u
 	```
+	
+	the above 3 commands are summerized in [utils.sh](https://github.com/larrysu1115/google-cloud-platform-examples/blob/master/gce-mesos-cluster/utils.sh) so you can just call this command to change the dns nameservers of all slaves through `gcloud compute ssh YOUR-SLAVE-INSTANCE`:
+	
+	```bash
+	./utils.sh -c set-slave-dns -n mesos-slave-1,mesos-slave-2,mesos-slave-3,mesos-slave-4
+	```
 
 1. **Test mesos-dns**
 	

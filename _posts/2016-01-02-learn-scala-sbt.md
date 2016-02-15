@@ -58,6 +58,10 @@ sbt> run
 Hi!
 # automatically recompile if source changes
 sbt> ~ compile
+
+# run with java
+$ cp=$(find lib_managed -name "*.jar" -exec printf :{} ';'); java -classpath "./target/scala-2.11/hello_2.11-1.0.jar:$cp" Hi
+
 ```
 
 ### Dependency
@@ -70,6 +74,10 @@ libraryDependencies += "org.scala-tools" % "scala-stm_2.11.1" % "0.3"
 
 # Per-configuration dependencies
 libraryDependencies += "org.apache.derby" % "derby" % "10.4.1.3" % "test"
+
+# output dependency jars to lib_managed
+retrieveManaged := true
+
 ```
 
 __Resolvers__

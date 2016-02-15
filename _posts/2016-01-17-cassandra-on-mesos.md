@@ -3,7 +3,7 @@ layout: post
 title: "Run Cassandra on Mesos"
 description: ""
 category: bigdata
-tags: [bigdata]
+tags: [cassandra, mesos]
 image-url: /assets/img/icon/icon-mesos.png
 
 ---

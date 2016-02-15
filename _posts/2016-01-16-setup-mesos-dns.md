@@ -3,7 +3,7 @@ layout: post
 title: "Setup mesos-dns"
 description: "To discover the services running on arbitrary mesos slave node, we need to use mesos-dns."
 category: bigdata
-tags: [bigdata]
+tags: [mesos]
 image-url: /assets/img/icon/icon-mesos.png
 
 ---

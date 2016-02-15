@@ -2,7 +2,7 @@
 layout: post
 title: "Setup MESOS cluster on GCE"
 description: "A step by step tutorial to build Mesos cluster on GCE(Google Compute Engine), Including Mesos master *3, slave *N, marathon and mesosDNS"
-category: programming
+category: bigdata
 tags: [bigquery, homepage]
 image-url: /assets/img/icon/icon-mesos.png
 
@@ -39,7 +39,7 @@ Shell scripts for creating this cluster can be found on github: [gce-mesos-clust
 	role | machine-type | # of machines | description
 	--- | --- | --- | ---
 	master | n1-standard-1 | 3 | Mesos master & ZooKeeper
-	slave | n1-standard-2 | 4 | with 300GB disk
+	slave | n1-standard-4 | 4 | with 300GB disk
 
 ### B. Create VM instances
 
@@ -57,7 +57,7 @@ gcloud compute --project "lab-larry" instances create "mesos-master-1" \
 	
 # create instance of mesos-slave
 gcloud compute --project "lab-larry" instances create "mesos-slave-1" \
-	--zone "asia-east1-b" --machine-type "n1-standard-2" \
+	--zone "asia-east1-b" --machine-type "n1-standard-4" \
 	--network "default" --maintenance-policy "MIGRATE" \
 	--scopes "https://www.googleapis.com/auth/cloud-platform" \
 	--image "https://www.googleapis.com/compute/v1/projects/ubuntu-os-cloud/global/images/ubuntu-1404-trusty-v20151113" \

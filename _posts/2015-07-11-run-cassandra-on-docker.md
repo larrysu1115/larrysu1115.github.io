@@ -3,7 +3,7 @@ layout: post
 title: "Run Cassandra on docker"
 description: "使用 docker 运行 cassandra, 简易单机运行。试试看 CQL 查询"
 category: nosql
-tags: [cassandra, docker, homepage]
+tags: [cassandra, docker]
 image-url: /assets/img/icon/icon-cassandra.png
 ---
 
@@ -26,6 +26,7 @@ $ docker create -v /var/lib/cassandra --name cassandra-data-dv cassandra
 
 # Run your cassandra container
 $ docker run -d -p 9042:9042 --volumes-from cassandra-data-dv --name cassandra-sys cassandra
+
 ```
 
 试试看 CQL 查询, (如果想用 GUI 的话，也可以用安装 [DBeaver](http://dbeaver.jkiss.org))。
@@ -55,7 +56,16 @@ cqlsh> SELECT * FROM users;
 
 (1 rows)
 
+```
 
+# With more settings
+
+```bash
+# Run cassandra and start rpc
+docker run -d \
+  -e CASSANDRA_START_RPC=true \
+  -e CASSANDRA_RPC_ADDRESS=0.0.0.0 \
+  -p 9042:9042 -p 9160:9160 --volumes-from cax-dv --name cax cassandra:3.0.2
 ```
 
 [icon-cassandra]: /assets/img/icon/icon-cassandra.png "Cassandra"

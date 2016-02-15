@@ -2,7 +2,7 @@
 layout: post
 title: "deploy mongoDB cluster on Google Container Engine"
 description: ""
-category: mongodb
+category: nosql
 tags: [mongodb, kubernetes]
 ---
 

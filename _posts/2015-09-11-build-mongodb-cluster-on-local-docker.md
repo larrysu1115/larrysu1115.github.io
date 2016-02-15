@@ -2,7 +2,7 @@
 layout: post
 title: "Build mongoDB cluster on local docker"
 description: ""
-category: mongodb
+category: nosql
 tags: [mongodb]
 ---
 

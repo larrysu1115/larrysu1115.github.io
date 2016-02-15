@@ -2,7 +2,7 @@
 layout: post
 title: "mongoDB Cluster"
 description: ""
-category: mongodb
+category: nosql
 tags: [mongodb]
 ---
 

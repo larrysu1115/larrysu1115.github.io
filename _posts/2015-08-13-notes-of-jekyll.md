@@ -2,7 +2,7 @@
 layout: post
 title: "Notes of Jekyll"
 description: ""
-category: Blog
+category: other
 tags: [jekyll, notes]
 ---
 

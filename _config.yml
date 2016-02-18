@@ -18,8 +18,8 @@ url: "http://blog.sws9f.org" # the base hostname & protocol for your site
 github_username:  larrysu1115
 
 # Build settings
-markdown            : redcarpet
-redcarpet:
-  extensions        : ["tables", "autolink", "strikethrough", "space_after_headers", "with_toc_data", "fenced_code_blocks"]
-highlighter         : pygments
+markdown            : kramdown
+kramdown:
+  input: GFM # Enable GitHub Flavored Markdown (fenced code blocks)
+  syntax_highlighter: rouge
 

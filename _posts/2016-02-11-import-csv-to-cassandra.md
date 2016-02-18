@@ -14,7 +14,15 @@ Two possible way to import csv into cassandra [(ref.)](http://docs.datastax.com/
 
 This article demonstrates these 2 methods, with this table schema:
 
-```sql
+~~~ java
+class Abc extends Cde {
+  int i = 3;
+}
+
+~~~
+
+
+~~~ sql
 CREATE KEYSPACE ks1 WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
 CREATE TABLE ks1.src_trans (
   uid varchar,
@@ -29,7 +37,7 @@ CREATE TABLE ks1.src_trans (
   diff int,
   PRIMARY KEY ((date), uid, c1, c2, c3, sid)
 );
-```
+~~~
 
 ### 1. Load small data with CQL:COPY
 

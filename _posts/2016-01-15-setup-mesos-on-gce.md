@@ -18,23 +18,23 @@ Shell scripts for creating this cluster can be found on github: [gce-mesos-clust
 
 1. Install the [Google Cloud SDK](https://cloud.google.com/sdk/) command line tool.
 
-1. Know your current quota limits and decide the machine types in the cluster.
+2. Know your current quota limits and decide the machine types in the cluster.
 
-	```bash
-	# Query the quota limits
-	$ gcloud compute project-info describe
-	$ gcloud compute regions describe asia-east1
-	...
-	- limit: 600.0
-	  metric: CPUS
-	  usage: 1.0
-	- limit: 200000.0
-	  metric: DISKS_TOTAL_GB
-	  usage: 410.0
-	...
-	```
+~~~ bash
+# Query the quota limits
+$ gcloud compute project-info describe
+$ gcloud compute regions describe asia-east1
+...
+- limit: 600.0
+  metric: CPUS
+  usage: 1.0
+- limit: 200000.0
+  metric: DISKS_TOTAL_GB
+  usage: 410.0
+...
+~~~
 
-1. In this tutorial, we are going to build a cluster with following specification:
+3. In this tutorial, we are going to build a cluster with following specification:
 
 	role | machine-type | # of machines | description
 	--- | --- | --- | ---
@@ -81,130 +81,130 @@ In [utils.sh](https://github.com/larrysu1115/google-cloud-platform-examples/blob
 
 1. **Install java & gcsfuse** on all masters & slaves
 
-	To use Google Storage as a shared folder to faciliate installation, we need `gcsfuse` to mount Google Storage Bucket.
+To use Google Storage as a shared folder to faciliate installation, we need `gcsfuse` to mount Google Storage Bucket.
 
-	```bash
-	echo "Not installed opt software, proceed install..."
-	echo "INSTALL: mesos repo"
-	apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF
-	DISTRO=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
-	CODENAME=$(lsb_release -cs)
-	echo "deb http://repos.mesosphere.io/${DISTRO} ${CODENAME} main" | tee /etc/apt/sources.list.d/mesosphere.list
+```bash
+echo "Not installed opt software, proceed install..."
+echo "INSTALL: mesos repo"
+apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF
+DISTRO=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
+CODENAME=$(lsb_release -cs)
+echo "deb http://repos.mesosphere.io/${DISTRO} ${CODENAME} main" | tee /etc/apt/sources.list.d/mesosphere.list
 
-	echo "INSTALL: Java 8 from Oracle's PPA"
-	add-apt-repository -y ppa:webupd8team/java
-	apt-get update -y
+echo "INSTALL: Java 8 from Oracle's PPA"
+add-apt-repository -y ppa:webupd8team/java
+apt-get update -y
 
-	# install oracle-java8 package without prompt
-	echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
-	echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
+# install oracle-java8 package without prompt
+echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
 
-	apt-get install -y oracle-java8-installer oracle-java8-set-default
+apt-get install -y oracle-java8-installer oracle-java8-set-default
 
-	echo "INSTALL: gcsfuse - optional, using google storage to share installation packages."
-	export GCSFUSE_REPO=gcsfuse-`lsb_release -c -s`
-	echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list
-	curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-	apt-get update -y
-	apt-get install -y gcsfuse
-	# create the shared folder
-	mkdir -p /opt/shared
-	```
+echo "INSTALL: gcsfuse - optional, using google storage to share installation packages."
+export GCSFUSE_REPO=gcsfuse-`lsb_release -c -s`
+echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+apt-get update -y
+apt-get install -y gcsfuse
+# create the shared folder
+mkdir -p /opt/shared
+```
 
-1. **Install mesos package**
+2. **Install mesos package**
 
-	*ONLY For MASTER*, install the `mesosphere` package
+*ONLY For MASTER*, install the `mesosphere` package
 
-	```bash
-	echo "INSTALL: for master, install mesosphere"
-	apt-get install -y mesosphere
-	```
+```bash
+echo "INSTALL: for master, install mesosphere"
+apt-get install -y mesosphere
+```
 	
-	*ONLY For SLAVE*, install the `mesos` package
+*ONLY For SLAVE*, install the `mesos` package
 	
-	```bash
-	echo "INSTALL: for slave, install mesos"
-	apt-get install -y mesos
-	```
+```bash
+echo "INSTALL: for slave, install mesos"
+apt-get install -y mesos
+```
 
-1. **Configure ZooKeeper (on every Master node)**
+3. **Configure ZooKeeper (on every Master node)**
 
-	Two configuration files are required for ZooKeeper:
+Two configuration files are required for ZooKeeper:
 	
-	`/etc/zookeeper/conf/myid` : content of this file should be 1, 2, 3 for mesos-master-1, mesos-master-2, mesos-master-3
+`/etc/zookeeper/conf/myid` : content of this file should be 1, 2, 3 for mesos-master-1, mesos-master-2, mesos-master-3
 	
-	`/etc/zookeeper/conf/zoo.cfg` : content of this file
+`/etc/zookeeper/conf/zoo.cfg` : content of this file
 	
-	```bash
-	server.1=mesos-master-1:2888:3888
-	server.2=mesos-master-2:2888:3888
-	server.3=mesos-master-3:2888:3888
-	```
+```bash
+server.1=mesos-master-1:2888:3888
+server.2=mesos-master-2:2888:3888
+server.3=mesos-master-3:2888:3888
+```
 	
-	Use this script to setup these 2 files:
+Use this script to setup these 2 files:
 	
-	```bash
-	# ${HOSTNAME##*-}: get the last serial number(1,2,3) in $HOSTNAME. We have $HOSTNAME like "mesos-master-[1,2,3]"
-	echo ${HOSTNAME##*-} > /etc/zookeeper/conf/myid
-	echo "server.1=mesos-master-1:2888:3888" >> /etc/zookeeper/conf/zoo.cfg
-	echo "server.2=mesos-master-2:2888:3888" >> /etc/zookeeper/conf/zoo.cfg
-	echo "server.3=mesos-master-3:2888:3888" >> /etc/zookeeper/conf/zoo.cfg
-	```
+```bash
+# ${HOSTNAME##*-}: get the last serial number(1,2,3) in $HOSTNAME. We have $HOSTNAME like "mesos-master-[1,2,3]"
+echo ${HOSTNAME##*-} > /etc/zookeeper/conf/myid
+echo "server.1=mesos-master-1:2888:3888" >> /etc/zookeeper/conf/zoo.cfg
+echo "server.2=mesos-master-2:2888:3888" >> /etc/zookeeper/conf/zoo.cfg
+echo "server.3=mesos-master-3:2888:3888" >> /etc/zookeeper/conf/zoo.cfg
+```
 
-1. **Configure Mesos Master service (on every Master node)**
+4. **Configure Mesos Master service (on every Master node)**
 	
-	Four configuration files are required for mesos-master-service.
+Four configuration files are required for mesos-master-service.
 	
-	`/etc/mesos-master/quorum` : the minimum number for a node to win the election to be active master, set this to 2 since we have 3 masters.
+`/etc/mesos-master/quorum` : the minimum number for a node to win the election to be active master, set this to 2 since we have 3 masters.
 	
-	`/etc/mesos-master/ip` : ip address of this master node.
+`/etc/mesos-master/ip` : ip address of this master node.
 	
-	`/etc/mesos-master/hostname` : hostname of this master node.
+`/etc/mesos-master/hostname` : hostname of this master node.
 	
-	`/etc/mesos/zk`: the ZooKeeper's service registry, content should be "zk://mesos-master-1:2181,mesos-master-2:2181,mesos-master-3:2181/mesos"
+`/etc/mesos/zk`: the ZooKeeper's service registry, content should be "zk://mesos-master-1:2181,mesos-master-2:2181,mesos-master-3:2181/mesos"
 
-	Use this script to setup these files:
+Use this script to setup these files:
 
-	```bash
-	echo "zk://mesos-master-1:2181,mesos-master-2:2181,mesos-master-3:2181/mesos" > /etc/mesos/zk
-	echo 2 > /etc/mesos-master/quorum
-	echo $HOSTNAME | tee /etc/mesos-master/hostname
-	ifconfig eth0 | awk '/inet addr/{print substr($2,6)}' | tee /etc/mesos-master/ip
+```bash
+echo "zk://mesos-master-1:2181,mesos-master-2:2181,mesos-master-3:2181/mesos" > /etc/mesos/zk
+echo 2 > /etc/mesos-master/quorum
+echo $HOSTNAME | tee /etc/mesos-master/hostname
+ifconfig eth0 | awk '/inet addr/{print substr($2,6)}' | tee /etc/mesos-master/ip
 	
-	# make sure mesos-slave won't be running on master
-	echo manual | sudo tee /etc/init/mesos-slave.override
-	```
+# make sure mesos-slave won't be running on master
+echo manual | sudo tee /etc/init/mesos-slave.override
+```
 
-1. **Configure Marathon Framework (on every Master node)**
+5. **Configure Marathon Framework (on every Master node)**
 
-	Use this script to setup related files:
+Use this script to setup related files:
 
-	```bash
-	### auto-script
-	mkdir -p /etc/marathon/conf
-	echo $HOSTNAME | tee /etc/marathon/conf/hostname
-	echo "zk://mesos-master-1:2181,mesos-master-2:2181,mesos-master-3:2181/mesos" | tee /etc/marathon/conf/master
-	echo "zk://mesos-master-1:2181,mesos-master-2:2181,mesos-master-3:2181/marathon" | tee /etc/marathon/conf/zk
-	```
+```bash
+### auto-script
+mkdir -p /etc/marathon/conf
+echo $HOSTNAME | tee /etc/marathon/conf/hostname
+echo "zk://mesos-master-1:2181,mesos-master-2:2181,mesos-master-3:2181/mesos" | tee /etc/marathon/conf/master
+echo "zk://mesos-master-1:2181,mesos-master-2:2181,mesos-master-3:2181/marathon" | tee /etc/marathon/conf/zk
+```
 
-1. **Configure Mesos Slave service(on every Slave node)**
+6. **Configure Mesos Slave service(on every Slave node)**
 
-	Use this script to setup slave's ip & hostname.
+Use this script to setup slave's ip & hostname.
 
-	```bash
-	# Make sure zookeeper won't be running on slave
-	sudo stop zookeeper
-	echo manual | sudo tee /etc/init/zookeeper.override
+```bash
+# Make sure zookeeper won't be running on slave
+sudo stop zookeeper
+echo manual | sudo tee /etc/init/zookeeper.override
 
-	# Make sure mesos-master service won't be running on slave
-	echo manual | sudo tee /etc/init/mesos-master.override
-	sudo stop mesos-master
+# Make sure mesos-master service won't be running on slave
+echo manual | sudo tee /etc/init/mesos-master.override
+sudo stop mesos-master
 
-	ifconfig eth0 | awk '/inet addr/{print substr($2,6)}' | tee /etc/mesos-slave/ip
-	echo $HOSTNAME | tee /etc/mesos-slave/hostname
-	```
+ifconfig eth0 | awk '/inet addr/{print substr($2,6)}' | tee /etc/mesos-slave/ip
+echo $HOSTNAME | tee /etc/mesos-slave/hostname
+```
 
-1. **Run Mesos Master & Slave services**
+7. **Run Mesos Master & Slave services**
 
 On master nodes, bring up 3 services: `zookeeper`, `mesos-master`, `marathon`
 

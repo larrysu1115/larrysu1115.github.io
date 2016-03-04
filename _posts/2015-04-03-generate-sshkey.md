@@ -3,7 +3,7 @@ layout: post
 title: "SSH Key"
 description: ""
 category: linux
-tags: [bash, notes]
+tags: [linux, notes]
 ---
 
 SSH Key 的公私钥组合，是常见的认证机制。

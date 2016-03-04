@@ -3,7 +3,7 @@ layout: post
 title: "Notes of bash commands"
 description: ""
 category: linux
-tags: [bash, notes]
+tags: [linux, notes]
 ---
 
 记录一些 Bash shell 的操作

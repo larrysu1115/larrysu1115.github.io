@@ -63,8 +63,11 @@ Map(x,y -> 3)
 ~~~
 
 __union__ : Return the union of this RDD and another one.
+
 __intersection__ : Return the intersection of this RDD and another one.
+
 __subtract__ : Return an RDD with the elements from this that are not in other.
+
 __distinct__ : Return a new RDD containing the distinct elements in this RDD.
 
 ~~~scala
@@ -141,6 +144,7 @@ scala> rdd1.sortBy(e => e._2, false).collect.foreach(println)
 ~~~
 
 __coalesce__ : Return a new RDD that is _reduced_ into numPartitions partitions.
+
 __repartition__ : Return a new RDD that has exactly numPartitions partitions.
 
 ~~~scala
@@ -169,7 +173,9 @@ res92: Int = 8
 [org.apache.spark.rdd.PairRDDFunctions](https://spark.apache.org/docs/1.6.0/api/scala/index.html#org.apache.spark.rdd.PairRDDFunctions)
 
 __keys__ : Return an RDD with the keys of each tuple.
+
 __values__ : Return an RDD with the values of each tuple.
+
 __mapValues__ : Pass each value in the key-value pair RDD through a map function without changing the keys; this also retains the original RDD's partitioning.
 
 ~~~scala
@@ -187,9 +193,13 @@ scala> rdd1.mapValues(v => v*v).foreach(print)
 ~~~
 
 __join__ : Return an RDD containing all pairs of elements with matching keys in this and other.
+
 __leftOuterJoin__ : Perform a left outer join of this and other.
+
 __rightOuterJoin__ : 
+
 __fullOuterJoin__ : Perform a full outer join of this and other.
+
 __subtractByKey__ : Return an RDD with the pairs from this whose keys are not in other.
 
 ~~~scala
@@ -226,6 +236,7 @@ scala> rdd1.subtractByKey(rdd2).foreach(println)
 ~~~
 
 __groupByKey__ (May SHUFFLE !!!): Group the values for each key in the RDD into a single sequence.
+
 __reduceByKey__ : Merge the values for each key using an associative reduce function.
 
 ~~~scala
@@ -245,9 +256,13 @@ scala> rdd1.reduceByKey( (v1, v2) => v1 + v2 ).foreach(println)
 ### Action
 
 __count__ : Return the number of elements in the RDD.
+
 __countByValue__ : Return the count of each unique value in this RDD as a local map of (value, count) pairs.
+
 __first__ : Return the first element in this RDD.
+
 __max__ : Returns the max of this RDD as defined by the implicit Ordering[T].
+
 __min__ : Returns the min of this RDD as defined by the implicit Ordering[T].
 
 ~~~scala
@@ -304,6 +319,7 @@ res118: Int = 20
 ### Actions of Key-Value Pairs
 
 __countByKey__ : Count the number of elements for each key, collecting the results to a local Map.
+
 __lookup__ : Return the list of values in the RDD for key `key`.
 
 ~~~scala
@@ -322,8 +338,11 @@ res120: Seq[Int] = WrappedArray(3, 4)
 [org.apache.spark.rdd.DoubleRDDFunctions](https://spark.apache.org/docs/1.6.0/api/scala/index.html#org.apache.spark.rdd.DoubleRDDFunctions)
 
 __mean__ : Compute the mean of this RDD's elements.
+
 __stddev__ : Compute the standard deviation of this RDD's elements.
+
 __sum__ : Add up the elements in this RDD.
+
 __variance__ : Compute the variance of this RDD's elements.
 
 ~~~scala
@@ -346,7 +365,9 @@ res128: Double = 8.0
 ### Caching
 
 __cache__ : Persist this RDD with the default storage level (MEMORY_ONLY).
+
 __persist__ : Set this RDD's storage level to persist its values across operations after the first time it is computed. This can only be used to assign a new storage level if the RDD does not have a storage level set yet. Local checkpointing is an exception.
+
 __unpersist__ : Mark the RDD as non-persistent, and remove all blocks for it from memory and disk.
 
 ~~~scala

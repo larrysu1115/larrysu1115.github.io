@@ -6,7 +6,13 @@ category: programming
 tags: [bigdata]
 ---
 
-Spark Core - RDD usage examples, [apidoc](https://spark.apache.org/docs/1.6.0/api/scala/#org.apache.spark.rdd.RDD)
+Spark Core - 
+
+RDD usage examples, [org.apache.spark.rdd.RDD](https://spark.apache.org/docs/1.6.0/api/scala/#org.apache.spark.rdd.RDD)
+
+Key-Value RDD, [org.apache.spark.rdd.PairRDDFunctions](https://spark.apache.org/docs/1.6.0/api/scala/index.html#org.apache.spark.rdd.PairRDDFunctions)
+
+Ordered RDD, [org.apache.spark.rdd.OrderedRDDFunctions](https://spark.apache.org/docs/latest/api/scala/#org.apache.spark.rdd.OrderedRDDFunctions)
 
 ### Transformation
 
@@ -147,9 +153,16 @@ __coalesce__ : Return a new RDD that is _reduced_ into numPartitions partitions.
 
 __repartition__ : Return a new RDD that has exactly numPartitions partitions.
 
+__repartitionAndSortWithinPartitions__ : Repartition the RDD according to the given partitioner and, within each resulting partition, sort records by their keys.
+
+[ordered RDD doc](https://spark.apache.org/docs/latest/api/scala/#org.apache.spark.rdd.OrderedRDDFunctions)
+
+
+
 ~~~scala
 def coalesce(numPartitions: Int, shuffle: Boolean = false)(implicit ord: Ordering[T] = null): RDD[T]
 def repartition(numPartitions: Int)(implicit ord: Ordering[T] = null): RDD[T]
+def repartitionAndSortWithinPartitions(partitioner: Partitioner): RDD[(K, V)]
 
 scala> val rdd1 = sc.parallelize( for (i <- 1 to 100; j <- 'a' to 'j') yield (i, j) )
 scala> rdd1.count
@@ -239,9 +252,15 @@ __groupByKey__ (May SHUFFLE !!!): Group the values for each key in the RDD into 
 
 __reduceByKey__ : Merge the values for each key using an associative reduce function.
 
+__aggregateByKey__ : Aggregate the values of each key, using given combine functions and a neutral "zero value". This function can return a different result type, U, than the type of the values in this RDD, V. Thus, we need one operation for merging a V into a U and one operation for merging two U's, as in scala.TraversableOnce. The former operation is used for merging values within a partition, and the latter is used for merging values between partitions. To avoid memory allocation, both of these functions are allowed to modify and return their first argument instead of creating a new U.
+
+__cogroup__ : For each key k in this or other1 or other2, return a resulting RDD that contains a tuple with the list of values for that key in this, other1 and other2.
+
 ~~~scala
 def groupByKey(): RDD[(K, Iterable[V])]   // MAY SHUFFLE !!!
 def reduceByKey(func: (V, V) ⇒ V): RDD[(K, V)]
+def aggregateByKey[U](zeroValue: U)(seqOp: (U, V) ⇒ U, combOp: (U, U) ⇒ U)(implicit arg0: ClassTag[U]): RDD[(K, U)]
+def cogroup[W1, W2](other1: RDD[(K, W1)], other2: RDD[(K, W2)]): RDD[(K, (Iterable[V], Iterable[W1], Iterable[W2]))]
 
 scala> val rdd1 = sc.parallelize( ('a',1) :: ('b',21) :: ('b',22) :: Nil )
 scala> rdd1.groupByKey.foreach(println)
@@ -251,6 +270,19 @@ scala> rdd1.groupByKey.foreach(println)
 scala> rdd1.reduceByKey( (v1, v2) => v1 + v2 ).foreach(println)
 (a,1)
 (b,43)
+
+scala> val zero = mutable.Set[String]()
+scala> val rdd1 = sc.parallelize( 1->"apple" :: 2->"pie" :: 1->"banana" :: 1->"apple" :: 2->"pie" :: Nil )
+scala> rdd1.aggregateByKey(zero)( (set, v) => set += v, (set1, set2) => set1 ++= set2 ).foreach(println)
+(1,Set(banana, apple))
+(2,Set(pie))
+
+scala> val rdd1 = sc.parallelize( 1->'a' :: 2->'b' :: 3->'c' :: Nil )
+scala> val rdd2 = sc.parallelize( 1->.01d :: 1->.11d :: 2->.02d :: Nil )
+scala> rdd1.cogroup(rdd2).foreach(println)
+(3,(CompactBuffer(c),CompactBuffer()))
+(1,(CompactBuffer(a),CompactBuffer(0.01, 0.11)))
+(2,(CompactBuffer(b),CompactBuffer(0.02)))
 ~~~
 
 ### Action
@@ -294,12 +326,19 @@ res111: Int = 7
 | __fold__ | Aggregate the elements of each partition, and then the results for all the partitions, using a given associative and commutative function and a neutral "zero value". |
 | __reduce__ | Reduces the elements of this RDD using the specified commutative and associative binary operator. |
 
+
+__treeReduce__ : Reduces the elements of this RDD in a multi-level tree pattern.
+
+__treeAggregate__ : Aggregates the elements of this RDD in a multi-level tree pattern.
+
 ~~~scala
 def take(num: Int): Array[T]
 def takeOrdered(num: Int)(implicit ord: Ordering[T]): Array[T]
 def top(num: Int)(implicit ord: Ordering[T]): Array[T]
 def fold(zeroValue: T)(op: (T, T) ⇒ T): T
 def reduce(f: (T, T) ⇒ T): T
+def treeReduce(f: (T, T) ⇒ T, depth: Int = 2): T
+def treeAggregate[U](zeroValue: U)(seqOp: (U, T) ⇒ U, combOp: (U, U) ⇒ U, depth: Int = 2)(implicit arg0: ClassTag[U]): U
 
 scala> val rdd1 = sc.parallelize(7 :: -3 :: 3 :: 9 :: 4 :: Nil)
 scala> rdd1.take(2)
@@ -314,6 +353,8 @@ scala> rdd1.fold(1)((prod, e) => prod * e)
 res116: Int = -2268
 scala> rdd1.reduce((e1, e2) => e1 + e2)
 res118: Int = 20
+scala> rdd1.treeReduce(_ + _)
+res70: Int = 20
 ~~~
 
 ### Actions of Key-Value Pairs

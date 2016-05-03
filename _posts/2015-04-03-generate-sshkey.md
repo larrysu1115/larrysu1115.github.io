@@ -30,4 +30,7 @@ $ cat yourid_rsa.pub >> ~/.ssh/authorized_keys
 
 # 其它, 删除 known_hosts 中的记录
 $ ssh-keygen -R your.host.name
+
+# 一个指令将 公钥传上 服务器，并修改 .ssh 资料夹对应的权限
+cat ~/.ssh/id_rsa.pub | ssh user@host "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 700 ~/.ssh && chmod 600 ~/.ssh/authorized_keys"
 ```

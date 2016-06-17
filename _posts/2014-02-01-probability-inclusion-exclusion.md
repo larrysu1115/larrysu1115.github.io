@@ -29,7 +29,7 @@ P \Big( \bigcup\limits_{i=1}^n A_i \Big) =
 - ...
 + (-1)^{n+1} \times P(A_1 \bigcap A_2 \bigcap ... \bigcap A_n)
 \\
-= 1 - \frac{1}{e}
+\color{green}{= 1 - \frac{1}{e}}
 $$
 
 Solution: [Taylor series](https://en.wikipedia.org/wiki/Taylor_series)

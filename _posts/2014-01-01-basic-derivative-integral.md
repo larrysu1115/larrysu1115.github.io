@@ -105,39 +105,3 @@ MathJax.Hub.Config({
 
   $$ \int_a^b [f(x) + g(x)]\,dx = \int_a^b f(x)\,dx + \int_a^b g(x)\,dx $$
   
-  # aaa
-  
-  #  aaa
-  #  aaa
-  #  aaa
-  #  aaa
-  #  aaa
-  #  aaa
-  
-  
-  # aaa
-  
-  
-  
-  #  aaa
-  
-  
-  
-  #  aaa
-  
-  
-  
-  #  aaa
-  
-  
-  
-  #  aaa
-  
-  
-  
-  #  aaa
-  
-  
-  #
-  
-  #

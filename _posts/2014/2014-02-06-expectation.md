@@ -118,20 +118,21 @@ Bin(n, p), let \  n\to\infty, p \to 0, \lambda = np\ \text{is held constant.}
 \text{Find what happends to } P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}, k \ \text{fixed}
 $$
 
+$$
+\begin{align}
+P(X=k) & = \frac{n(n-1)...(n-k+1) \lambda^k }{k! \  n^k} \times (1-\frac{\lambda}{n})^n  \times (1-\frac{\lambda}{n})^{-k} \\
+       & = \frac{\lambda^k}{k!} \times ( \frac{n}{n} \frac{n-1}{n} ...  \frac{n-k+1}{n} ) \times e^{-\lambda} \times 1 \\
+       & = \frac{\lambda^k}{k!} \times e^{-\lambda} \\
+       & = Pois PMF
+\end{align}
+$$
+
+
+> Hints:
 > $$ p = \frac{\lambda}{n} $$ 
 > $$ \binom{n}{k} = \frac{n(n-1)...(n-k+1)}{k!} $$
 > $$ (1 + \frac{x}{n})^n \to e^x \  as \ n \to \infty $$
 > $$ (1-\frac{\lambda}{n})^{-k} \to 1 $$
-
-$$
-P(X=k) 
-\\
-= \frac{n(n-1)...(n-k+1) \lambda^k }{k! \  n^k} \times (1-\frac{\lambda}{n})^n  \times (1-\frac{\lambda}{n})^{-k}
-\\
-= \frac{\lambda^k}{k!} \times ( \frac{n}{n} \frac{n-1}{n} ...  \frac{n-k+1}{n} ) \times e^{-\lambda} \times 1
-\\
-= \frac{\lambda^k}{k!} \times e^{-\lambda} = Pois PMF
-$$
 
 ---
 

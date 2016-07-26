@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Distributions of Probability"
+title: "Distributions of Probability - Discrete"
 description: "Distributions"
 category: "math - probability"
 tags: [math,probability]
@@ -18,6 +18,33 @@ MathJax.Hub.Config({
 </script>
 
 ---
+
+
+## Bernoulli : $$ X ~ Bern(p) $$
+
+Story: A random variable x is said to have Bernoulli distribution if x has only 2 possible values 0 and 1.
+
+$$ 
+\text{PMF:} \ P(X = 1) = p, \ P(X = 0) = q
+\\
+E(X) = p
+$$
+
+---
+
+
+## Binomial Distribution : $$ X \sim Bin(n,p) $$
+
+Story: The distribution of # sucesses in n independent Bern(p) trials.
+
+$$ 
+\text{PMF:} \ \binom{n}{k} p^k q^{n-k}, \text{for} \ k \in \{ 0, 1, ..., n \}
+\\
+E(X) = np
+$$
+
+---
+
 
 ## Geometric Distribution : $$ X \sim Geom(p) $$
 
@@ -39,6 +66,21 @@ $$
 \text{PMF:} \ P(X = n) = \binom{n + r -1}{r - 1} p^r \times q^n
 \\
 E(X) = r \times \frac{q}{p}
+$$
+
+---
+
+## Hypergeometric distribution : $$ X \sim HGeom(w, b, n) $$
+
+Story: Sampling without replacement. Having #_b_ black marbles and #_w_ white marbles, pick a sample of _n_ marbles. What's the distribution of white marbles in the sample?
+
+$$ 
+\text{PMF:} \ 
+P(X=k) = \frac{\binom{w}{k}\binom{b}{n-k}}{\binom{b+w}{n}}
+,\ 0 \le k \le w
+,\ 0 \le n-k \le b
+\\
+E(X) = \mu = \frac{nw}{w + b}
 $$
 
 ---

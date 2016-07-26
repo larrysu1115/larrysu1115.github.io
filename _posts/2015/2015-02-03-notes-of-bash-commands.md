@@ -52,4 +52,7 @@ $ sync && echo 3 > /proc/sys/vm/drop_caches
 
 ```bash
 find ./src_folder -type f -exec cat {} + > output_cat.csv
+
+# replace filename
+for f in *.mp4; do nf=`echo $f | sed 's/BADTEXT//g'`; mv $f $nf; done
 ```

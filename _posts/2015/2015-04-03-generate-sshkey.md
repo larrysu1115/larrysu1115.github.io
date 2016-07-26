@@ -34,3 +34,14 @@ $ ssh-keygen -R your.host.name
 # 一个指令将 公钥传上 服务器，并修改 .ssh 资料夹对应的权限
 cat ~/.ssh/id_rsa.pub | ssh user@host "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 700 ~/.ssh && chmod 600 ~/.ssh/authorized_keys"
 ```
+
+---
+
+### 自定 sshkey 文件路径
+
+默认的 sshkey 名称为 id_rsa / id_rsa.pub。在 Mac OS 中，如果自定名称，需要告诉 ssh-agent 文件名称。
+
+```bash
+ssh-agent
+ssh-add /path/to/myid_rsa
+```

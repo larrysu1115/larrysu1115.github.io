@@ -2,13 +2,32 @@
  * Site header
  */
 .site-header {
-    border-top: 5px solid $grey-color-dark;
-    border-bottom: 1px solid $grey-color-light;
+    // border-top: 5px solid $grey-color-dark;
+    // border-bottom: 1px solid $grey-color-light;
+    padding: 10px 0 0 0;
     min-height: 56px;
+
+    background-color: #BCBCBC;
 
     // Positioning context for the mobile navigation icon
     position: relative;
 }
+
+div.home .post-link {
+  color: #333;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+div.home a.post-link:hover {
+  color: #da054c;
+  text-decoration: none;
+}
+
+.home-article-meta {
+  color: #8e8e8e;
+}
+
 
 .site-title {
     font-size: 26px;
@@ -35,7 +54,13 @@
     .page-link {
         color: $text-color;
         line-height: $base-line-height;
+        font-weight: 300;
 
+        &:hover {
+            color: #aa032c;
+            text-decoration: none;
+        }
+        
         // Gaps between nav items, but not on the last one
         &:not(:last-child) {
             margin-right: 20px;
@@ -100,6 +125,7 @@
 .site-footer {
     border-top: 1px solid $grey-color-light;
     padding: $spacing-unit 0;
+    background-color: #fff;
 }
 
 .footer-heading {
@@ -168,7 +194,8 @@
  * Page content
  */
 .page-content {
-    padding: $spacing-unit 0;
+    padding: 0 0 $spacing-unit 0;
+    background-color: #BCBCBC;
 }
 
 .page-heading {
@@ -180,7 +207,8 @@
     list-style: none;
 
     > li {
-        margin-bottom: $spacing-unit;
+        padding-bottom: 20px;
+        border-bottom: #eee 1px solid;
     }
 
     > li h2 {
@@ -192,6 +220,13 @@
 .post-meta {
     font-size: $small-font-size;
     color: $grey-color;
+    float: right;
+    padding-top: 0.6em;
+}
+
+.post-meta a {
+  color: #da054c;
+  font-weight: bold;
 }
 
 .post-link {
@@ -205,14 +240,15 @@
  * Posts
  */
 .post-header {
-    margin-bottom: $spacing-unit;
+    margin-bottom: 1em;
 }
 
 .post-title {
-    font-size: 42px;
-    letter-spacing: -1px;
-    line-height: 1;
-
+    font-size: 26px;
+    font-weight: bold;
+    padding: 0.6em 0 0;
+    line-height: 1.6em;
+    
     @include media-query($on-laptop) {
         font-size: 36px;
     }
@@ -220,6 +256,11 @@
 
 .post-content {
     margin-bottom: $spacing-unit;
+
+    img {
+      border: #eee 1px solid;
+      padding: 10px;
+    }
 
     h2 {
         font-size: 32px;
@@ -230,8 +271,11 @@
     }
 
     h3 {
-        font-size: 26px;
-        text-decoration: underline;
+        font-size: 18px;
+        font-weight: bold;
+        text-decoration: none;
+        border-top: 1px solid #eee;
+        padding: 0.6em 0;
 
         @include media-query($on-laptop) {
             font-size: 22px;
@@ -239,7 +283,8 @@
     }
 
     h4 {
-        font-size: 20px;
+        font-size: 15px;
+        text-decoration: underline;
 
         @include media-query($on-laptop) {
             font-size: 18px;

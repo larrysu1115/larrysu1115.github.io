@@ -3,9 +3,22 @@ layout: default
 ---
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <header class="post-header">
+  <header>
+    <div class="post-meta">
+      <p>
+        Posted on <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {{ page.date | date: "%b %-d, %Y" }}</time>
+        &nbsp; | &nbsp;
+        {% if page.previous.url %}
+        <a class="prev" href="{{page.previous.url}}" title="{{page.previous.title}}">&laquo; Previous</a>
+        {% endif %} &middot;
+        {% if page.next.url %}
+        <a class="next" href="{{page.next.url}}" title="{{page.next.title}}">Next &raquo;</a>
+        {% endif %}
+     </p>
+    </div>
+
     <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
-    <p class="post-meta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
   </header>
 
   <div class="post-content" itemprop="articleBody">

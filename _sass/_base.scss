@@ -163,6 +163,7 @@ pre {
     margin-left: auto;
     padding-right: $spacing-unit;
     padding-left: $spacing-unit;
+    background-color: #FFF;
     @extend %clearfix;
 
     @include media-query($on-laptop) {
@@ -173,7 +174,20 @@ pre {
     }
 }
 
+header.site-header > .wrapper {
+    background-color: #BCBCBC;
+}
 
+div.page-content > div.wrapper {
+   -moz-border-radius: 3px;
+   -webkit-border-radius: 3px;
+   border-radius: 3px;
+}
+
+div.home {
+  padding: 1.6em;
+  margin: 0.6em;
+}
 
 /**
  * Clearfix

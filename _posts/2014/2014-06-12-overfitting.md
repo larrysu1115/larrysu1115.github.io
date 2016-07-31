@@ -17,34 +17,23 @@ MathJax.Hub.Config({
 });
 </script>
 
----
-
 ### Weight-Decay regularization
 
----
-
 ### Legendre polynomials
-
----
 
 ### Validation
 
 practical rule : K = N / 5
 
----
-
 ### Leave-One-Out Cross Validation
 
 LOOCV
 
----
-
 ### V-Fold Cross Validation
-
----
 
 ### 3 Learning Principles
 
 - Occam's Razoe: simple hypothesis/model complexity
 - Sampling Bias
 - No Data Snooping
+

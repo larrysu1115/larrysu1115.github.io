@@ -17,8 +17,6 @@ MathJax.Hub.Config({
 });
 </script>
 
----
-
 ### m x n matrix
 
 $$

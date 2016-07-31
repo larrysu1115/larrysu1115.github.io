@@ -18,7 +18,7 @@ layout: default
         <h2 style="">
           <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
         </h2>
-        <span class="post-meta" style="">{{ post.date | date: "%b %-d, %Y" }} - {{ post.description }}</span>
+        <span class="home-article-meta" style="">{{ post.date | date: "%b %-d, %Y" }} - {{ post.description }}</span>
       </li>
     {% endfor %}
   </ul>

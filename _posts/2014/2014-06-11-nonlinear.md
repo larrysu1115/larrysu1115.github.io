@@ -12,16 +12,13 @@ tags: [machine-learning]
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  displayAlign: "left",
-  displayIndent: "2em"
+  displayAlign: "left"
 });
 </script>
 
----
 
 ### Quadratic Hypotheses
 
----
 
 ### Linear Hypothesis in Z-Space
 
@@ -41,7 +38,6 @@ $$
 
 __restricted center on (0,0)__
 
----
 
 ### General Quadratic Hypothesis Set
 

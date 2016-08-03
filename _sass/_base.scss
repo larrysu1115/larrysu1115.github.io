@@ -111,12 +111,10 @@ a {
  * Blockquotes
  */
 blockquote {
-    color: $grey-color;
-    border-left: 4px solid $grey-color-light;
+    border-left: 4px solid #a00;
     padding-left: $spacing-unit / 2;
-    font-size: 18px;
-    letter-spacing: -1px;
-    font-style: italic;
+    font-size: 16px;
+    color: #22B;
 
     > :last-child {
         margin-bottom: 0;
@@ -138,6 +136,13 @@ code {
 
 code {
     padding: 1px 5px;
+}
+
+code.highlighter-rouge {
+    color: #080;
+    border: initial;
+    border-bottom: 2px solid #8d8;
+    background-color: #fff;
 }
 
 pre {

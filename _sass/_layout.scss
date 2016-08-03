@@ -271,10 +271,10 @@ div.home a.post-link:hover {
     }
 
     h3 {
-        font-size: 18px;
+        font-size: 20px;
         font-weight: bold;
         text-decoration: none;
-        border-top: 1px solid #eee;
+        border-top: 1px solid #ddd;
         padding: 0.6em 0;
 
         @include media-query($on-laptop) {
@@ -283,8 +283,11 @@ div.home a.post-link:hover {
     }
 
     h4 {
-        font-size: 15px;
-        text-decoration: underline;
+        font-size: 18px;
+        font-weight: 300;
+        border-top: 1px dashed #ddd;
+        padding-top: 10px;
+        letter-spacing: 0.5px;
 
         @include media-query($on-laptop) {
             font-size: 18px;

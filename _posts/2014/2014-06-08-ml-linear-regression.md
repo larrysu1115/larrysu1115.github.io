@@ -12,36 +12,35 @@ tags: [machine-learning]
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  displayAlign: "left",
-  displayIndent: "2em"
+  displayAlign: "left"
 });
 </script>
 
----
-
-## Linear Regression
+### Linear Regression
 
 features of customer: $$ x = (x_0, x_1, x2, ..., x_d) $$ ,
 
 approximate the __desired credit limit__ with a __weighted__ sum:
 
 $$
-y \approx \sum_{i=0}^{d} w_i X_i
+y \approx \sum_{i=0}^{d} w_i X_i =
+\begin{bmatrix}
+  w_0 \\ w_1 \\ \cdots \\ w_d
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+  x_0 \  x_1 \  \cdots \  x_d
+\end{bmatrix}
+
 $$
 
-linear regression hypothesis: $$ h(x) = w^T x $$
+> linear regression hypothesis: $$ h(x) = w^T x $$
 
-2 dimension (x, y):
+$$ y = (x_1) \in \mathbb{R} \ \ \ \ \ \  y = (x_1, x_2) \in \mathbb{R}^2 $$
 
-![img](http://www.biostathandbook.com/pix/regressionlollipop.gif)
+<img src="http://www.biostathandbook.com/pix/regressionlollipop.gif" /><img src="http://www.sjsu.edu/faculty/gerstman/EpiInfo/cont-mult1.jpg" width="400" style="float:right;" />
 
-3 dimension (x1, x2, y):
-
-![img](http://www.sjsu.edu/faculty/gerstman/EpiInfo/cont-mult1.jpg)
-
-__Find lines/hyperplanes with small residuals__
-
----
+> Find lines / hyperplanes with small residuals
 
 ### Error Measure
 
@@ -52,9 +51,8 @@ in-sample:
 $$
 \begin{align}
 & E_{in}(h) = \frac{1}{N} \sum_{n=1}^{N} \left( h(x_n) - y_n \right)^2
-\\
-\rightarrow \ &
-E_{in}(w) = \frac{1}{N} \sum_{n=1}^{N} \left( w^Tx_n - y_n \right)^2
+\rightarrow \\
+& E_{in}(w) = \frac{1}{N} \sum_{n=1}^{N} \left( w^Tx_n - y_n \right)^2
 \end{align}
 $$
 
@@ -64,10 +62,12 @@ $$
 E_{out}(w) = \varepsilon_{(x,y) \sim P} ( w^T x - y )^2
 $$
 
-Find minimum E_in
+> Find minimum $$ E_{in} $$
 
 $$
-E_{in}(w) = \frac{1}{N} \sum_{n=1}^{N} \left( w^Tx_n - y_n \right)^2
+E_{in}(w) 
+= \frac{1}{N} \sum_{n=1}^{N} \left( w^Tx_n - y_n \right)^2
+= \frac{1}{N} \sum_{n=1}^{N} \left( x_n^T \underline{w} - y_n \right)^2
 \\
 =\frac{1}{N}
 \begin{Vmatrix}
@@ -94,7 +94,9 @@ $$
 \\
 =\frac{1}{N}
 \begin{Vmatrix}
-  X w - Y
+\\
+  \underline{\underline{X}} \underline{w} - \underline{Y}
+\\  
 \end{Vmatrix}^2 
 $$
 

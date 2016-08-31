@@ -5,7 +5,7 @@ Usage:
   2) include JB/categories_list
   example:
     <ul>
-  	  {% assign categories_list = site.categories %}  
+  	  {% assign categories_list = site.categories %}
   	  {% include JB/categories_list %}
   	</ul>
   
@@ -27,7 +27,7 @@ Usage:
     	</a></li>
     {% endfor %}
   {% else %}
-    {% for category in categories_list %} 
+    {% for category in categories_sort %} 
     	<li><a href="{{ BASE_PATH }}{{ site.JB.categories_path }}#{{ category[0] }}-ref">
     		{{ category[0] | join: "/" }} </a>
             <span> - {{ category[1].size }}</span>
@@ -36,3 +36,4 @@ Usage:
   {% endif %}
 {% endif %}
 {% assign categories_list = nil %}
+{% assign categories_sort = nil %}

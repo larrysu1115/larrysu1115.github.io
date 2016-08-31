@@ -51,7 +51,7 @@ in-sample:
 $$
 \begin{align}
 & E_{in}(h) = \frac{1}{N} \sum_{n=1}^{N} \left( h(x_n) - y_n \right)^2
-\rightarrow \\
+\ \ \rightarrow \ \ 
 & E_{in}(w) = \frac{1}{N} \sum_{n=1}^{N} \left( w^Tx_n - y_n \right)^2
 \end{align}
 $$
@@ -100,11 +100,9 @@ $$
 \end{Vmatrix}^2 
 $$
 
-this is a convex function
+<img style="float:right;" src="http://mathworld.wolfram.com/images/eps-gif/ConcaveConvexFunction_1000.gif" />
 
-![img](http://mathworld.wolfram.com/images/eps-gif/ConcaveConvexFunction_1000.gif)
-
-So, find $$ E_{LIN} $$ such that $$ \triangledown E_{in}(w_{LIN}) = 0 $$
+this is a `convex function`. So, find $$ w_{LIN} $$ such that $$ \triangledown E_{in}(w_{LIN}) = 0 $$
 
 $$  
 min_w E_{in}(w)=\frac{1}{N}
@@ -115,23 +113,68 @@ min_w E_{in}(w)=\frac{1}{N}
 \frac{1}{N} ( w^T X^T X w - 2 w^T X^T y + y^T y )
 $$
 
-vector w
+let array 'A' = $$ X^T \ X $$, vector 'b' = $$ X^T \ y $$, constant 'c' = $$ y^T \ y $$. The equation can be changed to:
 
 $$
 \begin{align}
-              E_{in}(w) & = \frac{1}{N} ( w^T A w - 2 b w + c ) \\
-\triangledown E_{in}(w) & = \frac{1}{N} ( 2 A w - 2 b ) \\
+       E_{in}(w) & = \frac{1}{N} ( w^T A w - 2 w^T b + c ) \\
+\nabla E_{in}(w) & = \frac{1}{N} ( 2 A w - 2 b ) \\
+\nabla E_{in}(w) & = \frac{2}{N} ( X^T X w - X^T y ) \\
 \end{align}
 $$
 
-invertible X^T X
+for invertible $$ X^T X :
+w_{LIN} = ( X^T X )^{-1} X^T y = X^{\dagger} y $$
 
-$$ w_{LIN} = ( X^T X ) ^{-1} X^T y = X^{\dagger} y, \ \ X^{\dagger} $$ : pseudo-inverse
+`pseudo-inverse` : $$ X^{\dagger} = ( X^T X )^{-1} X^T $$
 
 > practical suggestion
 > 
 > use well-implemented $$ \dagger $$ routine
 >
+
+#### Summary of Linear Regression Algorithm
+
+1. from Data, construct input matrix X ( Nx(d+1) columns ) and output vector y ( Nx1 columns )
+
+   $$
+   X = 
+   \begin{Vmatrix}
+     - - x_1 - - \\
+     - - x_2 - - \\
+     - - \cdots - - \\
+     - - x_N - - \\
+   \end{Vmatrix}
+   \ \ \ \
+   y =
+   \begin{pmatrix}
+     y_1 \\
+     y_2 \\
+     \cdots \\
+     y_N \\
+   \end{pmatrix}
+   $$
+
+1. calculate pseudo-inverse $$ X^\dagger $$ : (d+1)xN columns
+1. return $$ W_{LIN} = X^\dagger y $$ : (d+1)x1 columns
+
+#### Coding example in R
+
+data from [this artical](https://www1.udel.edu/johnmack/frec424/regression/), here is [the r code](https://github.com/larrysu1115/r-examples/blob/master/R/exec_03_linear_reg.R)
+
+~~~R
+# find linear model by lm
+result2 <- lm(x_quantity ~ x_price + x_income)
+result2
+
+x0 <- rep(1,21)
+X <- t(matrix(c(x0,x_price,x_income),nrow=3,byrow=T))
+y <- x_quantity
+# find the pseudo-inverse of X: X'
+X_pinv <- ginv(t(X) %*% X) %*% t(X)
+# X' * y = 
+res_cal <- X_pinv %*% y
+~~~
 
 ---
 
@@ -139,10 +182,7 @@ avg of E_in = noise_level x $$ ( 1 - \frac{d+1}{N} ) $$
 
 call $$ XX^{\dagger} $$ the hat matrix H, because it puts ^ on y
 
----
 
 ### The learning Curve
 
 expected generalization error: $$ \frac{2(d+1)}{N} $$
-
----

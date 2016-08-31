@@ -14,7 +14,10 @@ tags: [python]
 virtualenv 可以在一台机器上利用不同目录建立独立的 python 环境，隔离开每个环境的 pip library, site_packages。从而解决上述的 dependency hell 问题。每个python项目只需要处理自己运行的内部版本依赖关系。
 
 ### 安装
-todo...
+
+```bash
+$ pip install virtualenv
+```
 
 ### 使用
 

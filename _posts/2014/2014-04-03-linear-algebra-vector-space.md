@@ -2,7 +2,7 @@
 layout: post
 title: "Linear Algebra - Vector Space"
 description: ""
-category: "math - linear algebra"
+category: "math-linear-algebra"
 tags: [linear-algebra]
 ---
 

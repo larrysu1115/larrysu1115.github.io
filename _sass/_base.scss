@@ -129,9 +129,10 @@ blockquote {
 pre,
 code {
     font-size: 15px;
-    border: 1px solid $grey-color-light;
-    border-radius: 3px;
-    background-color: #eef;
+    /** border: 1px solid $grey-color-light;
+     *border-radius: 3px;
+     *background-color: #eef;
+     */
 }
 
 code {
@@ -237,12 +238,14 @@ div.post-content table {
 
 div.post-content table {
     border: solid #ccc 1px;
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-    border-radius: 6px;
-    -webkit-box-shadow: 0 1px 1px #ccc; 
-    -moz-box-shadow: 0 1px 1px #ccc; 
-    box-shadow: 0 1px 1px #ccc;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    /**
+     * -webkit-box-shadow: 0 1px 1px #ccc; 
+     * -moz-box-shadow: 0 1px 1px #ccc; 
+     * box-shadow: 0 1px 1px #ccc;
+     */
     margin: 15px 0; 
 }
 
@@ -312,7 +315,27 @@ div.post-content table tr:last-child td:last-child {
 }
 
 div.post-content pre code {
-    font:12px/12px monospace;
+    font:14px/14px monospace;
 }
 
+div.highlight table tr td.gutter {
+    padding: 0;
+    width: 45px;
+    border: 0px;
+}
 
+div.highlight table tr td.code {
+    border-top: 0px;
+}
+
+div.highlight table tr td.gutter pre, div.highlight table tr td.code pre {
+    margin: 0px;
+}
+
+div.highlight table tr td.gutter, div.highlight table tr td.code {
+    padding: 0px;
+}
+
+div.highlight table tr:hover {
+    background: #eaeaea;
+}

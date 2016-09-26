@@ -43,5 +43,9 @@ cat ~/.ssh/id_rsa.pub | ssh user@host "mkdir -p ~/.ssh && cat >> ~/.ssh/authoriz
 
 ```bash
 ssh-agent
+
+# ubuntu
+eval $(ssh-agent)
+
 ssh-add /path/to/myid_rsa
 ```

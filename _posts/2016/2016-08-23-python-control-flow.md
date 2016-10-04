@@ -143,12 +143,3 @@ Unpacking argument lists: use * for tuple, ** for dictionary
 >>> list(range(*args))
 [3, 4, 5]
 ```
-
-#### Coding Style
-
-```py
->>> f = add(3)
->>> f(2)
-5
-```
-

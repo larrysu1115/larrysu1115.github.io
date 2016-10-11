@@ -20,10 +20,11 @@ Usage:
   This helper can be seen in use at: ../_layouts/default.html
 -->{% endcomment %}
 
+{% assign pages_sort = pages_list | sort: 'title' ) %}
 {% if site.JB.pages_list.provider == "custom" %}
   {% include custom/pages_list %}
 {% else %}
-  {% for node in pages_list %}
+  {% for node in pages_sort %}
     {% if node.title != null %}
       {% if group == null or group == node.group %}
       	{% if page.url == node.url %}
@@ -36,4 +37,5 @@ Usage:
   {% endfor %}
 {% endif %}
 {% assign pages_list = nil %}
+{% assign pages_sort = nil %}
 {% assign group = nil %}

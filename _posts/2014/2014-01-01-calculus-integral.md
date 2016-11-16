@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Basics of Derivatives and indefinite integral"
+title: "Basics of Integral"
 description: ""
 category: "math"
-tags: [math]
+tags: [calculus]
 ---
 
 <script type="text/javascript" async
@@ -41,31 +41,6 @@ MathJax.Hub.Config({
   
   $$ \int (x^3+x^2+x) dx = \int x^3 dx + \int x^2 dx + \int x dx = \frac{x^4}{4} + \frac{x^3}{3} + \frac{x^2}{2} + C $$
 
-### Derivatives of Functions
-
-- Add and Subtract Derivatives of Functions
-
-  $$ (f+g)' = f' + g' $$
-  
-  $$ \frac{d}{dx}[f(x)-g(x)] = \frac{d}{dx}f(x) + \frac{d}{dx}g(x) $$
-  
-- Derivatives of Products and Powers of Functions
-
-  $$ (fg)' = f'g + fg' $$
-  
-- Derivatives of Quotients of Functions
-
-  $$(\frac{f}{g})'  = \frac{f'g - fg'}{g^2}$$
-  
-- The Chain Rule for Differentiating Complicated Functions
-
-  $$ \frac{d}{dx}f(u(x)) = \frac{d}{du}f(u) \times \frac{d}{dx}u(x) $$
-
-- for a Point(x,y)
-
-  $$ Point(x,y), x=f(t), y=g(t) $$
-
-  $$ \frac{dy}{dx} = \frac{dy}{dt}\frac{dt}{dx} = \frac{\frac{dy}{dt}}{\frac{dx}{dt}} $$
   
 # Common indefinite integrals
 

@@ -29,6 +29,29 @@ A = [a_{ij}] =
 \end{bmatrix}
 $$
 
+#### matrix multiplication
+
+`X = aA + bB + cC + dD`, 结果的 nrow = 前矩阵nrow, ncol = 后矩阵ncol.
+
+$$
+\begin{bmatrix}
+  . & . & . & . \\
+  a & b & c & d \\
+\end{bmatrix}
+ \times 
+\begin{bmatrix}
+  . & A & . \\
+  . & B & . \\
+  . & C & . \\
+  . & D & . \\
+\end{bmatrix}
+ = 
+\begin{bmatrix}
+  . & . & . \\
+  . & X & . \\
+\end{bmatrix}
+$$
+
 #### identity matrix: 
 
 $$ I = 

@@ -3,7 +3,7 @@ layout: post
 title: "Conditional Probability, Bayes' theorem"
 description: ""
 category: "math - probability"
-tags: [math,probability]
+tags: [probability]
 ---
 
 <script type="text/javascript" async

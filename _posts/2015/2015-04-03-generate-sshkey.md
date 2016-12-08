@@ -45,7 +45,8 @@ cat ~/.ssh/id_rsa.pub | ssh user@host "mkdir -p ~/.ssh && cat >> ~/.ssh/authoriz
 ssh-agent
 
 # ubuntu
-eval $(ssh-agent)
+eval `ssh-agent`
 
+# 如果需要，输入 passphrase
 ssh-add /path/to/myid_rsa
 ```

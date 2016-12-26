@@ -3,7 +3,7 @@ layout: post
 title: "Docker Introduction"
 description: "Docker 是基于 Linux 的 operating system level 虚拟化技术。在 Host 主机上隔离出 CPU, memory, I/O 与网络资源，分配给每个虚拟容器(Container)使用。"
 category: devops
-tags: [docker, homepage]
+tags: [docker]
 image-url: /assets/img/icon/icon-docker.png
 ---
 

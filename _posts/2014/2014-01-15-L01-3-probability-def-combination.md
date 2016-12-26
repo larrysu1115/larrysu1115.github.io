@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "L01 L02 L03 - Prob. Definition, Combination"
+title: "L01~3 - Prob. Definition, Combination"
 description: ""
 category: "math - probability"
 tags: [probability]
@@ -68,6 +68,53 @@ Choose `r` objects out of `n`
 从M组取出k人，N组取出  0人的可能方式有 C(m,k) x C(n,0)   种
 ```
 
+#### Story Proof : Hockey Stick Identity
+
+`Hockey-stick Identity`: $$ \binom{k}{k} + \binom{k+1}{k} + \binom{k+2}{k} + \dots + \binom{n}{k} = \binom{n+1}{k+1} $$
+
+```text
+学校中有 n+1 人，需要选出 k+1 人的田径队。如果田径队中最高的人为队长。有下列可能性:
+    1. 队长是学校中  最高的，还需要在剩下的 n   人中取出 k 人，组成田径队。      - C(n,k)
+    2. 队长是学校中第二高的，还需要在剩下的 n-1 人中取出 k 人 (要排除第一,二)。  - C(n-1,k)
+    3. 队长是学校中第三高的，还需要在剩下的 n-2 人中取出 k 人 (要排除第一,二,三) - C(n-2,k)
+    .. ...
+n-k-1. 队长是学校中n-k-1高的，还需要在剩下的 k 人中取出 k 人                  - C(k, k)
+
+加总以上各个状况，就是结果 C(n+1, k+1)
+```
+
+[Pascal's Triangle](https://en.wikipedia.org/wiki/Pascal%27s_triangle) <img src="/assets/img/2016-Q3/161214-pascal-triangle.png" >
+
+#### Question : Gummi bear
+
+一包 Gummi bear 软糖中可能有 30~50 颗糖，每颗可能是 红 橘 黄 紫 绿 五种口味其中一种，这样一包的小熊软糖可能有多少种数量与口味组合？
+
+##### 这是无排序，可重复 的组合问题 (Combination without order, with replace)
+
+```text
+7 颗糖，五种口味 h
+红|橘|黄|紫|绿
+ooooooo||||  -> 7颗都是红
+oooooo|o|||  -> 6颗红,1颗橘
+有多少种组合? C(7+5-1,7)
+
+30 颗糖的状况，就是 C(34,30)
+```
+
+$$
+\binom{34}{30} + \binom{35}{31} + \dots + \binom{54}{50} =
+\\
+\binom{34}{4} + \binom{35}{4} + \dots + \binom{54}{4} 
+\\
+\binom{n+1}{k+1} = \sum_{j=k}^{n} \binom{j}{k}
+\\
+\binom{55}{5} = \sum_{j=4}^{54} \binom{j}{4} = \sum_{j=4}^{33} \binom{j}{4} + \sum_{j=34}^{54} \binom{j}{4}
+\\
+\binom{55}{5} = \binom{34}{5} + \sum_{j=34}^{54} \binom{j}{4}
+\\
+\sum_{j=34}^{54} \binom{j}{4} = \binom{55}{5} - \binom{34}{5} = 3,200,505
+$$
+
 ### Non Naïve definition
 
 A Probability sample space consists of S and P,
@@ -88,7 +135,7 @@ P is a function which takes an event A as input, returns $$ P(A) \in [0,1] $$ as
 
 > Property 3 : $$ P(A \cup B) = P(A) + P(B) - P(A \cap B) $$ 
 
-##### Inclusion-Exclusion rule
+### Inclusion-Exclusion Rule
 
 > Property 3* : 
 

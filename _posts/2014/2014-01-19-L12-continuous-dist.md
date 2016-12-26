@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Discrete vs Continuous"
+title: "L12 - Continuous distribution"
 description: ""
 category: "math - probability"
-tags: [math,probability]
+tags: [probability]
 ---
 
 <script type="text/javascript" async
@@ -13,21 +13,27 @@ tags: [math,probability]
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   displayAlign: "left",
-  displayIndent: "2em"
+  displayIndent: "2em",
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
 });
 </script>
 
 ---
 
-| |  Discrete                | Continuous                |
+|         |  Discrete                 | Continuous                      |
 |-|-|-|
-| PMF/PDF | P(X=x)              | $$ f_x(x) = F_x'(x) $$          |
-| CDF | $$ F_x(x) = P(X \le x) $$ | $$ F_x(x) = P(X \le x) $$ |
-| E(X) | $$ E(X) = \sum_x x \times P(X=x) $$ | $$ E(X) = \int_{-\infty}^{\infty} x \times f_x(x) d_x  $$ |
-| Variance | $$ Var(X) = E(X^2) - (EX)^2 $$ | $$ Var(X) = E(X^2) - (EX)^2 $$ |
+| R.V.    | X                         | X                               |
+| PMF/PDF | P(X=x)                    | PDF $ f_x(x) = F_x'(x) $        |
+| CDF     | $ F_x(x) = P(X \le x) $   | $ F_x(x) = P(X \le x) $         |
+| E(X)    | $ E(X) = \sum_x x \times P(X=x) $ | $ E(X) = \int_{-\infty}^{\infty} x \times f_x(x) d_x  $ |
+| Variance | $ Var(X) = E(X^2) - (EX)^2 $ | $ Var(X) = E(X^2) - (EX)^2 $ |
+| LOTUS   | $ E g(X) = \sum_x g(x) P(X=x) $ | $ E( g(X) ) = \int_{-\infty}^{\infty} g(x) f_x(x) d_x $ |
+
 
 PDF: Probability density function
-Defn: R.v. X has PDF f(x) if $$ P(a \le X \le b) = \int_{a}^{b} f(x) d_x  $$
+Defn: a random variable X has PDF f(x) if $$ P(a \le X \le b) = \int_{a}^{b} f(x) d_x  $$
+PDF 不是機率，將PDF進行 a~b 區間的積分後，才是 a~b 發生的機率。
+
 
 PDF to be valid, $$ f(x) \ge 0, \int_{-\infty}^{\infty} f(x) d_x = 1 $$
 
@@ -36,21 +42,11 @@ f(x_0) \times \epsilon \approx P\left( X \in ( x_0 - \frac{\epsilon}{2}, x_0 + \
 for\ \epsilon > 0 \ very \ small
 $$
 
----
+#### CDF
 
-### Find CDF by PDF
+If X has PDF f, the `CDF is`:  $ F(x) = P(X \le x) = \int_{-\infty}^{x} f(t) \ d_t $
 
-If $$ X $$ has PDF $$ f $$, the CDF is 
-
-$$ 
-F(x) = P(X \le x) = \int_{-\infty}^{x} f(t) \ d_t 
-$$
-
-If $$ X $$ has CDF $$ F $$ (and X is cont. r.v.), then PDF is
-
-$$ 
-f(x) = F'(x)
-$$
+If X has CDF F (and X is cont. r.v.), then `PDF is`: $ f(x) = F'(x) $
 
 > FTC : [Fundamental Theorem of Calculus](https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus)
 > F'(x) = f(x)
@@ -58,15 +54,12 @@ $$
 > $$ P( a \le x \le b ) = \int_{a}^{b} f(x) d_x = F(b) - F(a) $$
 >
 
----
+#### Variance Var(X)
 
-### Variance Var(X)
+Var(X) 變異數 : 觀測值於平均值之間偏差值的平方的平均；用來量測 `資料分散的程度` : $ Var(X) = E(X - EX)^2 $
+因為偏差值加總為零；所以先將偏差值平方，再加總就不為零，再開根號取平方根 還原本來的單位。即為標準差 S.D.
 
-$$ 
-Var(X) = E(X - EX)^2
-$$
-
-Standard deviation: $$ SD(X) = \sqrt{Var(X)} $$
+S.D. - Standard deviation: SD(X) = $ \sqrt{Var(X)} $
 
 Another way to express Var:
 
@@ -78,8 +71,6 @@ Var(X) \\
 $$
 
 ? How to compute E(X^2) ?
-
----
 
 ### Uniform Distribution : $$ X \sim Unif(a,b) $$
 
@@ -134,7 +125,7 @@ E(X^2) = E(Y) \\
 $$
 
 > LOTUS : Law Of The Unconscious Statistician
-> $$ E( g(X) ) = \int_{-\infty}^{\infty} g(x) f_x(x) d_x $$
+> $ E( g(X) ) = \int_{-\infty}^{\infty} g(x) f_x(x) d_x $
 
 Let U be Uniform between 0 and 1, 
 

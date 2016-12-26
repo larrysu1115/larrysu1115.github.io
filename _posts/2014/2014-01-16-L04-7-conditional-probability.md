@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "L04 L05 L06 - Conditional Probability, Bayes' theorem"
+title: "L04~7 - Conditional Probability, Bayes' theorem"
 description: ""
 category: "math - probability"
 tags: [probability]
@@ -78,7 +78,7 @@ $
 Let $ A_1,... ,A_n $ be a partition of the sample space S (i.e., the $ A_i $ are disjoint events and their union is S), with $ P(A_i) > 0 $ for all i. Then
 
 $$
-P(B) = \sum\limits_{i=1}^{n} P(B|A_i) P(A_i)
+P(B) = \sum_{i=1}^{n} P(B \cap A_i) = \sum_{i=1}^{n} P(B|A_i) P(A_i)
 $$
 
 ![img](/assets/img/2016-Q3/161212-lotp.jpeg)
@@ -191,5 +191,112 @@ A+X          B+Y
 o:79 x:21    o:82 x:18  0.79 < 0.82
 ```
 
+### Gambler's ruin
 
+两个赌徒，每回合互赌1元。开始时 A 有 i 元, B 有 (N - i) 元。
+p = P(A赢某一回合), q = 1 - p.
+__Question: P(A获胜) = ?__ （B ruined)
+Random walk: 
+<pre>
+0         i-2  i-1  i    i+1  i+2  i         N
+|----+----+----+----+----+----+----+----+----|
+</pre>
+p = P(向右走一步)
+
+"__absorbing states__": at 0 & N
+
+##### Hint: recursive structure, first step analysis
+
+---
+
+Strategy: conditioning on the 1st step
+
+$$ 
+p_i = P( \text{A wins the game} | \text{A starts with i dollars}) \\
+p_i = p \times p_{i+1} + q \times p_{i-1}, \text{with}\ 1 \le i \le N-1,
+\begin{cases}
+P_0 = 0, \\
+P_N = 1
+\end{cases}
+\\
+\text{boundary conditions:}\ p_0 = 0, p_N = 1
+$$
+
+LOTP:
+
+case A wins a certain round and wins the game: $$ p \times p_i $$
+
+case A lose a certain round but wins the game: $$ q \times p_{i-1} $$
+
+Hints:
+
+this is a [difference equation](https://en.wikipedia.org/wiki/Recurrence_relation).
+
+[Quadratic equation](https://en.wikipedia.org/wiki/Quadratic_equation)
+
+$$
+ax^2 + bx + c = 0
+\\
+x = \frac{-b\pm\sqrt{b^2-4ac}}{2a}
+$$
+
+[L'Hôpital's rule](https://en.wikipedia.org/wiki/L%27H%C3%B4pital%27s_rule)
+
+$$
+\lim_{x\to c}\frac{f(x)}{g(x)} = \lim_{x\to c}\frac{f'(x)}{g'(x)}
+$$
+
+Solution:
+
+First guess: let $$ p_i = x^i $$
+
+$$
+x^i = p \times x^{i+1} + q \times x^{i-1}
+\\
+\to \ 0 = p \times x^{i+1} - x^i + q \times x^{i-1}
+\\
+\to \ 0 = px^2 - x + q
+\\
+x = \frac{1\pm(2p-1)}{2p} \in \{ 1, \frac{q}{p} \}
+\\
+\text{assuming}\ p \neq q
+\\
+p_i = A \times (root_1)^i + B \times (root_2)^i = A1^i + B(\frac{q}{p})^i
+\\
+p_0 = 0 = A + B \implies B = -A
+\\
+p_N = 1 = A1^N + B(\frac{q}{p})^N = A \times (1 - (\frac{q}{p})^N) \implies A = \frac{1}{1 - (\frac{q}{p})^N}
+\\
+p_i = A1^i + B(\frac{q}{p})^i = A \times ( 1 - (\frac{q}{p})^i ) = 
+\color{blue}{ \frac{ 1 - (\frac{q}{p})^i }{ 1 - (\frac{q}{p})^N }, if\ p \neq q }
+
+\\
+\text{assuming}\ p = q,
+\\
+x = \frac{q}{p}
+\\
+\lim_{x\to 1}\frac{1-x^i}{1-x^N} 
+= \lim_{x\to 1}\frac{\frac{d}{dx}(1-x^i)}{\frac{d}{dx}(1-x^N)} 
+= \lim_{x\to 1}\frac{ix^{i-1}}{Nx^{N-1}}
+= \color{blue}{\frac{i}{N}, if\ p = q}
+
+\\
+\\
+
+Solution:
+\\
+\begin{cases}
+\frac{ 1 - (\frac{q}{p})^i }{ 1 - (\frac{q}{p})^N }, & if\ p \neq q \\
+\frac{i}{N}, & if\ p = q
+\end{cases}
+
+$$
+
+```text
+if i=N-i, p=0.49
+--- N ---- P(A wins) ---
+   20            0.4
+  100            0.12
+  200            0.02
+```
 

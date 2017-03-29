@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Basics of Derivative"
+title: "Calculus - Derivative"
 description: ""
 category: "math"
-tags: [calculus]
+tags: [math]
 ---
 
 <script type="text/javascript" async

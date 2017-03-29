@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Basics of Integral"
+title: "Calculus - Integral"
 description: ""
 category: "math"
-tags: [calculus]
+tags: [math]
 ---
 
 <script type="text/javascript" async
@@ -32,6 +32,10 @@ MathJax.Hub.Config({
   $$ \frac{d}{dx}f(x) = F(x), \int F(x) dx = f(x) + c $$
   
   $$ \int x^n dx = (\frac{1}{n+1}) x^{n+1} + c $$
+
+- Integration by Parts 分部積分法
+
+  $$ \int u dv = uv - \int v du $$
   
 ### Properties of Indefinite Integral
 

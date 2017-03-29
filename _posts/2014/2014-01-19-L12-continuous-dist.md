@@ -136,6 +136,48 @@ Var(u) = E(u^2) - (Eu)^2 = \frac{1}{3} - \frac{1}{4} = \frac{1}{12}
 
 $$
 
+#### Function of random variable
+
+X 為 random variable 隨機變數, 而 Y = g(X), 則 Y 也是 random variable. 
+
+Y 的 Range $ R_Y = \\{ g(x) \| x \in R_X \\} $; 
+
+如果知道 X 的 PMF: $ P_X(x) $, 則 Y 的 PMF 為: $ P_Y(y) = P(Y=y) = P[g(x)=y] = \sum_{x:g(x)=y} P_X(x) $
+
+Example: $ P_X(x=k) = 1/5 $, k = -1,0,1,2,3；若 Y = 2 \|X\|, 則 
+Y 的 Range: 0,2,4,6
+Y 的 PMF: 
+$$
+P_Y(y=k) = \begin{cases}
+1/5 \ for \ k = 0,4,6  \\
+2/5 \ for \ k = 2 \\
+0   \ for \ \ others
+\end{cases}
+$$
+
+#### LOTUS : Law Of The Unconscious Statistician
+
+X 為 random variable 隨機變數, 而 Y = g(X)
+X 的 PMF or PDF : $ P_X(x) $
+
+`Discrete` case :Y 的 Expectation E(Y)
+
+$$
+EY = E[g(X)] = \sum_{x} g(x) P_X(x)
+$$
+
+`Continuous` case :Y 的 Expectation E(Y)
+
+$$
+EY = E[g(X)] = \int_{-\infty}^{\infty} g(x) P_X(x) d_x
+$$
+
+`Known CDF`, 如果已知 X 的 CDF: $ F_X(x) $ 則 Y 的 Expectation E(Y)
+
+$$
+EY = E[g(X)] = \int_{-\infty}^{\infty} g(x) d F_X(x)
+$$
+
 ---
 
 Uniform is Universal:
@@ -178,6 +220,8 @@ $$
 P(X_1 \le x_1, ..., X_n \le x_n) = P(X_1 \le x_1) \times ... \times P(X_n \le x_n)
 $$
 
+This is `joint CDF`
+
 for all x_1, ..., x_n
 
 _Descrete case_ :
@@ -186,9 +230,18 @@ $$
 P(X_1 = x_1, ..., X_n = x_n) = P( X_1 = x_1) \times ... \times P( X_n = x_n)
 $$
 
----
+This is `joint PMF`
 
-## Normal (Gaussian) Distribution 
+#### Example pairwise indep. does'nt imply indep.
+
+X1, X2 ~ Bern(p)。 iid, X3 = 1 if X1 = X2, X3 = 0 otherwise.
+X1, X2 是兩次不同的投擲硬幣正面或反面結果；X3為1如果兩次相同，否則X3為0
+這些是兩兩獨立, 但是非獨立。
+case 1: 知道X1, 但X2仍是 0 / 1 一半一半機率 - X1 vs X2 為獨立
+case 2: 知道X1, 但X3仍是 0 / 1 一半一半機率 - X1 vs X3 為獨立
+case 3: 知道X1 &amp; X2 即可確定X3 - X1,X2 vs X3 為 `非獨立`
+
+### Normal (Gaussian) Distribution 
 
 [CLT (Central Limit Theorem)](https://en.wikipedia.org/wiki/Central_limit_theorem): 
 Sum of a lot of i.i.d. r.v. looks like a Normal Distribution

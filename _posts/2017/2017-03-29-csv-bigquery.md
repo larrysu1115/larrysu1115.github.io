@@ -61,3 +61,12 @@ iconv : 轉換各種編碼用
 sed : 替換文件內容
 awk : 利用某種分隔符號 處理/查看 文件 
 ```
+
+### 練習用的 CSV:
+
+下載這個文件，[點擊這裡下載 csv_samples.tgz](/assets/src/2017/csv_samples.tgz)
+
+先不要看裡面的 hints.txt 文件，這個文件提示每個 CSV 文件的特殊處。
+
+解開壓縮後有 5 個略有不同的 csv 文件，能否都順利的導入 BigQuery? 
+

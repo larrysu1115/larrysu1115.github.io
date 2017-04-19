@@ -44,6 +44,9 @@ pyenv activate p3env
 # 離開 p3env 這個環境
 pyenv deactivate
 
+# 將 p3env 當成 目前路徑 的默認 python version
+pyenv local p3env
+
 # 列出现有的 virtualenv 环境
 $ pyenv virtualenvs
 

@@ -38,7 +38,7 @@ np.set_printoptions(precision=5, suppress=True)
 
 | iris setosa | iris versicolor | iris virginica |
 |-|-|-|
-| <img src="/assets/img/2017/iris-setosa.jpg" style="width:150px" /> | <img src="/assets/img/2017/iris-versicolor.jpg" style="width:150px" /> | <img src="/assets/img/2017/iris-virginica.jpg" style="width:150px" /> |
+| <img src="/assets/img/2017/iris-setosa2.jpg" style="width:150px" /> | <img src="/assets/img/2017/iris-versicolor.jpg" style="width:150px" /> | <img src="/assets/img/2017/iris-virginica.jpg" style="width:150px" /> |
 
 
 ```python

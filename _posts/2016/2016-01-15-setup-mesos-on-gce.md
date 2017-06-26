@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Setup MESOS cluster on GCE"
-description: "A step by step tutorial to build Mesos cluster on GCE(Google Compute Engine), Including Mesos master *3, slave *N, marathon and mesosDNS"
+description: "Mesos provide resource management and scheduling across different machines. This is a step by step tutorial to build Mesos cluster on GCE(Google Compute Engine), including Mesos master *3, slave *N, marathon and mesosDNS."
 category: bigdata
 tags: [bigdata, homepage]
 image-url: /assets/img/icon/icon-mesos.png
@@ -54,7 +54,7 @@ gcloud compute --project "lab-larry" instances create "mesos-master-1" \
 	--image "https://www.googleapis.com/compute/v1/projects/ubuntu-os-cloud/global/images/ubuntu-1404-trusty-v20151113" \
 	--boot-disk-size "40" --boot-disk-type "pd-standard" --boot-disk-device-name "disk-mesos-master-1" \
 	--metadata-from-file startup-script=./init-vm-instance.sh
-	
+
 # create instance of mesos-slave
 gcloud compute --project "lab-larry" instances create "mesos-slave-1" \
 	--zone "asia-east1-b" --machine-type "n1-standard-4" \
@@ -119,9 +119,9 @@ mkdir -p /opt/shared
 echo "INSTALL: for master, install mesosphere"
 apt-get install -y mesosphere
 ```
-	
+
 *ONLY For SLAVE*, install the `mesos` package
-	
+
 ```bash
 echo "INSTALL: for slave, install mesos"
 apt-get install -y mesos
@@ -130,19 +130,19 @@ apt-get install -y mesos
 3. **Configure ZooKeeper (on every Master node)**
 
 Two configuration files are required for ZooKeeper:
-	
+
 `/etc/zookeeper/conf/myid` : content of this file should be 1, 2, 3 for mesos-master-1, mesos-master-2, mesos-master-3
-	
+
 `/etc/zookeeper/conf/zoo.cfg` : content of this file
-	
+
 ```bash
 server.1=mesos-master-1:2888:3888
 server.2=mesos-master-2:2888:3888
 server.3=mesos-master-3:2888:3888
 ```
-	
+
 Use this script to setup these 2 files:
-	
+
 ```bash
 # ${HOSTNAME##*-}: get the last serial number(1,2,3) in $HOSTNAME. We have $HOSTNAME like "mesos-master-[1,2,3]"
 echo ${HOSTNAME##*-} > /etc/zookeeper/conf/myid
@@ -152,15 +152,15 @@ echo "server.3=mesos-master-3:2888:3888" >> /etc/zookeeper/conf/zoo.cfg
 ```
 
 4. **Configure Mesos Master service (on every Master node)**
-	
+
 Four configuration files are required for mesos-master-service.
-	
+
 `/etc/mesos-master/quorum` : the minimum number for a node to win the election to be active master, set this to 2 since we have 3 masters.
-	
+
 `/etc/mesos-master/ip` : ip address of this master node.
-	
+
 `/etc/mesos-master/hostname` : hostname of this master node.
-	
+
 `/etc/mesos/zk`: the ZooKeeper's service registry, content should be "zk://mesos-master-1:2181,mesos-master-2:2181,mesos-master-3:2181/mesos"
 
 Use this script to setup these files:
@@ -170,7 +170,7 @@ echo "zk://mesos-master-1:2181,mesos-master-2:2181,mesos-master-3:2181/mesos" > 
 echo 2 > /etc/mesos-master/quorum
 echo $HOSTNAME | tee /etc/mesos-master/hostname
 ifconfig eth0 | awk '/inet addr/{print substr($2,6)}' | tee /etc/mesos-master/ip
-	
+
 # make sure mesos-slave won't be running on master
 echo manual | sudo tee /etc/init/mesos-slave.override
 ```

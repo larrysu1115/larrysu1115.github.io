@@ -3,7 +3,7 @@ layout: post
 title: "Hadoop on docker"
 description: "Simulate a hadoop cluster running on one single docker host."
 category: bigdata
-tags: [hadoop, homepage]
+tags: [hadoop]
 image-url: /assets/img/icon/icon-hadoop.jpg
 ---
 
@@ -11,7 +11,7 @@ Running [Hadoop](http://hadoop.apache.org/) on Docker
 
 __docker image__
 
-using Docker image: [larrysu1115/hadoop](https://hub.docker.com/r/larrysu1115/hadoop/), 
+using Docker image: [larrysu1115/hadoop](https://hub.docker.com/r/larrysu1115/hadoop/),
 
 Take a look at [Dockerfile](https://github.com/larrysu1115/dockerfile-hadoop/)
 
@@ -39,9 +39,9 @@ $ HADOOP_PREFIX=/opt/hadoop; \
 15/12/31 14:35:50 INFO mapreduce.JobSubmitter: number of splits:29
 ...
 ...
-	File Input Format Counters 
+	File Input Format Counters
 		Bytes Read=417
-	File Output Format Counters 
+	File Output Format Counters
 		Bytes Written=191
 6	dfs.audit.logger
 4	dfs.class

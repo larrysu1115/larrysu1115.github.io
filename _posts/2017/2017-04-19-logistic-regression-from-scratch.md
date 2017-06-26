@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Logistic Regression from scratch"
-description: "使用逻辑回归模型，自行实现算法的过程，并以 One-Versus-All 进行多元分类；演示中使用 iris dataset，并且以视觉化的方式呈现结果。"
+description: "以 python 实现 逻辑回归模型 的算法，過程中使用 gradient descent，獲得二元的最佳解，再以 One-Versus-All 进行多元分类；演示中使用 iris dataset，并且以视觉化的方式呈现預測的结果。"
 category: machine-learning
 tags: [machine-learning, homepage]
 image-url: /assets/img/2017/c170419-cover.jpg
@@ -30,7 +30,7 @@ pd.options.display.float_format = '{:,.2f}'.format
 np.set_printoptions(precision=5, suppress=True)
 ```
 
-为了方便绘图，这里只使用 iris dataset 的两个 features: 
+为了方便绘图，这里只使用 iris dataset 的两个 features:
 
 - sepal length : 花萼长度，作为 2D图中的 X 轴, 以 x1 表示
 - sepal width : 花萼宽度，作为 2D图中的 Y 轴, 以 x2 表示
@@ -128,12 +128,12 @@ types = (df_iris.loc[df_iris['y']==0],
 
 ax = plt.gca()
 for t in range(3):
-    ax.scatter(types[t]['x1'], 
-                types[t]['x2'], 
-                c = colors_label[t], 
-                s=40, 
-                alpha=0.6, 
-                edgecolors='none', 
+    ax.scatter(types[t]['x1'],
+                types[t]['x2'],
+                c = colors_label[t],
+                s=40,
+                alpha=0.6,
+                edgecolors='none',
                 label='%d: %s' % (t, iris.target_names[t]))
 
 ax.set_xlabel(iris.feature_names[0])
@@ -160,9 +160,9 @@ $$
 y = \frac{1}{1+\exp(-x)} = \frac{ e^x }{1 + e^x } = \theta( x ) = 1 - \theta(-x)
 $$
 
-算法的目的是最小化 Cross Entropy Error: 
+算法的目的是最小化 Cross Entropy Error:
 
-$$ 
+$$
 E_{in}(w) = \frac{1}{N} \sum_{n=1}^N \ln \Big( 1 + \exp(-y_n w^T x_n) \Big) + \underbrace{\frac{\lambda}{2 N} \sum_{j=1}^{\# \ features} \big( w_j^2 \big)}_{\text{L2 regularizer}} $$
 
 最佳化的过程使用 gradient descent，一步一步求的最小化的梯度
@@ -215,9 +215,9 @@ def gradient_descent(X, y, lamda, max_loop, err_ce_grad_target, eta, show_progre
         w_len = np.linalg.norm(w)
         if show_progress:
             err_ce = cost_function_reg(w, X, y, lamda)
-            print('round %d - w_len=%.4f   e_grad_length=%.8f, ein_ce=%.5f' 
+            print('round %d - w_len=%.4f   e_grad_length=%.8f, ein_ce=%.5f'
                   % (i, w_len, len_e_grad, err_ce))
-    
+
     err_ce = cost_function_reg(w, X, y, lamda)    
     return (w, err_ce, count_iterations)
 
@@ -234,8 +234,8 @@ def predict(w, x1, x2):
 # 对每个单一类别进行 training
 def fit(X, y, lamda, max_loop, err_ce_grad_target, eta, show_progress=False):
     w, err_ce, loops = gradient_descent(X, y,
-                                        lamda=lamda, max_loop=max_loop, 
-                                        err_ce_grad_target=err_ce_grad_target, 
+                                        lamda=lamda, max_loop=max_loop,
+                                        err_ce_grad_target=err_ce_grad_target,
                                         eta=eta, show_progress=show_progress)
     print('final result (%d loops): w = %s, ERROR=%.6f' % (loops, w.T[0], err_ce))
     return (w, err_ce)
@@ -243,7 +243,7 @@ def fit(X, y, lamda, max_loop, err_ce_grad_target, eta, show_progress=False):
 # 画出 2D Plot
 def draw_axe(ax, df, train_for_y_label):
     for i in range(len(df_iris)):
-        g_mark = 'D' if (df.loc[i,'usage'] == 'test' and df.loc[i,'g_error'] > 0.) 
+        g_mark = 'D' if (df.loc[i,'usage'] == 'test' and df.loc[i,'g_error'] > 0.)
                      else marks[df.loc[i,'usage']]
         g_alpha = 0.6 if g_mark == 'D' else 0.5
         g_size = 100 if g_mark == 'D' else 60
@@ -292,14 +292,14 @@ gx2 = np.linspace(x2_lim[0], x2_lim[1], 50)
 gvx1, gvx2 = np.meshgrid(gx1, gx2)
 
 
-def train_one_class_and_valid(train_for_y_label, df, lamda, 
-                              max_loop, err_ce_grad_target, 
+def train_one_class_and_valid(train_for_y_label, df, lamda,
+                              max_loop, err_ce_grad_target,
                               eta, show_progress=False):
     df_train = df.loc[np.where(df['usage'] == 'train', True, False),
                       ['x0', 'x1','x2',train_for_y_label]]
     X_train = df.loc[:,['x0', 'x1','x2']].as_matrix()
     y_train = df.loc[:,train_for_y_label].as_matrix().reshape(len(df), 1)
-    w, err_ce = fit(X_train, y_train, lamda=p_lamda, max_loop=p_loop, 
+    w, err_ce = fit(X_train, y_train, lamda=p_lamda, max_loop=p_loop,
                             err_ce_grad_target=p_limit, eta=p_eta)
     return (df, w, err_ce)
 
@@ -310,10 +310,10 @@ gvys = []
 for i_class in target_classes:
     train_for_y_label = 'y_is_%d' % i_class
     df = df_iris.copy()
-    df, w, err_ce = train_one_class_and_valid(train_for_y_label, 
-                                              df, lamda=p_lamda, 
+    df, w, err_ce = train_one_class_and_valid(train_for_y_label,
+                                              df, lamda=p_lamda,
                                               max_loop=p_loop,
-                                              err_ce_grad_target=p_limit, 
+                                              err_ce_grad_target=p_limit,
                                               eta=p_eta)
     df['g_prob'] = predict(w, df.x1.as_matrix(), df.x2.as_matrix())
     df['g_predict'] = np.where(df['g_prob'] > 0.5, 1., -1.)
@@ -324,7 +324,7 @@ for i_class in target_classes:
     gvys.append(gvy)
     ax.set_xlim(x1_lim)
     ax.set_ylim(x2_lim)
-    ax.pcolormesh(gvx1, gvx2, gvy, cmap='RdBu', 
+    ax.pcolormesh(gvx1, gvx2, gvy, cmap='RdBu',
                   alpha=0.15, linewidth=0, antialiased=True)
     draw_axe(ax, df, train_for_y_label)
 
@@ -341,13 +341,13 @@ for i,iv in enumerate(ivr):
         ivr[i] = 1.
     else:
         ivr[i] = 2.
-    
+
 ivr = ivr.reshape(gvys[0].shape)
 ax = axes[3]
 ax.set_xlim(x1_lim)
 ax.set_ylim(x2_lim)
 cMap = mplib.colors.ListedColormap(['r','g','b'])
-ax.pcolormesh(gvx1, gvx2, ivr, cmap=cMap, alpha=0.15, 
+ax.pcolormesh(gvx1, gvx2, ivr, cmap=cMap, alpha=0.15,
               linewidth=0, antialiased=True)
 
 colors2 = {0:'r', 1:'g', 2:'b'}

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Dotnet Development Stack"
-description: "2014~15年间使用的 C#.net 开发框架，使用 Domain Driven 模式分层 Web, BLL, DAL。主要技术 Entity Framework, NancyFX, TinyIoC"
+description: "2014~15年间使用的 C#.net 开发框架，使用 Domain Driven 模式分层 Web, BLL, DAL。使用的技术包含 ORM:Entity Framework, Web:NancyFX, Dependency Injection:TinyIoC, API doc: Swagger, etc..."
 category: programming
 tags: [dotnet, homepage]
 image-url: /assets/img/2014-11/tech_stacks.png
@@ -73,10 +73,10 @@ public class RepoAccountUser : GenericRepository<AccountUser>, IRepoAccountUser
     // 等 CRUD 操作。
 }```
 
-- EF Database Migration: .Core.DAL.EFMigrations, 使用 ***SQL-Script 模式*** 
+- EF Database Migration: .Core.DAL.EFMigrations, 使用 ***SQL-Script 模式***
 
 ```csharp
-public CoreDbContextMigrationConfiguration(){    // Use command:  Update-Database -Script -StartUpProjectName "MyProject.Core"    // if need to drop table:    // this.AutomaticMigrationDataLossAllowed = true;    this.AutomaticMigrationsEnabled = 
+public CoreDbContextMigrationConfiguration(){    // Use command:  Update-Database -Script -StartUpProjectName "MyProject.Core"    // if need to drop table:    // this.AutomaticMigrationDataLossAllowed = true;    this.AutomaticMigrationsEnabled =
         MyProject.Core.Helper.KitConfig.GetIsDevModeAllowEFAutomaticDbMigration();    this.ContextKey = "MyProject.Core.DAL.CoreDbContext";}
 ```
 

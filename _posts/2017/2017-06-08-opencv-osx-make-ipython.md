@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Install OpenCV on OSX, supporting ipython"
-description: "在 MAC 上编译安装 OpenCV，并可在 ipython 中使用。"
+description: "OpenCV 提供了許多電腦視覺的工具。本文在 macOS 上使用 make install 编译安装 OpenCV 3.2.0，支持 python 3.6.x 接口的呼叫，并在 jupyter notebook (ipython) 中演示一個簡單的面部辨識程序。建立起在 macOS 上的 OpenCV 開發環境。"
 category: computer-vision
 tags: [computer-vision, homepage]
 image-url: /assets/img/icon/icon-opencv.png
@@ -13,7 +13,7 @@ image-url: /assets/img/icon/icon-opencv.png
 
 - python: 3.6.1
 - OpenCV: 3.2.0
-- macOS: Sierra 10.12.5 
+- macOS: Sierra 10.12.5
 
 参考:  
 Adam Gradzki : [Python 3.6, OpenCV 3.2, and PyEnv on macOS Sierra](https://medium.com/@nszceta/python-3-6-opencv-3-2-and-pyenv-on-macos-sierra-6ebcebd6193e)  
@@ -132,7 +132,7 @@ $ python -c "import cv2; print(cv2.__version__)"
 
 ```
 # 建立 名为 p3cv 的 jupyter notebook kernel
-mkdir /Users/larrysu/Library/Jupyter/kernels/p3cv 
+mkdir /Users/larrysu/Library/Jupyter/kernels/p3cv
 vim /Users/larrysu/Library/Jupyter/kernels/p3cv/kernel.json
 
 # kernel.json 的内容如下

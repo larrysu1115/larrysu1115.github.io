@@ -1,9 +1,10 @@
 ---
 layout: post
 title: "R - Make new package with git in R Studio"
-description: ""
+description: "說明如何建立一個基本的 R project, 適合給沒有編程背景的 R data analyzer 入門瞭解如何系統化的編程。介紹如何建立 R project / package，使用 git 進行源代碼管理，還有使用 library, 如何編寫簡單的 function，並且引入程序中使用。"
 category: programming
-tags: [r]
+tags: [r, homepage]
+image-url: /assets/img/2016-Q3/160831-rstudio.png
 ---
 
 ### 0. 大綱
@@ -40,7 +41,7 @@ $ git config --global user.email "andy@gomi.com"
 $ git config --global user.name "Andy WANG"
 $ git config --global merge.ff false
 # 這些信息會寫入到 ~/.gitconfig 文件中
-$ cat ~/.gitconfig 
+$ cat ~/.gitconfig
 [user]
 	email = andy@gomi.com
 	name = Andy WANG
@@ -86,7 +87,7 @@ $ mkdir ~/repos
 [1] "/home/andy/repos/fufu"
 # 到上一層目錄
 > setwd('..')
-# 引用工具: devtools 
+# 引用工具: devtools
 > library(devtools)
 # 初始化 R package, 會多出 DESCRIPTION, NAMESPACE... 文件。overwrite? 選 Yes
 > devtools::create('fufu')
@@ -146,7 +147,7 @@ Updating fufu documentation
 git checkout -b master
 ```
 
-到 R Studio 的 [git TAB] >> [commit] 
+到 R Studio 的 [git TAB] >> [commit]
 
 - commit message: 隨便寫，如 "initial project structure"
 - 選擇左側的文件 staged 打勾
@@ -158,7 +159,7 @@ git checkout -b master
 
 ### 3. 使用 library, 以及編寫自己的 function
 
-重新打開 R Studio Project，應該`多了一個 [Build TAB]`，打開文件 DESCRIPTION，在裡頭加入兩個部分: Imports, Suggests 
+重新打開 R Studio Project，應該`多了一個 [Build TAB]`，打開文件 DESCRIPTION，在裡頭加入兩個部分: Imports, Suggests
 
 - Imports: 必須使用到的 library
 - Suggests: 建議使用到的 library (通常是開發用的，如文件產生器 roxygen2)
@@ -261,7 +262,7 @@ git checkout -b develop
 ```bash
 # 在 R Studio 中的 [git TAB] > [shell] 中輸入
 git push -u origin develop
-``` 
+```
 
 到 BitBucket 中看到已經有兩個分支 master, develop。
 剛才的修改只能在 develop 中看到。master 中沒有變化。
@@ -294,4 +295,3 @@ Merge made by the 'recursive' strategy.
 - 本地 master 分支 與 遠端 origin/master 分支同步 (在同一水平上)
 - 本地 develop 分支 與 遠端 origin/develop 分支同步
 - develop 分支已經合併回到 master 分支。
-

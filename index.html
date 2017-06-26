@@ -10,15 +10,22 @@ layout: default
     {% for post in site.tags['homepage'] limit:10 %}
       <li>
 
-        {% if post.image-url contains 'assets' %}
-        <img src="{{ site.baseurl }}{{ post.image-url }}" style="max-width:160px;max-height:70px;padding:5px;float:right" alt="post visual" title="{{ post.title }}" />
-        {% else %}
-        {% endif %}
-
-        <h2 style="">
+	<h2 style="homepage_sum_title">
           <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
         </h2>
-        <span class="home-article-meta" style="">{{ post.date | date: "%b %-d, %Y" }} - {{ post.description }}</span>
+
+	<div style="min-height:75px;" >
+
+	  {% if post.image-url contains 'assets' %}
+          <div class="homepage_sum_img" style="float:right;" >
+            <img src="{{ site.baseurl }}{{ post.image-url }}" style="max-width:160px;max-height:70px;padding:5px;float:right" 
+                 alt="post visual" title="{{ post.title }}" />
+          </div>
+          {% else %}
+          {% endif %}
+
+          <div class="home-article-meta" style="margin-right:170px">{{ post.date | date: "%b %-d, %Y" }} - {{ post.description }}</div>
+	</div>
       </li>
     {% endfor %}
   </ul>

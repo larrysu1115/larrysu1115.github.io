@@ -3,7 +3,7 @@ layout: post
 title: "Learn Scala - sbt"
 description: "Learn how to use the build tool of scala: sbt, with a helloworld example."
 category: programming
-tags: [scala, homepage]
+tags: [scala]
 image-url: /assets/img/icon/icon-sbt.svg
 ---
 
@@ -41,8 +41,8 @@ lazy val root = (project in file(".")).
 )
 
 // content of hw.scala
-object Hi { 
-    def main(args: Array[String]) = println("Hi!") 
+object Hi {
+    def main(args: Array[String]) = println("Hi!")
 }
 ```
 
@@ -54,7 +54,7 @@ $ sbt
 sbt> compile
 ...
 sbt> run
-[info] Running Hi 
+[info] Running Hi
 Hi!
 # automatically recompile if source changes
 sbt> ~ compile

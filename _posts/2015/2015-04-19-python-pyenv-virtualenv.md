@@ -25,7 +25,7 @@ $ brew install pyenv-virtualenv
 # fix an issue about brew openssl
 $ xcode-select --install
 # install python 3.x & 2.7.x
-$ pyenv install 3.5.2
+$ env PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install 3.5.2
 $ pyenv install 2.7.12
 
 # add 2 lines to bash profile script: ~/.bash_profile
@@ -53,4 +53,3 @@ $ pyenv virtualenvs
 # 移除现有的 virtualenv 环境
 pyenv uninstall my-virtual-env
 ```
-

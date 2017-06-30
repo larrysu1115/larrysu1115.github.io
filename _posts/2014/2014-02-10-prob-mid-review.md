@@ -2,7 +2,7 @@
 layout: post
 title: "Review"
 description: ""
-category: "probability"
+category: "math - probability"
 tags: [math,probability]
 ---
 
@@ -67,4 +67,3 @@ P ( F(X) \le \frac{1}{3} ) & = ? \\
 $$
 
 ### Logistic distribution
-

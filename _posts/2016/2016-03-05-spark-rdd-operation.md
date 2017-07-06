@@ -3,10 +3,10 @@ layout: post
 title: "Spark RDD operations"
 description: ""
 category: programming
-tags: [bigdata]
+tags: [spark]
 ---
 
-Spark Core - 
+Spark Core -
 
 RDD usage examples, [org.apache.spark.rdd.RDD](https://spark.apache.org/docs/1.6.0/api/scala/#org.apache.spark.rdd.RDD)
 
@@ -60,7 +60,7 @@ __mapPartitions__ : Return a new RDD by applying a function to each partition of
 def mapPartitions[U]
     (f: (Iterator[T]) ⇒ Iterator[U], preservesPartitioning: Boolean = false)
     (implicit arg0: ClassTag[U]): RDD[U]
-    
+
 scala> val rddx = rdd1 mapPartitions { it => it.map { e => Map(e -> e.length) } }
 rddx: org.apache.spark.rdd.RDD[scala.collection.immutable.Map[String,Int]] = MapPartitionsRDD[108] at mapPartitions at <console>:16
 scala> rddx.foreach(println)
@@ -209,7 +209,7 @@ __join__ : Return an RDD containing all pairs of elements with matching keys in 
 
 __leftOuterJoin__ : Perform a left outer join of this and other.
 
-__rightOuterJoin__ : 
+__rightOuterJoin__ :
 
 __fullOuterJoin__ : Perform a full outer join of this and other.
 

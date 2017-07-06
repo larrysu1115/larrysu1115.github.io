@@ -3,7 +3,7 @@ layout: post
 title: "Get detail BigQuery job result information"
 description: ""
 category: programming
-tags: [bigrquery]
+tags: [bigquery,r]
 ---
 
 A little modification to get job information (including billing bytes), for my colleagues.

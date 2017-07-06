@@ -3,7 +3,7 @@ layout: post
 title: "Setup MESOS cluster on GCE"
 description: "Mesos provide resource management and scheduling across different machines. This is a step by step tutorial to build Mesos cluster on GCE(Google Compute Engine), including Mesos master *3, slave *N, marathon and mesosDNS."
 category: bigdata
-tags: [bigdata, homepage]
+tags: [mesos, homepage]
 image-url: /assets/img/icon/icon-mesos.png
 
 ---

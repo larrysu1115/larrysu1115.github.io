@@ -40,6 +40,8 @@ tags: [r]
 # install from github
 > library("devtools")
 > devtools::install_github("larrysu1115/bigrquery")
+# do not install dependencies
+> devtools::install_github("larrysu1115/bigrquery", dependencies=FALSE)
 
 # install a local source package
 # go to parent folder containing ./xxname/R/

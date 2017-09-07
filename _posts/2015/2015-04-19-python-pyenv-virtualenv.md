@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Python pyenv+virtualenv"
+title: "Python Environment - pyenv,virtualenv,miniconda"
 description: ""
 category: programming
 tags: [python]
@@ -52,4 +52,17 @@ $ pyenv virtualenvs
 
 # 移除现有的 virtualenv 环境
 pyenv uninstall my-virtual-env
+```
+
+### miniconda + spyder
+
+安裝 spyder 需要 pyqt, 使用 miniconda 的基礎環境
+
+```
+pyenv install miniconda3-4.3.11
+pyenv virtualenv miniconda3-4.3.11 mconda3
+pyenv local mconda3
+pip install PyQt5
+pip install spyder
+spyder3
 ```

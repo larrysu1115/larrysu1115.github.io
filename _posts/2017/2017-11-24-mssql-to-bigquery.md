@@ -16,6 +16,11 @@ Export MSSQL data table to Google BigQuery
 
 ```bash
 bcp {TABLE_NAME} out "output_file.csv" -T -S {HOSTNAME_OR_IP} -d {DATABASE_NAME} -q -w -b5000 -t,
+
+# 如果表中的栏位，包含有半角逗号 "," 就需要加入 quoted delimeter 在 CSV 中
+# 需要使用 SQL Query 如 SELECT '"' + REPLACE(column_a,'"', '""') + '"' AS column_a, column_b FROM table_x
+# 套入 DOS 命令中，双引号之前要加上跳脱字符 escape character : \
+bcp " SELECT '\"' + REPLACE(column_a,'\"', '\"\"') + '\"' AS column_a, column_b FROM table_x " queryout "output_file.csv" -T -S {HOSTNAME_OR_IP} -d {DATABASE_NAME} -q -w -b5000 -t,
 ```
 
 ### Transfer csv data file
@@ -48,5 +53,5 @@ $ gsutil cp output_file_u8.csv gs://bucket_name/some_path/
 # 导入成为 BigQuery 的一张表
 $ bq --project_id {PROJECT_ID} --nosync load --replace --max_bad_records 0 --skip_leading_rows 0 \
   {DATASET}.{TABLE} gs://bucket_name/some_path/output_file_u8.csv \
-  {COLUMN_1},{COLUMN_2},{COLUMN_3}
+  {COLUMN_1},{COLUMN_2}:integer,{COLUMN_3}:date,{COLUMN_4}:float
 ```

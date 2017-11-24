@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Notes for Redshift"
+title: "Export MSSQL table to BigQuery"
 description: ""
 category: database
 tags: [mssql,bigquery]

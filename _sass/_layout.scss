@@ -2,12 +2,12 @@
  * Site header
  */
 .site-header {
-    // border-top: 5px solid $grey-color-dark;
-    // border-bottom: 1px solid $grey-color-light;
+    border-top: 5px solid $grey-color-dark;
+    border-bottom: 1px solid $grey-color-light;
     padding: 10px 0 0 0;
     min-height: 56px;
 
-    background-color: #BCBCBC;
+    // background-color: #BCBCBC;
 
     // Positioning context for the mobile navigation icon
     position: relative;
@@ -71,7 +71,7 @@ div.home a.post-link:hover {
         position: absolute;
         top: 9px;
         right: $spacing-unit / 2;
-        background-color: $background-color;
+        // background-color: $background-color;
         border: 1px solid $grey-color-light;
         border-radius: 5px;
         text-align: right;
@@ -195,7 +195,7 @@ div.home a.post-link:hover {
  */
 .page-content {
     padding: 0 0 $spacing-unit 0;
-    background-color: #BCBCBC;
+    // background-color: #BCBCBC;
 }
 
 .page-heading {

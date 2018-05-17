@@ -30,3 +30,8 @@ for (i in c(10, 11, 12)) {
 
 sprintf("total bytes: [%d]", all_bytes_billed)
 ~~~
+
+```
+# httr 認證，不使用交互瀏覽器驗證，而是在瀏覽器上獲得 authorization code 後，再貼回。
+options(httr_oob_default=TRUE)
+```

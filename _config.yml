@@ -6,7 +6,7 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: "SWS 9F"
+title: "SWS.9F"
 email: larrysu1115@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   吾生也有涯，而知也無涯。
@@ -29,6 +29,6 @@ kramdown:
     span:
       line_numbers: false
     block:
-      line_numbers: true
+      line_numbers: false
       start_line: 1
 

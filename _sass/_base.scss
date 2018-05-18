@@ -149,6 +149,7 @@ code.highlighter-rouge {
 pre {
     padding: 8px 12px;
     overflow-x: auto;
+    line-height: 18px;
 
     > code {
         border: 0;
@@ -165,8 +166,8 @@ pre {
 .wrapper {
     max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit} * 2));
     max-width:         calc(#{$content-width} - (#{$spacing-unit} * 2));
-    margin-right: auto;
-    margin-left: auto;
+    margin-right: 50px;
+    margin-left: 50px;
     padding-right: $spacing-unit;
     padding-left: $spacing-unit;
     background-color: #FFF;
@@ -311,7 +312,7 @@ div.post-content table tr:last-child td:last-child {
 }
 
 div.post-content pre code {
-    font:14px/14px monospace;
+    font:13px/13px monospace;
 }
 
 div.highlight table tr td.gutter {

@@ -250,7 +250,7 @@ div.home a.post-link:hover {
     line-height: 1.6em;
     
     @include media-query($on-laptop) {
-        font-size: 36px;
+        font-size: 26px;
     }
 }
 
@@ -263,19 +263,21 @@ div.home a.post-link:hover {
     }
 
     h2 {
-        font-size: 32px;
-
+        font-size: 26px;
+        border-bottom: 1px solid brown;
+        margin-top: 30px;
         @include media-query($on-laptop) {
             font-size: 28px;
         }
     }
 
     h3 {
-        font-size: 20px;
-        font-weight: bold;
-        text-decoration: none;
-        border-top: 1px solid #ddd;
-        padding: 0.6em 0;
+        font-size: 18px;
+        font-weight: 400;
+        // text-decoration: underline;
+        // border-top: 1px solid #ddd;
+        // padding: 0.6em 0;
+        margin-top: 25px;
 
         @include media-query($on-laptop) {
             font-size: 22px;

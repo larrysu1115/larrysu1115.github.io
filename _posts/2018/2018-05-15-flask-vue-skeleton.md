@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Development Stack: python + vue.js"
+title: "Flask + Vue.js : Fullstack Development"
 description: ""
 category: programming
 tags: [python, vue.js]
@@ -15,10 +15,12 @@ tags: [python, vue.js]
 
 This tutorial shows how to build a system with python flask and vue.js. In the end of this article, we will have a skeleton application ready for rapid development.
 
+Here's the source code: [github repository](https://github.com/larrysu1115/flask-vue)
+
 This series of tutorial have 6 parts:
 
-- Part 1 : environment, flask HelloWorld, blueprint
-- Part 2 : flask config, logging, unit-testing, SQLAlchemy
+- **Part 1 : environment, flask HelloWorld, blueprint**
+- Part 2 : [flask config, logging, unit-testing, SQLAlchemy](flask-vue-skeleton-part-2.html)
 - Part 3 : Restful API, marshmallow, Swagger apidoc
 - Part 4 : flask-admin
 - Part 5 : flask-security
@@ -181,7 +183,7 @@ Since we are referencing internal module:'doggy.api', the folder:'dodo' should b
 ```bash
 # declare folder:'dodo' as a package
 touch ./dodo/__init__.py
-# run example
+# run flask app
 FLASK_DEBUG=1 FLASK_APP=dodo/app2.py flask run
 # test api in blueprint
 curl http://localhost:5000/doggy/api/list

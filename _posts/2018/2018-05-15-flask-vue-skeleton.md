@@ -1,9 +1,10 @@
 ---
 layout: post
 title: "Flask + Vue.js : Fullstack Development"
-description: ""
+description: "搭建一个基于 flask + vue.js，可以快速开发的全栈框架。整合了 flask-admin, flask-security, SQLAlchemy, Swagger UI。以 json Restful API 与前端 Vue.js 交互。"
 category: programming
-tags: [python, vue.js]
+tags: [python, vue.js, homepage]
+image-url: /assets/img/2018/flask-vue.png
 ---
 
 ### GOAL: 搭建一个基于 flask + vue.js，可以快速开发的全栈框架。具有以下特色:
@@ -21,7 +22,7 @@ This series of tutorial have 6 parts:
 
 - **Part 1 : environment, flask HelloWorld, blueprint**
 - Part 2 : [flask config, logging, unit-testing, SQLAlchemy](flask-vue-skeleton-part-2.html)
-- Part 3 : Restful API, marshmallow, Swagger apidoc
+- Part 3 : [Restful API, marshmallow, Swagger apidoc](flask-vue-skeleton-part-3.html)
 - Part 4 : flask-admin
 - Part 5 : flask-security
 - Part 6 : Vue.js

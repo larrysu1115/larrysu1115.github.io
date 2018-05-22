@@ -84,3 +84,205 @@ def create_app():
 运行 flask，访问 [http://localhost:5000/admin](http://localhost:5000/admin) ，就可以看到 Flask-Admin 产生的后台，提供了 Model: Product, Item 两张表的增删改查界面！
 
 <img src="/assets/img/2018/flask-vue-flask-admin.png" />
+
+## Flask-Security
+
+接着要将权限管理整合进来，让系统具有权限管控的能力，包含:
+
+- 使用者管理
+- 权限分配
+- API token 权限验证
+
+这里使用的 Flask-Security 套件，聚焦在权限相关功能，整合了许多 python 的工具。我们来看看如何将 Flask-Security 添加进来。
+
+```
+pip install flask-security
+```
+
+file `./dodo/utils/gadget.py` 添加这两行:
+
+```python
+from flask_security import Security
+security = Security()
+```
+
+file `./config/development.py` 添加:
+
+```python
+SECURITY_PASSWORD_SALT = 'askme'
+# use simple crypt in dev mode.
+SECURITY_HASHING_SCHEMES = 'des_crypt'
+SECURITY_PASSWORD_HASH = 'des_crypt'
+SECURITY_DEPRECATED_HASHING_SCHEMES = []
+# for token to work
+WTF_CSRF_ENABLED = False
+```
+
+file `./dodo/model/auth.py` 添加用户权限对应的 Model 数据库表 User, Role:
+
+```python
+from flask_security import UserMixin, RoleMixin
+
+from ..utils.gadget import db
+
+class RolesUsers(db.Model):
+    __tablename__ = 'auth_roles_users'
+    id = db.Column(db.Integer(), primary_key=True)
+    user_id = db.Column('user_id', db.Integer(), db.ForeignKey('auth_user.id'))
+    role_id = db.Column('role_id', db.Integer(), db.ForeignKey('auth_role.id'))
+
+class Role(db.Model, RoleMixin):
+    __tablename__ = 'auth_role'
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(80), unique=True)
+    description = db.Column(db.String(255))
+
+    def __str__(self):
+        return self.name
+
+    def __hash__(self):
+        return hash(self.name)
+
+class User(db.Model, UserMixin):
+    __tablename__ = 'auth_user'
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(255), unique=True)
+    password = db.Column(db.String(255))
+    active = db.Column(db.Boolean())
+    confirmed_at = db.Column(db.DateTime())
+    roles = db.relationship(
+        'Role',
+        secondary='auth_roles_users',
+        backref=db.backref('users', lazy='dynamic'))
+
+    def __str__(self):
+        return self.email
+```
+
+file `./dodo/admin/view.py` 添加 Role, User 的 表单管理到 Flask-Admin
+
+```python
+from flask_admin.contrib import sqla
+from flask_admin.menu import MenuLink
+from flask_security import current_user
+from wtforms.fields import PasswordField
+
+from ..utils.gadget import fadmin, db
+from ..model.warehouse import Product, Item
+from ..model.auth import User, Role
+
+...
+
+class UserView(sqla.ModelView):
+    column_exclude_list = ('password',)
+    form_excluded_columns = ('password',)
+    column_auto_select_related = True
+
+    def is_accessible(self):
+        return current_user.has_role('admin')
+
+    def scaffold_form(self):
+        form_class = super(UserView, self).scaffold_form()
+        form_class.password2 = PasswordField('New Password')
+        return form_class
+
+    def on_model_change(self, form, model, is_created):
+        if len(model.password2):
+            model.password = utils.encrypt_password(model.password2)
+
+class RoleView(sqla.ModelView):
+    def is_accessible(self):
+        return current_user.has_role('admin')
+
+fadmin.add_view(RoleView(Role, db.session, category='Admin'))
+fadmin.add_view(UserView(User, db.session, category='Admin'))
+...
+```
+
+file `./dodo/utils/database.py` 添加用户和角色:
+
+```python
+from .gadget import security
+...
+def setup_database(app):
+    with app.app_context():
+        ...
+
+        ds = security.datastore
+        role_admin = ds.find_or_create_role(name='admin', description='Administrator')
+        role_user = ds.find_or_create_role(name='user', description='Normal User')
+        ds.create_user(email='user@sws9f.org', password='user')
+        ds.create_user(email='admin@sws9f.org', password='admin')
+        db.session.commit()
+
+        ds.add_role_to_user('user@sws9f.org', 'user')
+        ds.add_role_to_user('admin@sws9f.org', 'admin')
+        db.session.commit()
+```
+
+file `./dodo/app.py` 修改成:
+
+```python
+from flask import Flask, jsonify, url_for
+from .doggy.api import blueprint_api
+from .warehouse.api import blueprint_api as warehouse_api
+import logging.config
+from .utils.database import setup_database
+from .utils.swagger import setup_swagger
+from .utils.gadget import db
+from .utils.gadget import fadmin
+from .utils.gadget import security
+from flask_admin import helpers as admin_helpers
+from flask_security import Security, SQLAlchemyUserDatastore
+from .model.auth import User, Role
+
+def create_app():
+    app = Flask(__name__)
+    # setup configuration from ./config/development.py
+    app.config.from_object('config.development')
+    # setup configuration from a environment variable which contains a file path
+    app.config.from_envvar('APP_CONFIG_FILE', silent=True)
+    # load logging setting
+    logging.config.fileConfig('./config/logging.cfg')
+
+    db.init_app(app)
+    fadmin.init_app(app)
+
+    user_datastore = SQLAlchemyUserDatastore(db, User, Role)
+    security.init_app(app, user_datastore)
+    security_app = app.extensions['security']
+    @security_app.context_processor
+    def security_context_processor():
+        return dict(
+            admin_base_template=fadmin.base_template,
+            admin_view=fadmin.index_view,
+            h=admin_helpers,
+            get_url=url_for
+        )
+
+    setup_database(app)
+    app.register_blueprint(blueprint_api, url_prefix='/doggy/api')
+    app.register_blueprint(warehouse_api, url_prefix='/warehouse')
+    from .admin import view
+    setup_swagger(app)
+
+    app.logger.info('application start. __name__ : %s', __name__)
+    
+    return app
+
+if __name__ == '__main__':
+    app = create_app()
+    app.run()
+```
+
+接着启动 flask, 访问 [http://localhost:5000/login](http://localhost:5000/login) 进行登入，输入
+
+- 管理员: admin@sws9f.org / admin
+- 一般用户: user@sws9f.org / user
+
+再访问管理后台地址 [http://localhost:5000/admin](http://localhost:5000/admin) 可以看到只有 admin 管理员才有 使用者管理 的菜单 "ADMIN"
+
+如果使用一般用户登入，就不会有 使用者管理 的界面出现。
+
+<img src="/assets/img/2018/flask-vue-flask-security.png" />
+

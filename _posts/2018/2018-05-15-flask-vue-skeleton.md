@@ -20,12 +20,11 @@ Here's the source code: [github repository](https://github.com/larrysu1115/flask
 
 This series of tutorial have 5 parts:
 
-- **Part 1 : environment, flask HelloWorld, blueprint**
-- Part 2 : [flask config, logging, unit-testing, SQLAlchemy](flask-vue-skeleton-part-2.html)
-- Part 3 : [Restful API, marshmallow, Swagger apidoc](flask-vue-skeleton-part-3.html)
+- **Part 1 : Environment, Flask HelloWorld, Blueprint**
+- Part 2 : [Flask config, logging, unit-testing, SQLAlchemy](flask-vue-skeleton-part-2.html)
+- Part 3 : [Restful API, Marshmallow, Swagger apidoc](flask-vue-skeleton-part-3.html)
 - Part 4 : [Flask-Admin, Flask-Security](flask-vue-skeleton-part-4.html)
 - Part 5 : Vue.js
-
 
 ## Prepare the Environment
 

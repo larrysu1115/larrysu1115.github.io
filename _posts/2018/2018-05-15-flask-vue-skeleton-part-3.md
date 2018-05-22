@@ -7,8 +7,8 @@ tags: [python, vue.js]
 ---
 
 - Part 1 : [environment, flask HelloWorld, blueprint](flask-vue-skeleton.html)
-- Part 2 : [flask config, logging, unit-testing, SQLAlchemy](flask-vue-skeleton-part-2.html)
-- **Part 3 : Restful API, marshmallow, Swagger apidoc**
+- Part 2 : [Flask config, logging, unit-testing, SQLAlchemy](flask-vue-skeleton-part-2.html)
+- **Part 3 : Restful API, Marshmallow, Swagger apidoc**
 - Part 4 : [Flask-Admin, Flask-Security](flask-vue-skeleton-part-4.html)
 - Part 5 : Vue.js
 

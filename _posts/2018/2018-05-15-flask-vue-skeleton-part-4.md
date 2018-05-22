@@ -6,8 +6,8 @@ category: programming
 tags: [python, vue.js]
 ---
 
-- Part 1 : [environment, flask HelloWorld, blueprint](flask-vue-skeleton.html)
-- Part 2 : [flask config, logging, unit-testing, SQLAlchemy](flask-vue-skeleton-part-2.html)
+- Part 1 : [Environment, Flask HelloWorld, Blueprint](flask-vue-skeleton.html)
+- Part 2 : [Flask config, logging, unit-testing, SQLAlchemy](flask-vue-skeleton-part-2.html)
 - Part 3 : [Restful API, Marshmallow, Swagger apidoc](flask-vue-skeleton-part-3.html)
 - Part 4 : **Flask-Admin, Flask-Security**
 - Part 5 : Vue.js
@@ -286,3 +286,122 @@ if __name__ == '__main__':
 
 <img src="/assets/img/2018/flask-vue-flask-security.png" />
 
+## API Token
+
+Flask-Security 也可以提供 api 需要使用的 token。例如:
+
+```bash
+curl -H "content-type: application/json" -d '{"email":"user@sws9f.org", "password":"user"}' \
+  http://127.0.0.1:5000/login
+# output
+# { "meta": { "code":200 },
+#   "response": {
+#     "user": { "authentication_token":"WyIxIiwicnNsU005LkIxL3BJUSJd.DeVJiQ.0QjkwA-8ZQnmTASHIS5eImX5x2A",
+#               "id":"1" }
+#   }
+# }
+```
+
+我们可以将 api 加上 decorator : @auth_token_required，就可以限制必须带有有效的 token 才可以访问。
+如下我们将 warehouse Blueprint 加上一个需要 登入后使用 token 才可以访问的 API。
+
+file `./dodo/warehouse/ma_schema.py` 添加一行
+
+```python
+schema_products = ProductSchema(many=True)
+```
+
+file `./dodo/warehouse/api.py` 加入一个需要 token 认证才允许访问的 API
+
+```python
+...
+from ..model.warehouse import Item, Product
+from .ma_schema import schema_items, schema_products
+from flask_security import auth_token_required, current_user
+
+@blueprint_api.route('/product', methods=['GET'])
+@auth_token_required
+def get_products():
+    """
+    Product list
+    ---
+    tags:
+      - warehouse
+    description: Get all products in the store
+    responses:
+        200:
+            description: list of products
+            schema:
+                $ref: '#/definitions/Product'
+    """
+    products = db.session.query(Product).all()
+    products = schema_products.dump(products)[0]
+    data = dict(user=current_user.email, products=products)
+    return jsonify(data)
+```
+
+测试呼叫这个 API
+
+```bash
+# 没有带上 token 的访问，被限制。
+curl http://127.0.0.1:5000/warehouse/product
+    # <h1>Unauthorized</h1>
+    # <p>The server could not verify that you are authorized to access the URL
+    # requested. You either supplied the wrong credentials (e.g. a bad password),
+    # or your browser doesn't understand how to supply the credentials required.
+    # </p>
+
+# 带上合法 token 的访问，则可以成功获得 API 的讯息。
+# API 也可以辨识出该 token 所属的使用者。
+curl -H "Authentication-Token:WyIxIiwiZnF1TUVma0ZWRnM5QSJd.DeVNqA.cPV-04NRHC0lRZFgITfGDSqtNfI" \
+  http://127.0.0.1:5000/warehouse/product
+# { "products" : [ {"id":1,"name":"milk"},
+#                  {"id":2,"name":"curry lunchbox"},
+#                  {"id":3,"name":"instant noodle"} ],
+#   "user" : "user@sws9f.org"
+# }
+```
+
+## Swagger UI with TOKEN
+
+回到 Swagger UI 提供的 apidocs 文档上，我们也可以加上 token 的设置，让这个界面也使用 token 来呼叫 API。
+
+先修正一下刚才添加的 get_products API 定义
+
+file `./dodo/utils/swagger.py` 加入 get_products 路径的定义
+
+```python
+from ..warehouse.api import get_items, get_products
+
+def setup_swagger(app):
+    ...
+    template = spec.to_flasgger(
+        app,
+        definitions=[ProductSchema, ItemSchema],
+        paths=[get_items, get_products]
+    )
+    swag = Swagger(app, template=template)
+    ...
+```
+
+file `./config/development.py` 加入 SWAGGER Bearer 的设定:
+
+```python
+SWAGGER = {
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authentication-Token",
+            "in": "header"
+        }
+    }
+}
+```
+
+接着启动 Flask app, 就可以看见 Swagger UI 右上方多了 Authorize 的配置，可以输入有效的 token 来访问受限制的 API。
+
+```bash
+FLASK_APP=dodo/app.py flask run
+```
+
+<img src="/assets/img/2018/flask-vue-api-ui-auth.png" />

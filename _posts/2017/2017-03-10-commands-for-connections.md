@@ -28,3 +28,9 @@ $ nc -lu 0.0.0.0 5000
 # 發送訊息
 $ echo -n 'wowo' | nc -u -w1 192.168.42.13 5000
 ```
+
+查看外部 IP
+
+```bash
+$ dig +short myip.opendns.com @resolver1.opendns.com
+```

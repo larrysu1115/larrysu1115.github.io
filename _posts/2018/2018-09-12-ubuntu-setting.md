@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Notes of bash commands"
+title: "Ubuntu settings"
 description: ""
 category: linux
 tags: [linux, notes]

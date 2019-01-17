@@ -53,6 +53,9 @@ $ sync && echo 3 > /proc/sys/vm/drop_caches
 ```bash
 find ./src_folder -type f -exec cat {} + > output_cat.csv
 
+# remove files of a certain pattern recursively
+find ./path/files/ -type f -name '*pattern.mp3' -exec rm {} +
+
 # replace filename
 for f in *.mp4; do nf=`echo $f | sed 's/BADTEXT//g'`; mv $f $nf; done
 ```

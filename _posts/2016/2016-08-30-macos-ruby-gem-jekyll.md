@@ -33,7 +33,8 @@ $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/inst
 $ brew install gpg
 
 # install the security key for RVM
-$ command curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+$ gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys \
+  409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 
 # install RVM
 $ \curl -sSL https://get.rvm.io | bash -s stable
@@ -41,7 +42,7 @@ $ \curl -sSL https://get.rvm.io | bash -s stable
 $ rvm get stable --autolibs=enable
 
 # install ruby, 先检查一下最新版本号 http://www.ruby-lang.org/en/downloads/
-$ rvm install ruby-2.3.1
+$ rvm install ruby-2.6.3
 
 # ruby 装好后，就有ruby的类库管理工具:gem 了
 $ gem -v
@@ -54,15 +55,19 @@ $ rvm gemset list
 
 # 安装 bundler, 可以自动下载ruby程序需要的相应套件
 $ rvm gemset use global
-$ gem install bundler
 
 # 到 clone 回来的 jekyll 资料夹下
 # 看到的资料夹内容大概像这样
 $ ls
 CNAME           _config.yml     _layouts        _site       ... 
 Gemfile         _drafts         _posts          index.html  ...
-# 执行:
+# 安裝需要的 library:
 $ bundle install
+
+# 試著運行
+$ bundle exec jekyll serve
+
+# 訪問 http://127.0.0.1:4000/
 ```
 
 这样就可以在全新环境下，使用 RVM 系统性地管理 ruby, jekyll 运行环境。

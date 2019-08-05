@@ -75,6 +75,16 @@ GO
 -- Msg 5042, Level 16, State 1, Line 3
 -- The file 'MyDB_FG1_Dat1' cannot be removed because it is not empty.
 
+-- 移除 filegroup
+-- 可以先進行 EMPTYFILE 的操作，避免上述 5042 錯誤發生 (參考B)
+DBCC SHRINKFILE(MyDB_FG1_Dat1, EMPTYFILE);
+-- 
+USE master;
+GO
+ALTER DATABASE MyDB  
+REMOVE FILE MyDB_FG1_Dat1;
+GO
+
 -- 先刪除掉 filegroup 中的表，再移除就會成功
 DROP TABLE MyTable2;
 
@@ -84,4 +94,37 @@ GO
 ALTER DATABASE MyDB  
 REMOVE FILEGROUP MyDB_FG1;
 GO
+
+-- 檢查每個表使用的 file group (參考A)
+SELECT 
+  OBJECT_SCHEMA_NAME(t.object_id) AS schema_name
+  ,t.name AS table_name
+  ,i.index_id
+  ,i.name AS index_name
+  ,ds.name AS filegroup_name
+  ,FORMAT(p.rows, '#,###') AS rows
+FROM sys.tables t
+INNER JOIN sys.indexes i ON t.object_id=i.object_id
+INNER JOIN sys.filegroups ds ON i.data_space_id=ds.data_space_id
+INNER JOIN sys.partitions p ON i.object_id=p.object_id AND i.index_id=p.index_id
+ORDER BY t.name, i.index_id
+
+-- Listing 2. Query to determine table filegroup by index and partition
+ 
+SELECT OBJECT_SCHEMA_NAME(t.object_id) AS schema_name
+  ,t.name AS table_name
+  ,i.index_id
+  ,i.name AS index_name
+  ,p.partition_number
+  ,fg.name AS filegroup_name
+  ,p.rows AS rows
+FROM sys.tables t
+INNER JOIN sys.indexes i ON t.object_id = i.object_id
+INNER JOIN sys.partitions p ON i.object_id=p.object_id AND i.index_id=p.index_id
+LEFT OUTER JOIN sys.partition_schemes ps ON i.data_space_id=ps.data_space_id
+LEFT OUTER JOIN sys.destination_data_spaces dds ON ps.data_space_id=dds.partition_scheme_id AND p.partition_number=dds.destination_id
+INNER JOIN sys.filegroups fg ON COALESCE(dds.data_space_id, i.data_space_id)=fg.data_space_id
 ```
+
+- (參考A)[https://jasonstrate.com/2013/01/29/determining-file-group-for-a-table/]
+- (參考B)[https://www.dbrnd.com/2017/03/sql-server-fix-error-5042-the-file-filename-cannot-be-removed-because-it-is-not-empty/]

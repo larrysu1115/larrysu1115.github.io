@@ -14,17 +14,17 @@ layout: default
           <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
         </h2>
 
-	<div style="min-height:75px;" >
+	<div style="min-height:100px;" >
 
 	  {% if post.image-url contains 'assets' %}
           <div class="homepage_sum_img" style="float:right;" >
-            <img src="{{ site.baseurl }}{{ post.image-url }}" style="max-width:160px;max-height:100px;padding:5px;margin-top:-15px;float:right" 
+            <img src="{{ site.baseurl }}{{ post.image-url }}" style="max-width:160px;max-height:120px;padding:5px;margin-top:-20px;float:left" 
                  alt="post visual" title="{{ post.title }}" />
           </div>
           {% else %}
           {% endif %}
 
-          <div class="home-article-meta" style="margin-right:170px">{{ post.date | date: "%b %-d, %Y" }} - {{ post.description }}</div>
+          <div class="home-article-meta" style="margin-right:190px">{{ post.date | date: "%b %-d, %Y" }} - {{ post.description }}</div>
 	</div>
       </li>
     {% endfor %}

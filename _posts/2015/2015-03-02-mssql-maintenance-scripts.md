@@ -31,14 +31,29 @@ ALTER DATABASE @YOUR_DB_NAME SET RECOVERY FULL WITH NO_WAIT
 GO 
 ```
 
-## 添加使用者對 Stored Procedure 的 讀取定義 權限
+## 使用者權限
 
 ```sql
-GRANT VIEW DEFINITION ON [dbo].[some_sp]
+--添加使用者對 Stored Procedure 的 讀取定義 權限
+USE dbName;
+GRANT VIEW DEFINITION ON [dbo].[spName]
   TO [DOMAIN\bob];
 GO
 
--- 直接賦予 public
+-- 直接賦予 public 讀取定義 權限
+USE dbName;
 GRANT VIEW DEFINITION TO PUBLIC;
 GO
+
+--添加使用者對 Stored Procedure 的 執行 權限
+--如果 儲存過程:SpName 有寫入實體表，即時用戶沒有寫入實體表權限，用戶執行SpName仍然可以寫入實體表。
+USE dbName;
+GRANT EXECUTE ON OBJECT::dbo.SpName
+  TO [DOMAIN\bob];
+GO
+
+-- 撤銷權限
+REVOKE EXECUTE ON OBJECT::dbo.SpName
+  FROM [DOMAIN\bob];
+GO   
 ```

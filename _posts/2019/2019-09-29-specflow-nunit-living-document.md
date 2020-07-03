@@ -30,6 +30,8 @@ Discover a working combination of toolsets to help stakeholders in a software de
 - Automation Tests
 - Living Documentation
 
+Source code is available on [github](https://github.com/larrysu1115/specflow-sample-code).
+
 ## Preparation
 
 - Visual Studio 2019 : This is the only paid software used in this article. If you can't get a copy of VS2017, the free version called ***Visual Studio Community*** should work too, though I didn't try it out.
@@ -71,12 +73,15 @@ Run command: `dotnet restore` to setup all these nuget packages.
 
 ```
 Feature: Price Calculator
+    User provide product SKU and amount to buy,
+    then the total price will be determined 
+    based on unit-price, amount and sales condition.
 
 Scenario: Calculate total price to pay
-   Given I enter SKU number
-   And I enter purchase amount
+   Given I enter SKU number 'A-1234'
+   And I enter purchase amount 5
    When I clicks calculate
-   Then the system calculates the total price to pay
+   Then the calculator shows 500 as the total price to pay
 ```
 
 - Add the testing steps : `./Features/PriceCalculatorSteps.cs`
@@ -88,22 +93,22 @@ using TechTalk.SpecFlow;
 namespace SpecFlowDemo.Features
 {
     [Binding]
-    public class PriceCalculator_CalculateTotalPriceSteps
+    public class PriceCalculatorSteps
     {
         private string sku { get; set; }
         private int amount { get; set; }
         private int totalPrice { get; set; }
 
-        [Given(@"I enter SKU number")]
-        public void InputSKU()
+        [Given(@"I enter SKU number '(.*)'")]
+        public void InputSKU(string inputSku)
         {
-            sku = "A-1234";
+            sku = inputSku;
         }
 
-        [Given(@"I enter purchase amount")]
-        public void InputAmount()
+        [Given(@"I enter purchase amount (.*)")]
+        public void InputAmount(int inputAmount)
         {
-            amount = 5;
+            amount = inputAmount;
         }
 
         [When(@"I clicks calculate")]
@@ -115,10 +120,10 @@ namespace SpecFlowDemo.Features
             totalPrice = calculator.CalculatePriceToPay();
         }
 
-        [Then(@"the system calculates the total price to pay")]
-        public void Calculate()
+        [Then(@"the calculator shows (.*) as the total price to pay")]
+        public void Calculate(int expectedPrice)
         {
-            Assert.That(totalPrice, Is.EqualTo(500));
+            Assert.That(totalPrice, Is.EqualTo(expectedPrice));
         }
     }
 }

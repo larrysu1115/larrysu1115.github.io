@@ -33,4 +33,9 @@ $ dotnet add CoreLib.Test reference CoreLib
 
 # Execute unit tests
 $ dotnet test CoreLib.Test
+# exclude Integration.Tests
+$ dotnet test CoreLib.Test --filter 'FullyQualifiedName\!~Integration'
+
+# Run console program
+$ dotnet run -p ./App
 ```

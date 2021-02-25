@@ -31,6 +31,35 @@ ALTER DATABASE @YOUR_DB_NAME SET RECOVERY FULL WITH NO_WAIT
 GO 
 ```
 
+## 索引
+
+```sql
+-- 重組索引, 一般在 fragment 30% 以下使用
+ALTER INDEX Index_Name ON Table_Name REORGANIZE
+
+-- 重建索引, 預設為 OFFLINE 模式，重建時候該表無法使用
+-- Enterprise 版本才可用線上模式 ONLINE=ON
+ALTER INDEX Index_Name ON Table_Name REBUILD WITH ( ONLINE = ON )
+
+-- 查詢所有索引狀態
+SELECT S.name as 'Schema',
+T.name as 'Table',
+I.name as 'Index',
+DDIPS.avg_fragmentation_in_percent,
+DDIPS.page_count
+FROM sys.dm_db_index_physical_stats (DB_ID(), NULL, NULL, NULL, NULL) AS DDIPS
+INNER JOIN sys.tables T on T.object_id = DDIPS.object_id
+INNER JOIN sys.schemas S on T.schema_id = S.schema_id
+INNER JOIN sys.indexes I ON I.object_id = DDIPS.object_id
+AND DDIPS.index_id = I.index_id
+WHERE DDIPS.database_id = DB_ID()
+and I.name is not null
+AND DDIPS.avg_fragmentation_in_percent > 0
+ORDER BY DDIPS.avg_fragmentation_in_percent desc
+```
+
+ref: [how-to-identify-and-resolve-sql-server-index-fragmentation](https://www.sqlshack.com/how-to-identify-and-resolve-sql-server-index-fragmentation/)
+
 ## 使用者權限
 
 ```sql

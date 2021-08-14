@@ -51,5 +51,6 @@ $ openssl pkcs12 -export -out ./my-dev-ssl-cert.pfx \
 - open `mmc` in Windows
 - in mmc, `Add Snap-ins` : `Certificates`, choose `Computer Accounts`
 - import `my-dev-ssl-cert.pfx` to `Trusted Root Certification Authorities`
+- import `my-dev-ssl-cert.pfx` to `Web Hosting` > `Certificates`
 
 

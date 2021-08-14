@@ -35,6 +35,8 @@ $ dotnet add CoreLib.Test reference CoreLib
 $ dotnet test CoreLib.Test
 # exclude Integration.Tests
 $ dotnet test CoreLib.Test --filter 'FullyQualifiedName\!~Integration'
+# run only 1 test class
+$ dotnet test CoreLib.Test --filter ClassName=Abc.Xyz.UnitTestClassname
 
 # Run console program
 $ dotnet run -p ./App

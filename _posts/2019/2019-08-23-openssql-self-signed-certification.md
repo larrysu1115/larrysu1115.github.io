@@ -3,7 +3,7 @@ layout: post
 title: "Make a Self-Signed Certification with OpenSSL"
 description: ""
 category: network
-tags: [mssql]
+tags: [ssl]
 ---
 
 Using `openssl` to create a self-signed SSL Certification for multiple websites. Then import this certification to Windows IIS.
@@ -21,11 +21,11 @@ prompt = no
 C = TW
 ST = TP 
 L = TP
-O = Migocorp
-OU = RnD 
+O = ComXyz
+OU = FooDept 
 CN = primary.website.domain
 [v3_req] 
-keyUsage = keyEncipherment, dataEncipherment 
+keyUsage = digitalSignature, keyEncipherment, dataEncipherment
 extendedKeyUsage = serverAuth 
 subjectAltName = @alt_names 
 [alt_names] 
@@ -36,13 +36,17 @@ DNS.2 = secondary.website.domain
 ### 2. Make certification with openssl
 
 ```bash
-$ openssl req -x509 -nodes -days 1000 -newkey rsa:2048 \
-    -keyout ./cert.pem -out ./cert.pem -config cert-config.txt
+# the lifespan of new TLS certificates is limited to 398 days, since 2020 Sept.
+$ openssl req -x509 -nodes -days 397 -newkey rsa:4096 \
+    -keyout ./key.pem -out ./cert.pem -sha256 -config cert-config.txt
 
-# make file for windows IIS
-$ openssl pkcs12 -export -out ./my-dev-ssl-cert.pfx \
-    -in ./cert.pem -name "My-Dev-SSL-Cert"
+# make certificate file "cert.pfx" for windows IIS
+$ openssl pkcs12 -export -out ./cert.pfx \
+    -inkey key.pem -in cert.pem -name "My-Dev-SSL-Cert"
 ```
+
+ref : [SSL limited to 398 days](https://www.ssl.com/blogs/398-day-browser-limit-for-ssl-tls-certificates-begins-september-1-2020/)
+ref : [why 398 days?](https://stackoverflow.com/questions/62659149/why-was-398-days-chosen-for-tls-expiration)
 
 ### 3. Import certification to windows-IIS
 
@@ -50,7 +54,10 @@ $ openssl pkcs12 -export -out ./my-dev-ssl-cert.pfx \
 - set certification for websites, using `binding`
 - open `mmc` in Windows
 - in mmc, `Add Snap-ins` : `Certificates`, choose `Computer Accounts`
-- import `my-dev-ssl-cert.pfx` to `Trusted Root Certification Authorities`
-- import `my-dev-ssl-cert.pfx` to `Web Hosting` > `Certificates`
+- import `cert.pfx` to `Trusted Root Certification Authorities`
+- import `cert.pfx` to `Web Hosting` > `Certificates`
 
+### for macOSX browsers to visit
 
+- add cert.pem to KeyChain
+- choose "always trust"

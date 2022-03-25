@@ -18,6 +18,7 @@ $ dotnet new classlib --name CoreLib --output ./CoreLib -f netstandard2.1
 $ dotnet sln add ./CoreLib/CoreLib.csproj
 
 $ dotnet new classlib --name CoreLib.Test --output ./CoreLib.Test -f netcoreapp3.1
+$ dotnet new classlib --name CoreLib.Test --output ./CoreLib.Test -f net5.0
 $ dotnet sln add ./CoreLib.Test/CoreLib.Test.csproj
 
 $ dotnet new console --name App --output ./App -f netcoreapp3.1
@@ -36,7 +37,7 @@ $ dotnet test CoreLib.Test
 # exclude Integration.Tests
 $ dotnet test CoreLib.Test --filter 'FullyQualifiedName\!~Integration'
 # run only 1 test class
-$ dotnet test CoreLib.Test --filter ClassName=Abc.Xyz.UnitTestClassname
+$ dotnet test CoreLib.Test --filter Name~UnitTestClassname
 
 # Run console program
 $ dotnet run -p ./App

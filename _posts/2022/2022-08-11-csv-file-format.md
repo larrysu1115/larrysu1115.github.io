@@ -55,13 +55,13 @@ Iris,"Temple of ""Heaven""",99
 
 Windows Excel
 
-![img](../../assets/img/2022/20220811/csv_open_with_win_excel.png)
+![img](/assets/img/2022/20220811/csv_open_with_win_excel.png)
 
 <hr />
 
 MacOSX Numbers
 
-![img](../../assets/img/2022/20220811/csv_open_with_mac_numbers.png)
+![img](/assets/img/2022/20220811/csv_open_with_mac_numbers.png)
 
 ## 撰寫程式，如何讀取 (Parse) / 寫入 CSV 文件？
 
@@ -70,6 +70,25 @@ MacOSX Numbers
 這些 library 能夠很好地處理資料中包含 逗號, 雙引號, 斷行符號 之類的問題。  
 
 > 處理 XML, Json 格式文件同樣要避免自己去 parse 原始字串
+
+錯誤例子, 嘗試自己按照逗號分隔:
+
+|name|address|age|
+|-|-|-|
+|John|Road Apple, No "18", 地下室|42|
+
+```
+# 原始內容
+John,"Road Apple, No ""18"", 地下室",42
+```
+
+錯誤例子, 嘗試自己去解析:
+
+```python
+x = txt.split(",")
+
+# 註 : 如果想試試看自己解析，正確的方向應該是使用 State Machine as Parser
+```
 
 C# 示例:
 
@@ -110,7 +129,7 @@ with open("sample_a.csv", "r") as my_file:
 
 上面程式運行情況:
 
-![img](../../assets/img/2022/20220811/csv_read_csharp_python.png)
+![img](/assets/img/2022/20220811/csv_read_csharp_python.png)
 
 ## 錯誤情況
 

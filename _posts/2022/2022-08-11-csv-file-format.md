@@ -6,6 +6,14 @@ category: [software engineering]
 tags: [dotnet]
 ---
 
+## 提要
+
+- CSV (逗號分隔文件) 的標準是什麼？
+- 如何正確處理欄位內容包含 逗號 / 雙引號 的情況？
+- 程式讀取/寫入 CSV, 我自己寫 `.Split(",")` 去分隔欄位就好了？ `(錯！)`
+
+## 什麼是 CSV 格式
+
 CSV (Comma-Separated Values) 為 逗號(,) 分隔欄位的文本文件，可以用來儲存資料。  
 也是常見的資料轉換格式之一。
 

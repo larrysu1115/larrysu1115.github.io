@@ -96,11 +96,11 @@ John,"Road Apple, No ""18"", 地下室",42
 x = txt.split(",")
 
 # 上述的結果:
-Column 1: John
-Column 2: "Road Apple
-Column 3: No ""18""
-Column 4: 地下室"
-Column 5: 42
+# Column 1: John
+# Column 2: "Road Apple
+# Column 3: No ""18""
+# Column 4: 地下室"
+# Column 5: 42
 
 # 註 : 如果想試試看自己解析，正確的方向應該是使用 State Machine as Parser
 ```

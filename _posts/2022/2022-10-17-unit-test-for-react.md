@@ -159,3 +159,9 @@ expect(screen.getByText('登入成功')).toBeInTheDocument();
 
 - 進行重構前的安全保護
 - 2020 年工程師隨身必備
+
+## 撰寫 React 單元測試需要先讀過:
+
+- [React 官網 : Testing](https://reactjs.org/docs/testing.html)
+- [Jest](https://jestjs.io/docs/getting-started) 大概看過文件有哪些主題
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)

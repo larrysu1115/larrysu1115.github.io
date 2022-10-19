@@ -8,9 +8,6 @@ tags: [other]
 
 # React 的單元測試
 
-- 為什麼要做 Unit Test?
-- 好的單元測試
-
 ## 前言 : 單元測試是什麼？
 
 演示程式 : `src/utils/Validator/__test__/Validator.email.test.js`
@@ -98,9 +95,67 @@ expect(screen.getByText('登入成功')).toBeInTheDocument();
 #### React Testing Library : Queries 找到元素
 
 - 以使用者的角度，獲得 HTML 中元素來操作，[採用哪種Query方法的優先次序](https://testing-library.com/docs/queries/about#priority)
-- ARIA (Accessible Rich Internet Applications), [參考這裡](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Guides)
+- ARIA 定義 HTML 元素 (Accessible Rich Internet Applications), [參考這裡](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Guides)
+- 可以利用 screen.debug() 查看畫面的 HTML。舉例: `components/LoginForm/__test__/LoginForm.submit.test.js`
 
 #### 模擬用戶操作
 
-- [user-event](https://testing-library.com/docs/user-event/intro)
+- 使用 [user-event](https://testing-library.com/docs/user-event/intro)
+- 舉例: `components/LoginForm/__test__/LoginForm.submit.test.js`
 
+## 測試用的 Mock 造假
+
+#### 單元測試的常見名詞 / 概念
+
+- SUT : System Under Test。目標要測試的元件/方法
+- DOC : Depended-On Component。會依賴到的其他元件/方法
+- [Mock 替身](https://medium.com/starbugs/unit-test-中的替身-搞不清楚的dummy-stub-spy-mock-fake-94be192d5c46)
+- Mock 是使用 ***造假*** 的 依賴子元件/方法(DOC)。將測試關注的目標集中在元件本身(SUT)
+
+#### 舉例
+
+- 元件有依賴其他子元件，可以 Mock 子元件。例: `src/App.test.js`
+- 元件有依賴其他方法，可以 Mock 方法。例: `src/components/LoginForm/__test__/LoginForm.submit.test.js`
+- 元件依賴外部模組，也可以 Mock，如呼叫 axios 網路 API。例: `src/api/JokeApi/JokeApi.BAD.test.js`, `src/api/JokeApi/JokeApi.GOOD.test.js` 
+
+## 優秀單元測試的特質
+
+節錄自 ***單元測試的藝術***, page 7
+
+```
+- 它應該是自動化，可被重複執行的；
+    > 什麼樣的測試是不能重複執行的？
+
+- 它應該很容易被實現；
+    > 容易實現，所以熟悉之後，會比手動測試更快速，開發時間更短
+    > 我能在幾分鐘內寫出一個基本的單元測試嗎？
+
+- 它到第二天應該還有存在意義；（不是臨時性的）
+
+- 任何人都可以按個按鈕就執行；
+    > 我兩個月前寫的單元測試，團隊所有人是否都能正常執行呢？
+
+- 它的執行速度應該很快；
+    > 單元測試日積月累，可能會有成千上萬個，部署前要運行所有單元測試，可能會很久。
+    > 我能在幾分鐘內跑完所有單元測試嗎？
+
+- 它的執行結果應該一致；
+    > 方法 getWeekdayOfToday() 每天回傳結果都要一致。
+```
+
+[timer-mocks](https://jestjs.io/docs/timer-mocks)
+
+## thinker F2E 現況
+
+- 7 個單元測試。 App.test.js / Menu.test.js 嚴重依賴外部模組，子元件，呼叫網路API。
+- 想要重構 Menu.js (3000 行)
+- 先對 Menu.js 寫基本的測試（有許多依賴沒有解耦）
+- 分離部份 function，為分離的 function 各別撰寫單元測試。
+- 減少 Menu.js 的行數。希望減低到 500 行。
+- 能夠對 Menu.js 撰寫乾淨沒有依賴的 單元測試
+- “[most component files should not exceed 250 lines](https://medium.com/swlh/how-to-write-great-react-c4f23f2f3f4f)”, by Scott Domes, author of ***Progressive Web Apps with React***
+
+## 單元測試的重要性
+
+- 進行重構前的安全保護
+- 2020 年工程師隨身必備

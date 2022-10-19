@@ -2,8 +2,8 @@
 layout: post
 title: "Unit Testing in React.js"
 description: ""
-category: [software engineering]
-tags: [other]
+category: [programming]
+tags: [react, testing]
 ---
 
 # React 的單元測試

@@ -108,3 +108,22 @@ ORDER BY SCHEMA_NAME(sOBJ.schema_id), sOBJ.name ;
 EXEC sp_executesql @QueryString
 GO
 ```
+
+## 刪除資料庫中所有表
+
+```sql
+-- Check tables
+SELECT TOP 100 * FROM   INFORMATION_SCHEMA.TABLES
+WHERE  TABLE_TYPE = 'BASE TABLE' AND TABLE_CATALOG = 'my_db_name'
+
+-- remove tables
+DECLARE @sql NVARCHAR(max)=''
+
+SELECT TOP 50 @sql += ' Drop table ' + QUOTENAME(TABLE_SCHEMA) + '.'+ QUOTENAME(TABLE_NAME) + '; '
+FROM   INFORMATION_SCHEMA.TABLES
+WHERE  TABLE_TYPE = 'BASE TABLE' AND TABLE_CATALOG = 'my_db_name'
+
+PRINT @sql
+
+Exec Sp_executesql @sql
+```

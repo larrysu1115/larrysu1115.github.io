@@ -77,3 +77,25 @@ icing 的邊緣應該厚一點，使用 mask, mesh filter 均勻地 apply inflat
 - Smooth mask: (mask > smooth mask) 讓 mask 邊緣漸進式，apply filter 就不會在邊緣顯得突兀。
 - Clear mask: (mask > clear mask) 清除 mask
 - sculpt > smooth: 可以選定該工具，或直接按住 `Shift` 會變爲 smooth 工具的作用。
+
+## Part 5 : Shading
+
+```
+
+```
+
+- Material: 給 donut, icing 基本底色。右側菜單, Base color, Roughness (0:平滑反光,1:粗糙)
+- 底座: (Add > Mesh > Plane)
+- object parent: group 群組移動多個物件。先選 child, 再 shift 加選 parent, 然後按 `Ctrl + P`. 要選擇 Object (Keep Transform)
+- search 命令: `F3` 輸入要找的指令
+- Image Texture: material, base color 左側的小圓點 按下，選擇 Image Texture
+- Shading: 上方 tab (Shading), 會看到實際 material 的 nodes, 可以添加修改 nodes
+- Hue/Saturation/Value node: 可以轉變顏色
+- Roughness: 從 Principled BSDF 的 Roughness 左側小圓點 拉出線，新增 Image Texture, 選擇對應材質圖片, color space 要選擇 Non-Color
+- Normal: 正交垂直的向量，會展現爲表面的不規則小突起。由 normal 左側小圓點拉出線，新增 Image Texture, 選擇對應材質圖片, color space 要選擇 Non-Color, 還需在中間加上 Normal Map node (Vector > Normal map)
+- Full Screen: `Ctrl + Space`
+- PBR Shader: Physically Based Rendering
+- Texture Paint: 在右邊 material 先爲 donut 本體加上 Image Texture, new 建立新圖片，選擇填滿的顏色。上方 tab (Texture Paint), 選色，調色，在 donut 本體繪出側邊一圈略白色
+- UV Unwrap
+- 記得要在左側 `Image*` 按下 save, 才會存檔
+- 左上角顯示 User Perspective (Local), Local 代表是 isolated mode `/`

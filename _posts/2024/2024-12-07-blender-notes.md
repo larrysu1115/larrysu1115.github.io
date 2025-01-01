@@ -81,7 +81,10 @@ icing 的邊緣應該厚一點，使用 mask, mesh filter 均勻地 apply inflat
 ## Part 5 : Shading
 
 ```
-
+加入底座平台，使用大理石材質 Image Texture, roughness (Non-Color), normal (Non-Color) 的材質貼圖。
+利用 object parent 將 icing 與 donut 建立群組一起移動。
+使用 shading 的 nodes 連接圖。
+爲 donut 本體加入 image texture, 設定底色, 再用 texture paint 塗上邊緣發白一圈。
 ```
 
 - Material: 給 donut, icing 基本底色。右側菜單, Base color, Roughness (0:平滑反光,1:粗糙)
@@ -99,3 +102,35 @@ icing 的邊緣應該厚一點，使用 mask, mesh filter 均勻地 apply inflat
 - UV Unwrap
 - 記得要在左側 `Image*` 按下 save, 才會存檔
 - 左上角顯示 User Perspective (Local), Local 代表是 isolated mode `/`
+
+## Part 6 : Geometry Nodes
+
+```
+```
+
+- GeometryNode modifier: 上方選擇 tab Geometry Nodes, 選中 icing 後按 new, 會增加 modifier: GeometryNodes
+- 利用 nodes system, 在 mesh 不變動的情況下，調整產出結果。
+- Distribute Points on faces: 將 icing 物件變成表面多個點 (add > Point > )
+- Join Geometry: (add > geometry) 將原來的 icing 物件 join 回來。注意連接點圖示較長，表示可以連接多條線，從 input 拉多第二條線進來。
+- UV Sphere: add > mesh > UV Sphere, 因爲會很多 sprinkle, 物件給 segments:12, rings:8 就好, radius:0.01m
+- 下方 Geometry nodes 面板，只會顯示目前選中的物件。可以用 圖針 釘住
+- Instance on Points: 參考小圓點形狀。從右上 collection 將小圓點拖下到 Geometry Nodes 面板出現 node:Object Info, add > Instances
+- 設定連線 DisPoints.Point > InstPoints.Point, ObjInfo.Geometry > InstPoints.Instance, InstPoints.Instances > JoinGeometry.Geometry
+- Poisson Distribution: 太多點時候，會重疊的問題. 將 DistriPointsOnFaces 的 distribution method 從 random 改爲 Poisson Disk, 可以設定 distance min:0.013
+- 漫佈的小店在 icing 正反面都有，徒耗效能。
+- Weight Paint: 在 mesh 上畫出 weight 值，用來指導佈局。進入 weight paint mode.
+- data: 右側菜單 data 可以見到 vertex group, 重新命名爲 sprinkle density
+- Density Factor: 引用 weight. 將 node: DistriPoints.DensityFactor 點拉出，增加 named attribute, name 設定爲 sprinkle_density (vertex group)
+- Weight Paint: negative paint 繪製時候按住 `Ctrl`
+- Quick Zoom: `NumberPad . (period)`
+- View Selected: `~`  + `3` 注意要在 viewport 圖示畫面內
+- 將小點圓形進行 shade smooth
+- exposing a value: 提取設定值讓複製出的物件可以各自設定。DistriPoints.DensityMax 拉到 GroupInput, 就多了 modifier 的設定值。再到 下方面板 Geometry Node 右側 Group 頁籤中設定名稱爲 Sprinkle Density
+- 實際大小: 在 viewport 按 `n` 看到 properties
+- 選擇所有: `a` for ALL
+- 調整大小: 選擇 donut, icing, plane 進行 scale `s`, 如果按 `Ctrl` 會進行階段式的縮放，也可輸入數值。
+- 注意到 `n` properties 顯示 scale: 0.1, 如果不 apply 就是經過 scale 處理
+- apple scale: 選取要進行的物件，`Ctrl + A` 出現選單按下 apple scale.
+- apply scale 後 density 到 20000, distance min 到 0.001 都需要再調整
+- 增加 math node (add > utility > math > math), 將 density 乘以 200, 方便進行數值調整，不用處理 20000 的大數.
+

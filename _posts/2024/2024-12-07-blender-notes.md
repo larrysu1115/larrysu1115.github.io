@@ -106,6 +106,12 @@ icing 的邊緣應該厚一點，使用 mask, mesh filter 均勻地 apply inflat
 ## Part 6 : Geometry Nodes
 
 ```
+製作參考 UV Sphere 作出的 sprinkles.
+使用 Geometry Nodes: 
+Distribute Points on faces > Join Geometry > Instance on Points
+Weight Paint 控制出現的部位
+Expose value: density 設定可讓複製出的不同物件有不同 sprinkle density
+修正實際尺寸，scale 的縮放與 apply，添加 math 運算 node 調整太大的輸入值
 ```
 
 - GeometryNode modifier: 上方選擇 tab Geometry Nodes, 選中 icing 後按 new, 會增加 modifier: GeometryNodes
@@ -134,3 +140,58 @@ icing 的邊緣應該厚一點，使用 mask, mesh filter 均勻地 apply inflat
 - apply scale 後 density 到 20000, distance min 到 0.001 都需要再調整
 - 增加 math node (add > utility > math > math), 將 density 乘以 200, 方便進行數值調整，不用處理 20000 的大數.
 
+## Part 7 : Long Sprinkles
+
+```
+增加3種長度，和一個彎曲的 sprinkles.
+使用 bevel 斜角處理圓柱兩端圓弧
+彎曲的圓柱，利用 modifier:SimpleDeform 處理
+利用 collection 管理物件的群組
+collection:long sprinkles 爲第二個 donut 的 geometryNode.DistriPoints 來源引用物件。
+處理 geometryNode 的 rotation 平貼在表面
+```
+
+- 3D cursor: `Shift + 右鍵` 可以改變 3D cursor 的位置
+- add cylinder: vertices: 12, radius: 0.001m, depth: 0.001m
+- 太靠近 cylinder 會消失: 修正 `N` properties, tab:view, clip start 改爲 0.001 m.
+- 加長 cylinder: scale z-axis
+- bevel: 爲 cylinder 兩端增加圓弧 bevel(斜角). 在 edit mode 中按上方 Select mode: face select. `Ctrl + B` 增加 bevel, 如果 scroll 就會增加層更圓潤。 
+- 增加 長/中 兩種長度 cylinder: `shift + D` duplicate, 選中上方 vertices `g` 拉長。
+- 要先 apply scale, 下面的 bend 才會正常彎曲
+- 增加 彎曲 bend cylinder: `Ctrl + R` 再 scroll 增加 cylinder 圓柱的 mesh 到 8 圈，使用 modifier:SimpleDeform, tab:Bend
+- origin point: 每個物件的質量中心，關於旋轉/彎曲/... 都有關係。選中物件 > 右鍵 > Set Origin > Origin to Geometry
+- Organize Collections: 增加 collection:sprinkles > Round,Long. 將對應物件移入。也可用 viewport 畫面選中物件, `m` move to collection
+- 複製一個用長條 sprinkle 的 donut: 選中 icing + donut, `Shift + D` duplicate, 複製出的 donut 的 icing 的 geometry nodes 右邊顯示 2, 代表被 2 物件共用。點擊 `2` 可讓不再共用。
+- 重新命名 modifier 的 geometry nodes 爲 round sprinkles, long sprinkles
+- 修改 geometry nodes:long sprinkles, 注意圖釘不要釘住了，釘住永遠選定當時的物件的geo nodes.
+- 將包含 long sprinkles 的 collection 拉入 Geometry nodes 面板上，以新出現的 collection info 替換掉之前的 object info. 此時出現在奇怪的上方位置，可以勾選 separate + reset children 修正。
+- InstanceOnPoints 勾選 Pick Instance 才會選擇單一物件，而不是四個 long sprinkles 一起
+- 接入 DistriPoints.Rotation 到 InstanceOnPoints.Rotation, 讓 sprinkle 垂直 donut 表面
+- rotate long sprinkles 90度，就可以 平貼表面，記得需要 `Ctrl + a`, apply rotation 才會生效。
+- DistriPoints.Rotation 到 InstanceOnPoints.Rotation 之間加入 Utilities > Rotation > "Rotate Rotation". 
+- 將 rotate By 小圓點拉出，新增 Random Value, z 軸線的 max: tau (2*pi ~=6.28)
+- 將 sprinkle 調整 scale 1.5 (InstanceOnPoints), max distance: 0.006 (DistribuPointsOnFaces)
+- 按住左鍵下拉一次選中3個數，一起修改
+
+## Part 8 : Render
+
+```
+讓 sprinkles 物件共享 material,
+使用 shade.ColorRamp 的 constant 模式賦予不同固定色
+colorRamp 同區段加上對應的 roughness, 金屬 屬性, 展現 金/銀 色。
+render 實時 engine: EEVEE, 真光影:Cycles
+```
+
+- Link Materials: 讓多物件共享同一 material. 先選擇有要共享的物件，然後 `Shift + 左鍵` 逐一選擇其他來共享的物件， 
+最後再選回有要共享的物件。 `Ctrl + L` link materials. 完成後可以見到被共享的 material 右側有數字代表被幾個共享。
+- shade > object info node: 到 shading 下，add (input > object info) node, random 連到 base Color
+- shade > color ramp node: add (converter > color ramp) node, 位於 random 與 base Color 中. 改變顏色，linear 換成 constant, `+` 多個區段不同顏色
+- 金屬色澤: `Ctrl + Shift + D` 複製 color ramp node. 將 color 連到 Base Color, 右側 黃(金)白(銀)範圍設定爲白(1), 其他不要金屬色澤設定爲黑(0), 去除掉無用的區隔。
+- 將 roughness 設定降低，光滑鏡面就有金屬材質感。
+- render: `F12`
+- camera view: `Numpad 0`
+- fly mode (View > Navigation > Fly Navigation): 先選中 camera, 再按 `Shift ~`. 就可用 `WASD qe` 遊戲般控制視角，scroll 控制速度。設定好點擊左鍵完成。
+- render engine: 右側菜單中，render 預設是 EEVEE
+- 右側菜單 Scene Properties > Light Probes > Sphere Resolution 改到 4096 px
+- Render props: Fast GI Approximation > Bias 調整值
+- render engine: Cycles

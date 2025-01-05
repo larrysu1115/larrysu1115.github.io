@@ -194,4 +194,57 @@ render 實時 engine: EEVEE, 真光影:Cycles
 - render engine: 右側菜單中，render 預設是 EEVEE
 - 右側菜單 Scene Properties > Light Probes > Sphere Resolution 改到 4096 px
 - Render props: Fast GI Approximation > Bias 調整值
-- render engine: Cycles
+- render engine: Cycles (offline render, path trace, ray traced)
+- preference > system > cycle render > graphic card
+- `alt + G` reset object to center
+- icing 讓材質柔軟 materials > subsurface. weight=1.0, Radius 的預設值是給皮膚，這裡不適用，XYZ(RGB)都改成1, scale=0.005m (厚度)
+- sprinkles 也做材質柔軟 scale=0.002m
+
+## Part 9 : Layout
+
+```
+
+```
+
+- vertical split: 到上方兩個 menu 交界，cursor 變不同的地方按右鍵，vertical split 畫面會分成左右兩個。
+- 合併兩個畫面是在 交界 處，鼠標圖示不同的地方右鍵。或 畫面 右上角 拖動。
+- 製作 plate 盤子
+- `Z` 鍵會帶出各種模式選擇 wireframe, render, ...
+- edit mode 選中的 face 應呈現半橘色。沒色就是空的沒有 face.
+- 盤子 circle 中間圓面是空的。選中邊緣一圈，`f` 產生面。
+- 增加直角上的斜角。使用 edge-select mode (不是 vertex-select), `Alt LeftMouse`, `Shift` 選中要增加 bevel 的數個圈圈，`Ctrl + b`一起增加
+- 盤子沒有厚度。增加 modifier:solidify, 厚度 0.004m
+- 先 apply solidify。盤子最邊緣用斜角合起。選中兩側 edge 兩圈, `Ctrl + b` 增加斜角，`scroll` 增加面，注意下方提示 `Clamp` 讓兩個變貼合不重疊上。
+- merge by distance, 到 edit mode, 選中物件所有點 `A`, 按下 merge `M`, 選擇 by distance, 會看到下方 幾百個 vertices 被 merge 的訊息。
+- 要做 merge by distance 是因爲上面做了 bevel 合併 edge, 有些點會在同樣的地方。
+- 將盤子放到平臺貼合
+- `Ctrl + Alt + 0` 將 camera 設定爲目前的 view
+- 選中 icing + donut, `Shift + D` duplicate, 上移 再 rotate 貼合堆疊。
+- 複製處的 donut, rotate 角度不同。要再進行 rotate 時候可以按兩次 `Z` + `Z` 旋轉軸變成該 donut 自己的方向。
+- 讓每個 donut icing 顏色不同。按下每個 donut 的 material 右側數字(共用)， 重新命名 material, 改顏色。
+- 盤子材質 : 泛黃白色，roughness:0.15, subsurface:weight=1,radius=1,1,1
+
+## Part 10 : Light
+
+```
+
+```
+
+- Sky Texture 全場自然光: world > color > texture > Sky Texture
+- 太亮調 Render > Color Management > Exposure
+- Sky Texture: sun rotation 旋轉太陽角度
+- sun elevation: 如 日出,正午,日落，改成 15 度
+- sun size: 預設0.545是地球與太陽相對真實量。改成 2.0 ~ 3.0 之間，讓影子邊緣較柔軟。
+- donut 盤子與後方背景牆距離 3個盤子，方便後續製造景深模糊失焦。
+- sky light 從四面八方照入，需要有個房間窗戶照入光的感覺。
+- 增加 mesh > cube
+- 需要將 cube 的一角對齊背景地板,牆直角。按下 `g`, 再按下 `b` 進入 snap mode, 此時遊標會變化選定 點,線,中點,面，再選定要貼齊的對象點,線,...
+- `g` > `b` 的 snap mode 下, 按住 `alt + 中鍵` 可以旋轉畫面視角
+- 其他幾個面，先進入 `face-select mode`, 再用 snap mode 貼合。
+- 將 cube 的底和後 兩面刪除。edge-select, `x` 選擇 face.
+- cube 左側牆開窗。選中左側face, `i` insect 拉出窗的面，`x` 刪除 face
+- 右側牆希望是不會反光，像是房間深處。選中 cube 的 material 加 white, black walls 兩種 material, black wall 的 Surface 選 Diffuse BSDF 可以減低 cycles renderer 的負擔。
+- 在 edit mode, 選中右側牆，在 material 中選擇 black walls 再按 `Assign`
+- import model: import blender model 是用 `File > Append` 通常是選 collection
+- install addon: 下載的 zip 不需解開
+

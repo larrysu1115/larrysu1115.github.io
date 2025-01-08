@@ -203,7 +203,13 @@ render 實時 engine: EEVEE, 真光影:Cycles
 ## Part 9 : Layout
 
 ```
-
+製作盤子，以 circle 開始，增加中間空心的圓面，
+將外圈 extrude 拉伸出高起的多個外圈，
+以 bevel 製作高起外圈直角的弧度，
+增厚盤子 modifier:solidify，再 apply, 
+邊緣也用 bevel 做圓弧合起，Clamp 可接合。再 merge by distance 去除重疊的點。
+複製出多個 donut, 並給不同顏色的 icing.
+盤子給上泛黃材質。
 ```
 
 - vertical split: 到上方兩個 menu 交界，cursor 變不同的地方按右鍵，vertical split 畫面會分成左右兩個。
@@ -227,7 +233,12 @@ render 實時 engine: EEVEE, 真光影:Cycles
 ## Part 10 : Light
 
 ```
-
+使用 world > Sky Texture 造出空間日光，
+用 cube 製作房間。
+對齊房間與地板用 grab `g`, `b` 進入 snap mode.
+刪除 cube 重複的底和後背，去除 z-fighting
+左側開窗 insect, x 刪除 face
+右側面爲 black 不反光
 ```
 
 - Sky Texture 全場自然光: world > color > texture > Sky Texture
@@ -248,3 +259,29 @@ render 實時 engine: EEVEE, 真光影:Cycles
 - import model: import blender model 是用 `File > Append` 通常是選 collection
 - install addon: 下載的 zip 不需解開
 
+## Part 11 : Composition
+
+```
+composition 是 post processing 過程，
+作出亮點光暈效果
+```
+
+- 在右側加入一個 area lighting
+- Composition: 上方菜單 composition, 上方 勾選 Use Nodes, 按下 `Home` 會將 node圖 置中。
+- 右側 Render 設定: Sampling > Render > Max Samples ( 100 作爲這個練習就夠用，比較快。4096可在正式時候用。)
+- Viewer Node: 背景出現 render 圖: `Ctrl + Shift 左鍵點 Render Layer`, `Alt + 中鍵` 拖動背景圖，以及 Viewer Node。
+- `V`, `Alt + V`: zoom-in, out 背景的 render. 或點 viewer node 再拖動。
+- 右側 Render 設定: Color management > Look > High Contrast
+- 亮晶晶: add filter > glare, 亮點streaks:16, threshold:越低亮的區域越多, mix:1完全只有效果
+- 亮霧化: duplicate 
+- add: color > mix > mix color, 將 image 的線接入，blending mode:add, fac:0.01
+- 別用 compositor 入魔了
+- 下方畫面，左上小按鈕選擇 General > 3D viewport, 此時右邊的小下拉箭頭按鈕 viewport shading > compositor > always
+- lens distortion: 可以作出貓眼鏡頭效果
+- 右菜單 output > post processing > pipeline: 可以將 compositing 取消
+
+## Part 12 : Animation
+
+## Part 13 : Render
+
+## Part 14 : Final

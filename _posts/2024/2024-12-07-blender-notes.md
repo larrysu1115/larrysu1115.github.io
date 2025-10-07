@@ -14,6 +14,8 @@ blender 是一款開源的 3D 模型工具，這是學習這篇 [Blender 4.0 Beg
 
 - vertices, edge, face
 - `g`:move, `s`:scale, `r`:rotate
+- hotkey [Cheet Sheet](https://docs.google.com/document/d/1zPBgZAdftWa6WVa7UIFUqW_7EcqOYE0X743RqFuJL3o/edit?tab=t.0#heading=h.ftqi9ub1gec3)
+- Camera 操作 `0`:使用視角, `N`:帶出Properties側邊欄使用"View"選擇
 
 ## Part 2
 
@@ -282,6 +284,35 @@ composition 是 post processing 過程，
 
 ## Part 12 : Animation
 
+- Key frame animation.
+- 選中物件，第0 frame, 按下 `k` insert key frame, location
+- 移動 camera, 選中 60 frame, 按下 `k` insert key frame, location
+- 播放就可以見到動畫效果
+- `Shift + 右鍵` 將 3D cursor 放在盤子中間
+- add > empty > plain axes, 在 data 再改爲 sphere, scale 縮小 size
+- parent Camera to the empty Sphere. 選擇 Camera, `Shift` 再加選 empty sphere, `Ctrl + P` object(Keep Transform)
+- 選中 Sphere 再 rotate 就會看到 camera 跟隨旋轉
+- frame:160 選中 Sphere, 增加 `k` key frame, 再移動到 frame:0, rotate 到上方, `k` 增加 key frame. 播放看看。
+- `Shift + 左箭頭` 會跳到 frame:0
+- 希望作出 Camera 開始動最後慢慢靜止停下。
+- 切換上方的 animation TAB, 下方換成 Dope sheet (顯示更多關於 key frame 的訊息)
+- 在 dope sheet 上見到 Y, Z Rotation 都是一長條，代表沒有變化，可以刪除。
+- Graph Editor: 在 dope sheet 左上角小按鈕，切換成 animation > Graph Editor.
+- Graph Editor: `Ctrl + 中鍵` 可以旋轉視角。或是 `Home`. 選中左側 Object Transform > X euler rotation
+- 希望接近 frame:160 能變得慢些。利用 `R` rotate, `S` scale 調整兩個 key frame 端點之間的曲線，獲得想要的移動速度變化。
+- 接着希望一開始距離較近，逐漸拉遠。選中 empty sphere, 在 frame:0 `k` insert key frame (scale), 到 frame:160 調整好 scale 拉遠後，`k` insert key frame
+- 因爲 rotate, scale 的 value 差異大，可以利用 Normalize 讓曲線圖 (rotate+scale) 共存也易讀
+- 可以將房間 cube 先 hide, 方便操作
+- 用 上下鍵 可以在 key frame 之間切換
+- 右側 output 可以選擇 frame Rate (default:24 fps)
+
 ## Part 13 : Render
+
+- render > Sampling > sample:100勉強可看，300可以，最好是500
+- denoise 實用
+- 不要勾選 Noise Threshold
+- output 要用 PNG, 不要直接輸出影片，因爲輸出一半當機就損失所有。
+- check: facing orientation. gizmo右邊下拉小箭頭 > Geometry > 勾選 Face Orientation, 藍色是預計要呈現的面，紅色是不應該呈現的面。到 edit mode, 選擇紅色面, 如果可以呈現, 按 `Shift + N`, 或是 view port 左下方 Recalculate Normals 勾選 Inside
+- check: lighting and exposure. render > color management > exposure. 可以換 viewTransform:AgX 到 false color 看曝光程度。最好大部分藍綠，少部分橘紅。
 
 ## Part 14 : Final

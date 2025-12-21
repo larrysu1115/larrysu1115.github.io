@@ -27,8 +27,13 @@ Blender Character Creator for Video Games (Updated to 4.2)
 
 - 技巧: 使用 cube 建 subdivision modifier, 然後 extrude, scale 製作獸人牙齒
 - 技巧: 多個面置於水平, 選取所有面 `S` scale, `Z` z-axis, `0` 歸零
+- 技巧: 設定 object origin, 在 edit mode 選中面，`Shift + S` cursor to selected,  object mode "Set origin", "origin to 3D cursor"
 
-- `g` + `g` : 沿着原來的線條上 grab
+
+
+- `g` + `g` : 沿着原來的線條上 grab, edge slide
+- `Ctrl + RMB`: extrude as `e` in edit mode
+- shortest path selection: 先選中一線段，再 `Ctrl + LMB` 選中另一線段，會將之間一起選起 
 
 - 移除 link : Object > Relations > Make Single User > Object & Data
 
@@ -45,7 +50,9 @@ Blender Character Creator for Video Games (Updated to 4.2)
 - modifier solidify: 增加厚度, 內外層有問題用 offset 調整
 - modifier shrinkwrap: 貼近指定的物件的面, 注意其他 modifier 的順序
 
- 
+- 選擇物件按下 `Alt` 可從多個中挑選
+
+- propotional editing `O`:
 
 ## Clothing
 

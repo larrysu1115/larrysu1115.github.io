@@ -56,3 +56,25 @@ Blender Character Creator for Video Games (Updated to 4.2)
 
 ## Clothing
 
+## Retopology
+
+- instant mesh: 
+  - 先 join, remesh, (350K Faces)
+  - apply decimate modifier 降低 mesh 後 (70K Faces)
+  - export wavefront (.obj) 檔案, selection only
+  - use [instant-meshes](https://github.com/wjakob/instant-meshes)
+  - solve 使用 comb (梳子) 劃定垂直中分線，然後 export, extract, save 回到 blender (10K Faces)
+  - 用 auto mirror 後, 再將 eye 周圍 indent, 
+  - 結果 orc body  (10K Faces )
+- modifier decimate: 降低 poly 
+
+- finger retopology: 
+  - 先用 8 邊 circle, shrinkwrap + snap extrude 到指尖, 
+  - 最後 `F` fill 面, 在面上的點 `J` join 出兩條線再修形狀
+
+- `M` merge: mesh > merge > by distance 將重疊的點合併
+- `L` select linked: 在 edit mode 一個物件有多個不相連的部位，可以鼠標移動到一個部位, 按下 `L` 就會選中該部位。
+
+- smooth vertices: 先選中 loop edges 一圈，如果有些參差不齊，用 vertax > smooth vertices 然後調整強度就會較平齊
+- select more/less: `Ctrl +/-` 先選指尖的面，然後一圈一圈加入選擇
+- scale by normal: `Alt + S` 將形體按照原先的垂直向量延伸擴大

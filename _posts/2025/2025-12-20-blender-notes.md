@@ -78,3 +78,8 @@ Blender Character Creator for Video Games (Updated to 4.2)
 - smooth vertices: 先選中 loop edges 一圈，如果有些參差不齊，用 vertax > smooth vertices 然後調整強度就會較平齊
 - select more/less: `Ctrl +/-` 先選指尖的面，然後一圈一圈加入選擇
 - scale by normal: `Alt + S` 將形體按照原先的垂直向量延伸擴大
+
+
+- knife tool `K`
+
+- dissolve edges `Ctrl + X`: 移除四邊形中的對角線, 也可用 `X` > dissolve edges

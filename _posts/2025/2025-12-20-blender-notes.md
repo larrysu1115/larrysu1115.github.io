@@ -73,6 +73,7 @@ Blender Character Creator for Video Games (Updated to 4.2)
   - 最後 `F` fill 面, 在面上的點 `J` join 出兩條線再修形狀
 
 - `M` merge: mesh > merge > by distance 將重疊的點合併
+- `M` merge: 選擇兩個電後，`M` merge, "at last" 點合併
 - `L` select linked: 在 edit mode 一個物件有多個不相連的部位，可以鼠標移動到一個部位, 按下 `L` 就會選中該部位。
 
 - smooth vertices: 先選中 loop edges 一圈，如果有些參差不齊，用 vertax > smooth vertices 然後調整強度就會較平齊

@@ -88,3 +88,6 @@ Blender Character Creator for Video Games (Updated to 4.2)
 - `I` insect + `B` boundary
 
 - grid fill: face > "grid fill" 將兩邊填格子連起
+
+- add-ons: "Mesh:LoopTools" 讓 loop 中的多個 edge 平均分佈. RMB > "LoopTools" > "Space", 可再調整 influence
+

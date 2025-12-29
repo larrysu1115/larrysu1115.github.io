@@ -83,3 +83,5 @@ Blender Character Creator for Video Games (Updated to 4.2)
 - knife tool `K`
 
 - dissolve edges `Ctrl + X`: 移除四邊形中的對角線, 也可用 `X` > dissolve edges
+
+- add-ons: "Mesh:LoopTools" 讓 loop 中的多個 edge 平均分佈. RMB > "LoopTools" > "Space", 可再調整 influence

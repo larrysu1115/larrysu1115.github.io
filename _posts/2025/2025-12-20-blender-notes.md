@@ -79,7 +79,12 @@ Blender Character Creator for Video Games (Updated to 4.2)
 - select more/less: `Ctrl +/-` 先選指尖的面，然後一圈一圈加入選擇
 - scale by normal: `Alt + S` 將形體按照原先的垂直向量延伸擴大
 
+- `Ctrl + E` edge bridge: edge > "bridge edge" loops 在 edit mode 中將兩邊一樣多的 edge 之間用面連接
 
 - knife tool `K`
 
 - dissolve edges `Ctrl + X`: 移除四邊形中的對角線, 也可用 `X` > dissolve edges
+
+- `I` insect + `B` boundary
+
+- grid fill: face > "grid fill" 將兩邊填格子連起

@@ -92,3 +92,13 @@ Blender Character Creator for Video Games (Updated to 4.2)
 
 - add-ons: "Mesh:LoopTools" 讓 loop 中的多個 edge 平均分佈. RMB > "LoopTools" > "Space", 可再調整 influence
 
+- `V` split vertex: 將一個點分成兩個，可以再左右拉開
+
+- subdivided : 選中邊，點 RMB 選 subdivide, 可將邊切兩段
+
+- 將左右對稱, 到 sculpting mode, X 對稱, 下拉選單, symmetrize
+
+- Sculpting mode, Line Project 切斷小腿平面, 可用 `F` flip
+
+## Detailed Sculpt
+

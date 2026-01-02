@@ -102,3 +102,11 @@ Blender Character Creator for Video Games (Updated to 4.2)
 
 ## Detailed Sculpt
 
+- multiRes modifier: 套用 shrinkWrap mod 的貼近, 將 retropo 再 subdivide, 如果有跳針, 可以調整 shrinkWrap 的 wrapMethod 為 project, 再勾選 "Negative" & "Positive"
+- UV Editing: 選中要切邊的 edges, `Ctrl + E`, "Mark Seam", `A` 選中所有邊面, `U`: UV, "Unwrap Angle Based"
+- UV Editing: 左上角圖示 "UV Sync Selection", `L` link 可以聯起來
+- UV Editing: 切好 mark seam, unwrap 後, apple "Mirror", "ShrinkWrap" modifiers, apply 順序由上到下。
+
+- sculpt mode: `Shift + C` crease 褶痕，皺褶
+
+- sculpt mode: 將雕刻結果 apply 到 base retropo. Multires modifier, Shape > "Apply Base"

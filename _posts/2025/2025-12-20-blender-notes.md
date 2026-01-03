@@ -102,3 +102,6 @@ Blender Character Creator for Video Games (Updated to 4.2)
 
 ## Detailed Sculpt
 
+- brush: "scrape" 刷出金屬質感
+
+- extrude along normals: 讓最下一圈的面延伸出. 選中一圈面，`Alt + E`, "extrude along normals"

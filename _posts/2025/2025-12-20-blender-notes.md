@@ -110,3 +110,6 @@ Blender Character Creator for Video Games (Updated to 4.2)
 - sculpt mode: `Shift + C` crease 褶痕，皺褶
 
 - sculpt mode: 將雕刻結果 apply 到 base retropo. Multires modifier, Shape > "Apply Base"
+- brush: "scrape" 刷出金屬質感
+
+- extrude along normals: 讓最下一圈的面延伸出. 選中一圈面，`Alt + E`, "extrude along normals"

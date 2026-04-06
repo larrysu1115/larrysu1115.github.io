@@ -115,3 +115,11 @@ Blender Character Creator for Video Games (Updated to 4.2)
 - extrude along normals: 讓最下一圈的面延伸出. 選中一圈面，`Alt + E`, "extrude along normals"
 
 - UV editing mode: "UV" > "Pack Islands" > 不要勾 scale. 調整 UV map 上的大小與位置
+
+## Baking Normal Maps
+
+- normal map: bumpiness
+- cavity (空隙,洞,腔) map: all creases and detail
+- ambient occlusion (環境光遮蔽) map: deep shadows
+
+

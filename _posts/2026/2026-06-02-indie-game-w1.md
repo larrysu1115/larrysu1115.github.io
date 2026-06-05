@@ -68,6 +68,19 @@ Success Matrix:
 - how to set the price?
 - memeable moments for influencer to share
 
+## Pick a game genre
+
+- 自己喜歡的
+- 自己擅長的
+- 市場能賺錢的
+
+Genre Matrix
+
+| Genre      | Market | Skill - Tech | Skill - Design | Time | Score |
+| ---------- | ------ | ------------ | -------------- | ---- | ----- |
+| Rogue-like | 4      | 3            | 2              | 3    | 12    |
+| Platformer | ..     | ...          |                |      |       |
+|            |        |              |                |      |       |
 
 ## 5-8 : Trends  4
 

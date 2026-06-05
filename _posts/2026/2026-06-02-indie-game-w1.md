@@ -34,6 +34,41 @@ tools:
 
 ## 3-4 : Goals, Aims & Success Matrix
 
+Goal: earn, make st I like
+
+- market: a game that market wants
+- publisher
+- economy: stress, budget, investor, secure funding
+- time: asset source, 
+- lots of prototypes
+
+Aims:
+
+- Entertainment
+- Storytelling
+- Artistic Expression
+- Innovation
+- Education
+- Social Interaction
+- Commercial Success
+- Critical Acclaim
+- Technical Achievement
+- Culture Impact
+
+Success Matrix:
+
+ |                                       |                                            |                                                |
+ | ------------------------------------- | ------------------------------------------ | ---------------------------------------------- |
+ | 5 second WOW <br /> [ Visual Appeal ] | 5 minute stickness <br /> [ Fun Factor ]   | 5 hour durability <br /> [ balance & quality ] |
+ | Worthiness  <br /> [ Value ]          | Freshness<br /> [ Unique Selling Point ]   | Tightness<br /> [ Polish ]                     |
+ | Eyeballs<br /> [ Marketing ]          | Shareworthy <br /> [ influencer friendly ] | Advocates <br /> [ Community ]                 |
+ |                                       |                                            |                                                |
+
+- steam refund rate 10 ~ 20 % is normal.
+- how to set the price?
+- memeable moments for influencer to share
+
+
 ## 5-8 : Trends  4
 
 ## 9-14 :   5
